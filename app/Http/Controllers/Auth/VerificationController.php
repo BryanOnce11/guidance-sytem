@@ -25,7 +25,11 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+        alert('Success', 'You have successfully registered and verify your email!', 'success');
+        return route('login');
+    }
 
     /**
      * Create a new controller instance.
