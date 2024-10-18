@@ -25,7 +25,7 @@
     <div class="flex w-full h-screen"> <!-- Full width and height of screen -->
         <!-- Left Side with Curved Background (Full Width and Height) -->
         <div class="w-[40rem] curved-bg flex flex-col justify-center items-center text-white">
-            <div class="absolute top-8 left-8 flex items-center space-x-2">
+            <div class="absolute flex items-center space-x-2 top-8 left-8">
                 <!-- Replace with your logo -->
                 <img src="{{ asset('psu.png') }}" alt="PSU Logo" class="w-8 h-8">
                 <span class="font-bold">PSU - Brookes Point</span>
@@ -35,7 +35,7 @@
                 <img src="{{ asset('psu.png') }}" alt="PSU Logo" class="w-48 mb-4 opacity-75">
             </div>
 
-            <div class="text-center mt-6">
+            <div class="mt-6 text-center">
                 <h1 class="text-3xl font-bold">PSU BROOKES POINT CAMPUS</h1>
                 <p class="mt-2 text-lg">Student Information Management and Virtual Counseling</p>
             </div>
@@ -44,7 +44,7 @@
         <!-- Right Side - Registration Form (Full Width and Height) -->
         <div class="w-[60rem] bg-white p-12 flex flex-col justify-center items-center h-screen">
             <div class="w-full max-w-md">
-                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Create User</h2>
+                <h2 class="mb-8 text-4xl font-bold text-center text-gray-800">Create User</h2>
                 <form action="{{ route('register.post') }}" method="POST" class="space-y-6">
                     @csrf
                     <div class="flex space-x-4">
@@ -54,7 +54,7 @@
                                 class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 placeholder="Last Name">
                             @error('lname')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="w-1/2">
@@ -63,7 +63,7 @@
                                 class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 placeholder="First Name">
                             @error('fname')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="w-1/2">
@@ -73,7 +73,7 @@
                                 class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 placeholder="Middle Name">
                             @error('m_i')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                                 class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 placeholder="Email">
                             @error('email')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
@@ -93,7 +93,7 @@
                                 class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 placeholder="Password">
                             @error('password')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                         <div>
@@ -102,16 +102,16 @@
                                 class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                 placeholder="Password Confirmation">
                             @error('password_confirmation')
-                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                                <span class="text-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
 
-                    <div class="flex justify-center space-x-4 mt-8">
+                    <div class="flex justify-center mt-8 space-x-4">
                         <button type="submit"
-                            class="bg-orange-500 text-white py-3 px-6 rounded-lg hover:bg-orange-600 transition duration-200">REGISTER</button>
+                            class="px-6 py-3 text-white transition duration-200 bg-orange-500 rounded-lg hover:bg-orange-600">REGISTER</button>
                         <a href="route('login')"
-                            class="bg-white border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-100 transition duration-200">LOGIN</a>
+                            class="px-6 py-3 text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-lg hover:bg-gray-100">LOGIN</a>
                     </div>
                 </form>
             </div>
