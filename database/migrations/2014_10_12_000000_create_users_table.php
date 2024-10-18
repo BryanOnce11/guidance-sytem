@@ -15,10 +15,11 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('fname');
-            $table->string('lname');
-            $table->string('m_i');
-            $table->string('role')->default('student');
+            // $table->string('fname');
+            // $table->string('lname');
+            // $table->string('m_i');
+            $table->string('role')->default('Student');
+            $table->string('status')->default('Pendimg');
             // $table->rememberToken();
             $table->timestamps();
         });

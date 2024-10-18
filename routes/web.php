@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,16 @@ route::controller(VerificationController::class)->group(function () {
     Route::get('email/verify', 'show')->name('verification.notice');
     Route::get('email/verify/{id}/{hash}', 'verify')->name('verification.verify');
     Route::post('email/resend', 'resend')->name('verification.resend');
+});
+
+
+Route::controller(StudentController::class)->group(function () {
+    Route::get('good-moral', 'indexGoodmoral')->name('student.good-moral.index');
+    Route::get('good-moral/create', 'createGoodmoral')->name('student.good-moral.create');
+    Route::post('good-moral', 'storeGoodmoral')->name('student.good-moral.store');
+    Route::get('counceling', 'indexCounseling')->name('student.counceling.index');
+    Route::get('counceling/create', 'createCounseling')->name('student.counceling.create');
+    Route::post('counceling', 'storeCounseling')->name('student.counceling.store');
+    Route::get('profile', 'showStudentProfile')->name('student.profile.show');
+    Route::put('profile/{student}', 'updateStudentProfile')->name('student.profile.update');
 });

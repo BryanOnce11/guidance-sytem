@@ -31,11 +31,21 @@ class Student extends Model
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function family_back()
     {
-        $this->belongsTo(FamilyBackground::class);
+        return $this->belongsTo(FamilyBackground::class);
+    }
+
+    public function good_moral()
+    {
+        return $this->hasOne(GoodMoralRequest::class);
+    }
+
+    public function virtual_counseling()
+    {
+        return $this->hasOne(VirtualCounseling::class);
     }
 }

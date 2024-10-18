@@ -57,8 +57,6 @@ class StoreStudentRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'user_id.required' => 'The user ID is required.',
-            'user_id.exists' => 'The selected user ID is invalid.',
             'student_id.required' => 'The student ID is required.',
             'student_id.string' => 'The student ID must be a string.',
             'student_id.max' => 'The student ID may not be greater than 20 characters.',
