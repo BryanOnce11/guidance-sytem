@@ -17,16 +17,16 @@ class FamilyBackground extends Model
 
     public function father()
     {
-        $this->belongsTo(FatherInfo::class);
+        return $this->belongsTo(FatherInfo::class);
     }
 
     public function mother()
     {
-        $this->belongsTo(MotherInfo::class);
+        return $this->belongsTo(MotherInfo::class);
     }
 
     public function spouse()
     {
-        $this->belongsTo(SpouseInfo::class);
+        return $this->belongsTo(SpouseInfo::class);
     }
 }

@@ -17,6 +17,6 @@ class FatherInfo extends Model
 
     public function family_back()
     {
-        $this->hasOne(FamilyBackground::class);
+        return $this->hasOne(FamilyBackground::class);
     }
 }
