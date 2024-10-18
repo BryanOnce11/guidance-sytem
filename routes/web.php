@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\StudentController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,9 @@ use App\Http\Controllers\StudentController;
 //     return view('auth.login');
 // });
 
-// Route::get('/register', function () {
-//     return view('auth.register');
-// });
+Route::get('/dashboard', function () {
+    return view('Dashboard.dashboard');
+});
 
 // Auth::routes();
 
