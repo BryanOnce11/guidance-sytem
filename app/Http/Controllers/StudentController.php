@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    public function indexGoodMoral()
+    public function pendingGoodMoral()
     {
-        return view('student.good-moral.index');
+        return view('pages.student.good-moral.pending');
     }
 
-    public function createGoodMoral()
+    public function readyToPickupGoodMoral()
     {
-        return view('student.good-moral.create');
+        return view('pages.student.good-moral.ready-to-pickup');
     }
 
     public function storeGoodMoral(Request $request)
@@ -33,17 +33,17 @@ class StudentController extends Controller
 
         alert('Success', 'You have successfully request a good moral', 'Success');
 
-        return redirect()->route('student.good-moral.index');
+        return redirect()->route('student.good-moral.pending');
     }
 
-    public function indexCounseling()
+    public function pendingCounseling()
     {
-        return view('student.counseling.index');
+        return view('pages.student.counseling.pending');
     }
 
-    public function createCounseling()
+    public function approvedCounseling()
     {
-        return view('student.counseling.create');
+        return view('pages.student.counseling.approved');
     }
 
     public function storeCounseling()
@@ -55,7 +55,7 @@ class StudentController extends Controller
 
         alert('Success', 'You have successfully request a virtual conseling', 'Success');
 
-        return redirect()->route('student.counseling.index');
+        return redirect()->route('student.counseling.pending');
     }
 
     public function showStudentProfile()
