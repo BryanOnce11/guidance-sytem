@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="intro-y flex h-10 items-center mt-10">
-        <h2 class="mr-5 truncate text-lg font-medium">Good Moral Request</h2>
+        <h2 class="mr-5 truncate text-lg font-medium">Virtual Counseling</h2>
         <a class="ml-auto flex items-center text-primary" href="">
             <i data-tw-merge="" data-lucide="refresh-ccw" class="stroke-1.5 mr-3 h-4 w-4"></i>
             Reload Data
