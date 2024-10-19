@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\VerificationController;
@@ -48,13 +49,24 @@ route::controller(VerificationController::class)->group(function () {
 });
 
 
-Route::controller(StudentController::class)->group(function () {
-    Route::get('good-moral', 'indexGoodmoral')->name('student.good-moral.index');
-    Route::get('good-moral/create', 'createGoodmoral')->name('student.good-moral.create');
+Route::controller(StudentController::class)->prefix('admin')->group(function () {
+    Route::get('good-moral/pending', 'pendingGoodmoral')->name('student.good-moral.pending');
+    Route::get('good-moral/ready-to-pickup', 'readyToPickupGoodmoral')->name('student.good-moral.ready_to_pickup');
     Route::post('good-moral', 'storeGoodmoral')->name('student.good-moral.store');
-    Route::get('counceling', 'indexCounseling')->name('student.counceling.index');
-    Route::get('counceling/create', 'createCounseling')->name('student.counceling.create');
-    Route::post('counceling', 'storeCounseling')->name('student.counceling.store');
+    Route::get('counceling/pending', 'pendingCounseling')->name('student.counseling.pending');
+    Route::get('counceling/approved', 'approvedCounseling')->name('student.counseling.approved');
+    Route::post('counceling', 'storeCounseling')->name('student.counseling.store');
     Route::get('profile', 'showStudentProfile')->name('student.profile.show');
     Route::put('profile/{student}', 'updateStudentProfile')->name('student.profile.update');
+});
+
+Route::controller(AdminController::class)->prefix('student')->group(function () {
+    Route::get('student-list/pending', 'pendingStudents')->name('admin.student-list.pending');
+    Route::get('student-list/verified', 'verifiedStudents')->name('admn.student-list.verified');
+    Route::get('good-moral/pending', 'pendingGoodmoral')->name('admin.good-moral.pending');
+    Route::get('good-moral/ready-to-pickup', 'readyToPickupGoodmoral')->name('admin.good-moral.ready_to_pickup');
+    Route::get('counceling/pending', 'pendingCounseling')->name('admin.counseling.pending');
+    Route::get('counceling/approved', 'approvedCounseling')->name('admin.counseling.approved');
+    Route::get('counseling/record-history', 'recordHistory')->name('admin.counseling.record_history');
+    Route::get('settings/history-logs', 'historyLogs')->name('admin.settings.history_logs');
 });
