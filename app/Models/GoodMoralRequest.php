@@ -13,6 +13,7 @@ class GoodMoralRequest extends Model
         'stundent_id',
         'reason',
         'date_requested',
+        'date_to_pickup',
         'status',
     ];
 

@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->date('date_scheduled')->nullable();
             $table->string('status')->default('Pending');
             $table->timestamps();
-            $table->timestamps();
         });
     }
 
