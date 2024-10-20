@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('fname');
             $table->string('lname');
+            $table->string('m_i');
             $table->string('occupation');
             $table->timestamps();
         });
