@@ -34,10 +34,10 @@ class AuthController extends Controller
 
             $user = auth()->user();
 
-            if ($user->role == 'student') {
-                return redirect()->route('student.dashboard');
+            if ($user->role == 'Student') {
+                return redirect()->route('student.profile.show');
             } else {
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin.student-list.pending');
             }
         }
 
@@ -132,5 +132,12 @@ class AuthController extends Controller
         alert('Successfully', 'We send you an email verification!', 'success');
 
         return redirect()->route('verification.notice');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('login');
     }
 }

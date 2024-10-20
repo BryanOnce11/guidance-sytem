@@ -20,6 +20,8 @@
     <meta name="author" content="LEFT4CODE">
     <title>Dashboard - Midone - Tailwind Admin Dashboard Template</title>
     <!-- BEGIN: CSS Assets-->
+    <link rel="stylesheet" href="{{ asset('dist/css/vendors/tom-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/vendors/highlight.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/tippy.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/litepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/tiny-slider.css') }}">
@@ -27,7 +29,8 @@
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/leaflet.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/simplebar.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/components/mobile-menu.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}"> <!-- END: CSS Assets-->
+    <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}">
+    <!-- END: CSS Assets-->
 </head>
 <!-- END: Head -->
 
@@ -53,6 +56,8 @@
     <script src="{{ asset('dist/js/vendors/dom.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/tailwind-merge.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/lucide.js') }}"></script>
+    <script src="{{ asset('dist/js/vendors/tom-select.js') }}"></script>
+    <script src="{{ asset('dist/js/components/base/tom-select.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/tippy.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/dayjs.js') }}"></script>
     <script src="{{ asset('dist/js/vendors/litepicker.js') }}"></script>
@@ -75,14 +80,17 @@
     <script src="{{ asset('dist/js/components/report-pie-chart.js') }}"></script>
     <script src="{{ asset('dist/js/components/report-donut-chart.js') }}"></script>
     <script src="{{ asset('dist/js/components/report-donut-chart-1.js') }}"></script>
+    <script src="{{ asset('dist/js/components/base/highlight.js') }}"></script>
+    <script src="{{ asset('dist/js/components/base/source.js') }}"></script>
+    <script src="{{ asset('dist/js/components/base/preview-component.js') }}"></script>
     <script src="{{ asset('dist/js/components/simple-line-chart-1.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/tiny-slider.js') }}"></script>
+    <script src="{{ asset('dist/js/vendors/highlight.js') }}"></script>
     <script src="{{ asset('dist/js/themes/enigma.js') }}"></script>
     <script src="{{ asset('dist/js/components/base/leaflet-map-loader.js') }}"></script>
     <script src="{{ asset('dist/js/components/mobile-menu.js') }}"></script>
-    <script src="{{ asset('dist/js/components/themes/enigma/top-bar.js') }}"></script> <!-- END: Vendor JS Assets-->
-    <!-- BEGIN: Pages, layouts, components JS Assets-->
-    <!-- END: Pages, layouts, components JS Assets-->
+    <script src="{{ asset('dist/js/components/themes/enigma/top-bar.js') }}"></script>
+    <!-- END: Vendor JS Assets-->
 </body>
 
 </html>
