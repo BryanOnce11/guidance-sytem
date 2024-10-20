@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
             SpouseInfoSeeder::class,
             FamilyBackgroundSeeder::class,
             StudentSeeder::class,
+            GoodMoralRequestSeeder::class,
+            VirtualCounselingSeeder::class
         ]);
     }
 }

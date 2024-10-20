@@ -10,14 +10,19 @@ class VirtualCounseling extends Model
     use HasFactory;
 
     protected $fillable = [
-        'stundent_id',
+        'student_id',
         'date_requested',
         'date_scheduled',
         'status',
     ];
 
+    protected $casts = [
+        'date_requested' => 'datetime',
+        'date_scheduled' => 'datetime',
+    ];
 
-    public function stundent()
+
+    public function student()
     {
         return $this->belongsTo(Student::class);
     }

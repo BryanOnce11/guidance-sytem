@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GoodMoralRequest;
+use App\Models\Student;
 use App\Models\User;
+use App\Models\VirtualCounseling;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -19,34 +22,121 @@ class AdminController extends Controller
         ]);
     }
 
-    public function verifyStudent()
+    public function verifyStudent(User $user)
     {
+        $user->update([
+            'status' => 'Verified'
+        ]);
 
+        alert('Success', "You have successfully verified {$user->student->fname} {$user->student->m_i} {$user->student->lname}", 'success');
+
+        return redirect()->route('admin.student-list.pending');
     }
 
     public function verifiedStudents()
     {
-        return view('pages.admin.student-list.verified');
+        $per_page = request('per_page', 10);
+        $verified_students = User::with('student')
+            ->where('status', 'Verified')
+            ->paginate($per_page);
+        return view('pages.admin.student-list.verified', [
+            'verified_students' => $verified_students
+        ]);
     }
 
     public function pendingGoodMoral()
     {
-        return view('pages.admin.good-moral.pending');
+        $per_page = request('per_page', 10);
+        $good_moral_pendings = GoodMoralRequest::with('student')
+            ->where('status', 'Pending')
+            ->paginate($per_page);
+        return view('pages.admin.good-moral.pending', [
+            'good_moral_pendings' => $good_moral_pendings
+        ]);
+    }
+
+    public function approvedGoodMoral(Request $request, GoodMoralRequest $good_moral_request)
+    {
+        $validated = $request->validate([
+            'date_to_pickup' => 'bail|required|date'
+        ]);
+        $good_moral_request->update([
+            'status' => 'Ready To Pickup',
+            'date_to_pickup' => $validated['date_to_pickup']
+        ]);
+
+        alert('Success', "You have successfully approved the good moral request of {$good_moral_request->student->fname} {$good_moral_request->student->m_i} {$good_moral_request->student->lname}", 'success');
+
+        return redirect()->route('admin.counseling.pending');
     }
 
     public function readyToPickupGoodMoral()
     {
-        return view('pages.admin.good-moral.ready-to-pickup');
+        $per_page = request('per_page', 10);
+        $good_moral_ready_to_pickups = GoodMoralRequest::with('student')
+            ->where('status', 'Ready To Pickup')
+            ->orWhere('status', 'Picked Up')
+            ->paginate($per_page);
+        return view('pages.admin.good-moral.ready-to-pickup', [
+            'good_moral_ready_to_pickups' => $good_moral_ready_to_pickups
+        ]);
+    }
+
+    public function pickedUpGoodMoral(GoodMoralRequest $good_moral_request)
+    {
+        $good_moral_request->update([
+            'status' => 'Picked Up'
+        ]);
+
+        alert(
+            'Success',
+            "{$good_moral_request->student->fname} {$good_moral_request->student->m_i} {$good_moral_request->student->lname} successfully picked up the good moral request",
+            'success'
+        );
+
+        return redirect()->route('admin.good-moral.ready_to_pickup');
     }
 
     public function pendingCounseling()
     {
-        return view('pages.admin.counseling.pending');
+        $per_page = request('per_page', 10);
+        $counseling_pendings = VirtualCounseling::with('student')
+            ->where('status', 'Pending')
+            ->paginate($per_page);
+        return view('pages.admin.counseling.pending', [
+            'counseling_pendings' => $counseling_pendings
+        ]);
+    }
+
+    public function dateScheduledCounseling(Request $request, VirtualCounseling $virtual_counseling)
+    {
+        $validated = $request->validate([
+            'date_scheduled' => 'bail|required|date'
+        ]);
+
+        $virtual_counseling->update([
+            'status' => 'Approved',
+            'date_scheduled' => $validated['date_scheduled']
+        ]);
+
+        alert(
+            'Success',
+            "You have successfully approved the request of {$virtual_counseling->student->fname} {$virtual_counseling->student->m_i} {$virtual_counseling->student->lname}",
+            'success'
+        );
+
+        return redirect()->route('admin.counseling.pending');
     }
 
     public function approvedCounseling()
     {
-        return view('pages.admin.counseling.approved');
+        $per_page = request('per_page', 10);
+        $counseling_approveds = VirtualCounseling::with('student')
+            ->where('status', 'Approved')
+            ->paginate($per_page);
+        return view('pages.admin.counseling.approved', [
+            'counseling_approveds' => $counseling_approveds
+        ]);
     }
 
     public function recordHistory()
