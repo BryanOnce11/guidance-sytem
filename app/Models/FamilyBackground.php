@@ -15,18 +15,23 @@ class FamilyBackground extends Model
         'spouse_info_id',
     ];
 
+    public function family_back()
+    {
+        return $this->hasOne(Student::class);
+    }
+
     public function father()
     {
-        return $this->belongsTo(FatherInfo::class);
+        return $this->belongsTo(FatherInfo::class, 'father_info_id');
     }
 
     public function mother()
     {
-        return $this->belongsTo(MotherInfo::class);
+        return $this->belongsTo(MotherInfo::class, 'mother_info_id');
     }
 
     public function spouse()
     {
-        return $this->belongsTo(SpouseInfo::class);
+        return $this->belongsTo(SpouseInfo::class, 'spouse_info_id');
     }
 }

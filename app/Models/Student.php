@@ -36,7 +36,7 @@ class Student extends Model
 
     public function family_back()
     {
-        return $this->belongsTo(FamilyBackground::class);
+        return $this->belongsTo(FamilyBackground::class, 'family_background_id');
     }
 
     public function good_moral()
