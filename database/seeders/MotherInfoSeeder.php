@@ -17,6 +17,7 @@ class MotherInfoSeeder extends Seeder
             MotherInfo::create([
                 'fname' => "Mother{$i}First",
                 'lname' => "Mother{$i}Last",
+                'm_i' => "Mother{$i}Middle",
                 'occupation' => "Occupation {$i}",
             ]);
         }

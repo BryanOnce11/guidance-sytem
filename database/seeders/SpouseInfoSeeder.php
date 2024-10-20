@@ -17,6 +17,7 @@ class SpouseInfoSeeder extends Seeder
             SpouseInfo::create([
                 'fname' => "Spouse{$i}First",
                 'lname' => "Spouse{$i}Last",
+                'm_i' => "Spouse{$i}Middle",
                 'occupation' => "Occupation {$i}",
             ]);
         }

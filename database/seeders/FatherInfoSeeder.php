@@ -17,6 +17,7 @@ class FatherInfoSeeder extends Seeder
             FatherInfo::create([
                 'fname' => "Father{$i}First",
                 'lname' => "Father{$i}Last",
+                'm_i' => "Father{$i}Middle",
                 'occupation' => "Occupation {$i}",
             ]);
         }
