@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\GoodMoralRequest;
 use App\Models\Student;
+use App\Models\User;
 use App\Models\VirtualCounseling;
 use Illuminate\Http\Request;
 
@@ -12,12 +13,25 @@ class StudentController extends Controller
 {
     public function pendingGoodMoral()
     {
-        return view('pages.student.good-moral.pending');
+        $per_page = request('per_page', 10);
+        $pending_good_morals = GoodMoralRequest::where('student_id', auth()->user()->student->id)
+            ->where('status', 'Pending')
+            ->paginate($per_page);
+        return view('pages.student.good-moral.pending', [
+            'pending_good_morals' => $pending_good_morals
+        ]);
     }
 
     public function readyToPickupGoodMoral()
     {
-        return view('pages.student.good-moral.ready-to-pickup');
+        $per_page = request('per_page', 10);
+        $ready_to_pickup_good_morals = GoodMoralRequest::where('student_id', auth()->user()->student->id)
+            ->where('status', 'Ready To Pickup')
+            ->Where('status', 'Picked Up')
+            ->paginate($per_page);
+        return view('pages.student.good-moral.ready-to-pickup', [
+            'ready_to_pickup_good_morals' => $ready_to_pickup_good_morals
+        ]);
     }
 
     public function storeGoodMoral(Request $request)
@@ -31,19 +45,31 @@ class StudentController extends Controller
             'reason' => $validated['reason']
         ]);
 
-        alert('Success', 'You have successfully request a good moral', 'Success');
+        alert('Success', 'You have successfully request a good moral', 'success');
 
         return redirect()->route('student.good-moral.pending');
     }
 
     public function pendingCounseling()
     {
-        return view('pages.student.counseling.pending');
+        $per_page = request('per_page', 10);
+        $pending_counselings = VirtualCounseling::where('student_id', auth()->user()->student->id)
+            ->where('status', 'Pending')
+            ->paginate($per_page);
+        return view('pages.student.counseling.pending', [
+            'pending_counselings' => $pending_counselings
+        ]);
     }
 
     public function approvedCounseling()
     {
-        return view('pages.student.counseling.approved');
+        $per_page = request('per_page', 10);
+        $approved_counselings = VirtualCounseling::where('student_id', auth()->user()->student->id)
+            ->where('status', 'Approved')
+            ->paginate($per_page);
+        return view('pages.student.counseling.approved', [
+            'approved_counselings' => $approved_counselings
+        ]);
     }
 
     public function storeCounseling()
@@ -53,15 +79,22 @@ class StudentController extends Controller
             'student_id' => auth()->user()->student->id
         ]);
 
-        alert('Success', 'You have successfully request a virtual conseling', 'Success');
+        alert('Success', 'You have successfully request a virtual conseling', 'success');
 
         return redirect()->route('student.counseling.pending');
     }
 
     public function showStudentProfile()
     {
-        return view('student.profile');
+        $user = User::with('student.family_back.father', 'student.family_back.mother', 'student.family_back.spouse')
+            ->where('id', auth()->id())
+            ->first();
+
+        return view('pages.student.profile', [
+            'user' => $user
+        ]);
     }
+
 
     public function updateStudentProfile(UpdateStudentRequest $request, Student $student)
     {
