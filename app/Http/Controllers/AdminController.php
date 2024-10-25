@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GoodMoralRequest;
 use App\Models\Student;
 use App\Models\User;
+use App\Models\AdminHistory;
 use App\Models\VirtualCounseling;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,11 @@ class AdminController extends Controller
             'status' => 'Verified'
         ]);
 
+        AdminHistory::create([
+            'action' => 'Student Verified',
+            'details' => "Admin " . auth()->user()->email . " verified the account of {$user->student->fname} {$user->student->lname}"
+        ]);
+
         alert('Success', "You have successfully verified {$user->student->fname} {$user->student->m_i} {$user->student->lname}", 'success');
 
         return redirect()->route('admin.student-list.pending');
@@ -38,9 +44,19 @@ class AdminController extends Controller
         $per_page = request('per_page', 10);
         $verified_students = User::with('student')
             ->where('status', 'Verified')
+            ->where('role', 'Student')
             ->paginate($per_page);
         return view('pages.admin.student-list.verified', [
             'verified_students' => $verified_students
+        ]);
+    }
+
+    public function studentProfile(User $user_id)
+    {
+        $user_id->load('student');
+
+        return view('pages.admin.student-list.profile', [
+            'user' => $user_id
         ]);
     }
 
@@ -65,6 +81,11 @@ class AdminController extends Controller
             'date_to_pickup' => $validated['date_to_pickup']
         ]);
 
+        AdminHistory::create([
+            'action' => 'Approved Good Moral Request',
+            'details' => "Admin " . auth()->user()->email . "  approved good moral request of {$good_moral_request->student->fname} {$good_moral_request->student->lname}"
+        ]);
+
         alert('Success', "You have successfully approved the good moral request of {$good_moral_request->student->fname} {$good_moral_request->student->m_i} {$good_moral_request->student->lname}", 'success');
 
         return redirect()->route('admin.counseling.pending');
@@ -86,6 +107,11 @@ class AdminController extends Controller
     {
         $good_moral_request->update([
             'status' => 'Picked Up'
+        ]);
+
+        AdminHistory::create([
+            'action' => 'Picked Up Good Moral Request',
+            'details' => "Admin " . auth()->user()->email . " set the status of the good moral request for {$good_moral_request->student->fname} {$good_moral_request->student->lname} to 'Picked Up.'"
         ]);
 
         alert(
@@ -119,6 +145,11 @@ class AdminController extends Controller
             'date_scheduled' => $validated['date_scheduled']
         ]);
 
+        AdminHistory::create([
+            'action' => 'Approved Virtual Counseling Request',
+            'details' => "Admin " . auth()->user()->email . "  approved virtual counseling request of {$virtual_counseling->student->fname} {$virtual_counseling->student->lname}"
+        ]);
+
         alert(
             'Success',
             "You have successfully approved the request of {$virtual_counseling->student->fname} {$virtual_counseling->student->m_i} {$virtual_counseling->student->lname}",
@@ -146,6 +177,10 @@ class AdminController extends Controller
 
     public function historyLogs()
     {
-        return view('pages.admin.settings.histoty-logs');
+        $per_page = request('per_page', 10);
+        $history_logs = AdminHistory::paginate($per_page);
+        return view('pages.admin.settings.histoty-logs', [
+            'history_logs' => $history_logs
+        ]);
     }
 }

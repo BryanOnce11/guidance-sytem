@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::get('student-list/pending', 'pendingStudents')->name('admin.student-list.pending');
         Route::get('student-list/verified', 'verifiedStudents')->name('admn.student-list.verified');
         Route::put('student-list/verify/{user}', 'verifyStudent')->name('admin.student-list.verify');
+        Route::get('student-list/profile/{user_id}', 'studentProfile')->name('admin.student-list.profile');
         Route::get('good-moral/pending', 'pendingGoodmoral')->name('admin.good-moral.pending');
         Route::get('good-moral/ready-to-pickup', 'readyToPickupGoodmoral')->name('admin.good-moral.ready_to_pickup');
         Route::put('good-moral/approved/{good_moral_request}', 'approvedGoodMoral')->name('admin.good-moral.approved');
