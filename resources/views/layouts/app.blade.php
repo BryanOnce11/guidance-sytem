@@ -18,7 +18,8 @@
     <meta name="keywords"
         content="admin template, midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="LEFT4CODE">
-    <title>Dashboard - Midone - Tailwind Admin Dashboard Template</title>
+    <title>Guidance Office Portal - Login</title>
+    <link href="{{ asset('dist/images/logo.svg') }}" rel="shortcut icon">
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/tom-select.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/vendors/highlight.css') }}">
