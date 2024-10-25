@@ -50,4 +50,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Student::class);
     }
+
+    //important when accessing through user model
+    public function admin()
+    {
+        return $this->hasOne(Admin::class);
+    }
 }

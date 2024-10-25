@@ -21,5 +21,12 @@ class UserSeeder extends Seeder
                 'status' => rand(0, 1) ? 'Pending' : 'Verified',
             ]);
         }
+
+        User::create([
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => 'Admin',
+            'status' => 'Verified'
+        ]);
     }
 }

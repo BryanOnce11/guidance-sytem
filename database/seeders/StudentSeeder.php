@@ -27,7 +27,7 @@ class StudentSeeder extends Seeder
                 'birth_place' => "Birth Place {$i}",
                 'gender' => rand(0, 1) ? 'Male' : 'Female',
                 'citizenship' => "Citizenship {$i}",
-                'civil_status' => rand(0, 1) ? 'Single' : 'Married',
+                'civil_status' => rand(0, 2) === 0 ? 'Single' : (rand(0, 1) === 0 ? 'Married' : 'Widowed'),
                 'contact_num' => '09123456789',
                 'emergency_fullname' => "Emergency Contact {$i}",
                 'emergency_contact_num' => '09123456789',
