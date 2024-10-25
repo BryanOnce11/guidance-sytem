@@ -7,7 +7,7 @@
                     <img class="w-6" src="{{ asset('dist/images/logo.svg') }}"
                         alt="Enigma Tailwind HTML Admin Template">
                     <span class="hidden ml-3 text-lg text-white xl:block">
-                        Enigma
+                        PSU-Guidance
                     </span>
                 </a>
                 <!-- END: Logo -->

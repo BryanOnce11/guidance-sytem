@@ -31,7 +31,7 @@ class AdminController extends Controller
 
         AdminHistory::create([
             'action' => 'Student Verified',
-            'details' => "Admin " . auth()->user()->email . " verified the account of {$user->student->fname} {$user->student->lname}"
+            'details' => "Admin " . auth()->user()->admin->fname . " verified the account of {$user->student->fname} {$user->student->lname}"
         ]);
 
         alert('Success', "You have successfully verified {$user->student->fname} {$user->student->m_i} {$user->student->lname}", 'success');
@@ -83,7 +83,7 @@ class AdminController extends Controller
 
         AdminHistory::create([
             'action' => 'Approved Good Moral Request',
-            'details' => "Admin " . auth()->user()->email . "  approved good moral request of {$good_moral_request->student->fname} {$good_moral_request->student->lname}"
+            'details' => "Admin " . auth()->user()->admin->fname . "  approved good moral request of {$good_moral_request->student->fname} {$good_moral_request->student->lname}"
         ]);
 
         alert('Success', "You have successfully approved the good moral request of {$good_moral_request->student->fname} {$good_moral_request->student->m_i} {$good_moral_request->student->lname}", 'success');
@@ -111,7 +111,7 @@ class AdminController extends Controller
 
         AdminHistory::create([
             'action' => 'Picked Up Good Moral Request',
-            'details' => "Admin " . auth()->user()->email . " set the status of the good moral request for {$good_moral_request->student->fname} {$good_moral_request->student->lname} to 'Picked Up.'"
+            'details' => "Admin " . auth()->user()->admin->fname . " set the status of the good moral request for {$good_moral_request->student->fname} {$good_moral_request->student->lname} to 'Picked Up.'"
         ]);
 
         alert(
@@ -147,7 +147,7 @@ class AdminController extends Controller
 
         AdminHistory::create([
             'action' => 'Approved Virtual Counseling Request',
-            'details' => "Admin " . auth()->user()->email . "  approved virtual counseling request of {$virtual_counseling->student->fname} {$virtual_counseling->student->lname}"
+            'details' => "Admin " . auth()->user()->admin->fname . "  approved virtual counseling request of {$virtual_counseling->student->fname} {$virtual_counseling->student->lname}"
         ]);
 
         alert(
