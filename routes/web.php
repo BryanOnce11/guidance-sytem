@@ -70,10 +70,12 @@ Route::middleware('auth')->group(function () {
         Route::put('student-list/verify/{user}', 'verifyStudent')->name('admin.student-list.verify');
         Route::get('student-list/profile/{user_id}', 'studentProfile')->name('admin.student-list.profile');
         Route::get('good-moral/pending', 'pendingGoodmoral')->name('admin.good-moral.pending');
+        Route::get('good-moral/letter/{good_moral}', 'goodMoralView')->name('admin.good-moral.letter');
         Route::get('good-moral/ready-to-pickup', 'readyToPickupGoodmoral')->name('admin.good-moral.ready_to_pickup');
         Route::put('good-moral/approved/{good_moral_request}', 'approvedGoodMoral')->name('admin.good-moral.approved');
         Route::put('good-moral/picked-up/{good_moral_request}', 'pickedUpGoodMoral')->name('admin.good-moral.picked_up');
-        Route::get('counseling/pending', 'pendingCounseling')->name('admin.counseling.pending');
+        Route::get('counseling/pending', 'pendingCounseling')->name(name: 'admin.counseling.pending');
+        Route::get('counseling/letter/{virtual_counseling}', 'virtualCounselingView')->name('admin.counseling.letter');
         Route::get('counseling/approved', 'approvedCounseling')->name('admin.counseling.approved');
         Route::put('counseling/date-scheduled/{virtual_counseling}', 'dateScheduledCounseling')->name('admin.couseling.date_scheduled');
         Route::get('counseling/record-history', 'recordHistory')->name('admin.counseling.record_history');

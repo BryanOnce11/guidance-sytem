@@ -13,6 +13,7 @@ class VirtualCounseling extends Model
         'student_id',
         'date_requested',
         'date_scheduled',
+        'reason',
         'status',
     ];
 

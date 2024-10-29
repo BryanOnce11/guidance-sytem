@@ -6,6 +6,7 @@ use App\Http\Requests\UpdateStudentRequest;
 use App\Models\GoodMoralRequest;
 use App\Models\Student;
 use App\Models\User;
+use App\Models\Course;
 use App\Models\VirtualCounseling;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,7 @@ class StudentController extends Controller
         $per_page = request('per_page', 10);
         $ready_to_pickup_good_morals = GoodMoralRequest::where('student_id', auth()->user()->student->id)
             ->where('status', 'Ready To Pickup')
-            ->Where('status', 'Picked Up')
+            ->orWhere('status', 'Picked Up')
             ->paginate($per_page);
         return view('pages.student.good-moral.ready-to-pickup', [
             'ready_to_pickup_good_morals' => $ready_to_pickup_good_morals
@@ -72,11 +73,15 @@ class StudentController extends Controller
         ]);
     }
 
-    public function storeCounseling()
+    public function storeCounseling(Request $request)
     {
+        $validated = $request->validate([
+            'reason' => 'required'
+        ]);
 
         VirtualCounseling::create([
-            'student_id' => auth()->user()->student->id
+            'student_id' => auth()->user()->student->id,
+            'reason' => $validated['reason']
         ]);
 
         alert('Success', 'You have successfully request a virtual conseling', 'success');
@@ -90,8 +95,11 @@ class StudentController extends Controller
             ->where('id', auth()->id())
             ->first();
 
+        $courses = Course::all();
+
         return view('pages.student.profile', [
-            'user' => $user
+            'user' => $user,
+            'courses' => $courses
         ]);
     }
 

@@ -19,6 +19,7 @@ class VirtualCounselingSeeder extends Seeder
                 'student_id' => $i + 1,
                 'date_requested' => now(),
                 'date_scheduled' => now()->addDay(),
+                'reason' => "Reason {$i}",
                 'status' => $statuses[array_rand($statuses)]
             ]);
         }

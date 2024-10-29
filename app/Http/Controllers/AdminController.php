@@ -6,6 +6,7 @@ use App\Models\GoodMoralRequest;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\AdminHistory;
+use App\Models\Course;
 use App\Models\VirtualCounseling;
 use Illuminate\Http\Request;
 
@@ -55,8 +56,11 @@ class AdminController extends Controller
     {
         $user_id->load('student');
 
+        $courses = Course::all();
+
         return view('pages.admin.student-list.profile', [
-            'user' => $user_id
+            'user' => $user_id,
+            'courses' => $courses
         ]);
     }
 
@@ -68,6 +72,13 @@ class AdminController extends Controller
             ->paginate($per_page);
         return view('pages.admin.good-moral.pending', [
             'good_moral_pendings' => $good_moral_pendings
+        ]);
+    }
+
+    public function goodMoralView(GoodMoralRequest $good_moral)
+    {
+        return view('pages.admin.good-moral.request-letter', [
+            'good_moral' => $good_moral
         ]);
     }
 
@@ -131,6 +142,13 @@ class AdminController extends Controller
             ->paginate($per_page);
         return view('pages.admin.counseling.pending', [
             'counseling_pendings' => $counseling_pendings
+        ]);
+    }
+
+    public function virtualCounselingView(GoodMoralRequest $virtual_counseling)
+    {
+        return view('pages.admin.good-moral.request-letter', [
+            'virtual_counseling' => $virtual_counseling
         ]);
     }
 

@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->foreignIdFor(Student::class);
             $table->date('date_requested')->default(now());
             $table->date('date_scheduled')->nullable();
+            $table->string('reason');
             $table->string('status')->default('Pending');
             $table->timestamps();
         });
