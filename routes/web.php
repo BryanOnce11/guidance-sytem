@@ -40,6 +40,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login')->name('login.post');
     Route::get('/register', 'showRegister')->name('register');
     Route::post('/register', 'register')->name('register.post');
+    Route::get('/personal-info', 'showPersonalInfo')->name('student.personal-info');
+    Route::post('/personal-info', 'personalInfo')->name('student.personal-info.post');
+    Route::get('/family-background', 'showFamilyBackGround')->name('student.family-background');
+    Route::post('/family-background', 'familyBackGround')->name('student.family-background.post');
     Route::get('/logout', 'logout')->name('logout');
 });
 

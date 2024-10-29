@@ -44,39 +44,9 @@
         <!-- Right Side - Registration Form (Full Width and Height) -->
         <div class="w-[60rem] bg-white p-12 flex flex-col justify-center items-center h-screen">
             <div class="w-full max-w-md">
-                <h2 class="mb-8 text-4xl font-bold text-center text-gray-800">Create User</h2>
+                <h2 class="mb-8 text-4xl font-bold text-center text-gray-800">Register</h2>
                 <form action="{{ route('register.post') }}" method="POST" class="space-y-6">
                     @csrf
-                    <div class="flex space-x-4">
-                        <div class="w-1/2">
-                            <label for="lname" class="block text-gray-700">Last Name</label>
-                            <input type="text" name="lname" id="lname" value="{{ old('lname') }}"
-                                class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                placeholder="Last Name">
-                            @error('lname')
-                                <span class="text-sm text-red-500">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="w-1/2">
-                            <label for="fname" class="block text-gray-700">First Name</label>
-                            <input type="text" name="fname" id="fname" value="{{ old('fname') }}"
-                                class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                placeholder="First Name">
-                            @error('fname')
-                                <span class="text-sm text-red-500">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="w-1/2">
-                            <label for="m_i" class="block text-gray-700">Middle Name</label>
-                            <input maxlength="1" type="text" name="m_i" id="m_i"
-                                value="{{ old('m_i') }}"
-                                class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                placeholder="Middle Name">
-                            @error('m_i')
-                                <span class="text-sm text-red-500">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
                     <div class="space-y-4">
                         <div>
                             <label for="email" class="block text-gray-700">Email</label>
@@ -110,7 +80,7 @@
                     <div class="flex justify-center mt-8 space-x-4">
                         <button type="submit"
                             class="px-6 py-3 text-white transition duration-200 bg-orange-500 rounded-lg hover:bg-orange-600">REGISTER</button>
-                        <a href="route('login')"
+                        <a href="{{ route('login') }}"
                             class="px-6 py-3 text-gray-700 transition duration-200 bg-white border border-gray-300 rounded-lg hover:bg-gray-100">LOGIN</a>
                     </div>
                 </form>

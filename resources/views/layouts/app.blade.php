@@ -18,6 +18,7 @@
     <meta name="keywords"
         content="admin template, midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="LEFT4CODE">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Guidance Office Portal - Login</title>
     <link href="{{ asset('dist/images/logo.svg') }}" rel="shortcut icon">
     <!-- BEGIN: CSS Assets-->

@@ -13,13 +13,14 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
+        $year_lvls = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
         for ($i = 0; $i < 100; $i++) {
             Student::create([
                 'user_id' => $i + 1,
                 'family_background_id' => $i + 1,
                 'student_id' => "S{$i}0001",
                 'course_id' => rand(1, 11),
-                'year_lvl' => rand(1, 4), // Random year level between 1 to 4
+                'year_lvl' => $year_lvls[array_rand($year_lvls)],
                 'fname' => "Student{$i}First",
                 'lname' => "Student{$i}Last",
                 'm_i' => "M.I.{$i}",
