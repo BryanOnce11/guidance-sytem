@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Course;
 use App\Models\FamilyBackground;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -16,8 +17,9 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(FamilyBackground::class);
+            $table->foreignIdFor(Course::class);
             $table->string('student_id');
-            $table->string('course');
+            // $table->string('course');
             $table->string('year_lvl');
             $table->string('fname');
             $table->string('lname');

@@ -23,9 +23,10 @@
                         </label>
                         <select name="coruse" id="update-profile-form-8"
                             class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
-                            <option>IC</option>
-                            <option>FIN</option>
-                            <option>Passport</option>
+                            @foreach ($courses as $course)
+                                <option {{ $user->student->course->name == $course->name ? 'selected' : '' }}>
+                                    {{ $course->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="flex-1 ">

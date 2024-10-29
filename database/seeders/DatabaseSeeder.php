@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             MotherInfoSeeder::class,
             SpouseInfoSeeder::class,
             FamilyBackgroundSeeder::class,
+            CourseSeeder::class,
             StudentSeeder::class,
             AdminSeeder::class,
             GoodMoralRequestSeeder::class,

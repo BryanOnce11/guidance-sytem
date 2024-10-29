@@ -109,7 +109,7 @@ class AuthController extends Controller
             'lname' => $validated['lname'],
             'm_i' => $validated['m_i'],
             'student_id' => $validated['student_id'],
-            'course' => $validated['course'],
+            'course_id' => $validated['course_id'],
             'year_lvl' => $validated['year_lvl'],
             'birth_date' => $validated['birth_date'],
             'birth_place' => $validated['birth_place'],

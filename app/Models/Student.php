@@ -16,7 +16,7 @@ class Student extends Model
         'fname',
         'lname',
         'm_i',
-        'course',
+        'course_id',
         'year_lvl',
         'birth_date',
         'birth_place',
@@ -47,5 +47,10 @@ class Student extends Model
     public function virtual_counseling()
     {
         return $this->hasOne(VirtualCounseling::class);
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
     }
 }

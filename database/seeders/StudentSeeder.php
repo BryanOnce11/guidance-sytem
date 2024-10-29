@@ -18,7 +18,7 @@ class StudentSeeder extends Seeder
                 'user_id' => $i + 1,
                 'family_background_id' => $i + 1,
                 'student_id' => "S{$i}0001",
-                'course' => "Course {$i}",
+                'course_id' => rand(1, 11),
                 'year_lvl' => rand(1, 4), // Random year level between 1 to 4
                 'fname' => "Student{$i}First",
                 'lname' => "Student{$i}Last",

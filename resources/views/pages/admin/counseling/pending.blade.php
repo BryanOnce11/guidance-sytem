@@ -1,21 +1,21 @@
 @extends('layouts.app')
 @section('content')
-    <div class="intro-y flex h-10 items-center mt-10">
-        <h2 class="mr-5 truncate text-lg font-medium">Virtual Counseling Request</h2>
-        <a class="ml-auto flex items-center text-primary" href="">
+    <div class="flex items-center h-10 mt-10 intro-y">
+        <h2 class="mr-5 text-lg font-medium truncate">Virtual Counseling Request</h2>
+        <a class="flex items-center ml-auto text-primary" href="">
             <i data-tw-merge="" data-lucide="refresh-ccw" class="stroke-1.5 mr-3 h-4 w-4"></i>
             Reload Data
         </a>
     </div>
-    <div class="mt-5 grid grid-cols-12 gap-6">
-        <div class="intro-y col-span-12 mt-2 flex flex-wrap items-center sm:flex-nowrap">
+    <div class="grid grid-cols-12 gap-6 mt-5">
+        <div class="flex flex-wrap items-center col-span-12 mt-2 intro-y sm:flex-nowrap">
             {{-- <button data-tw-merge="" data-tw-toggle="modal" data-tw-target="#new-order-modal"
                 class="transition duration-200 border inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary mr-2 shadow-md">
                 Request Good Moral</button>
-            <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative"><button data-tw-merge=""
+            <div data-tw-merge="" data-tw-placement="bottom-end" class="relative dropdown"><button data-tw-merge=""
                     data-tw-toggle="dropdown" aria-expanded="false"
                     class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed !box px-2"><span
-                        class="flex h-5 w-5 items-center justify-center">
+                        class="flex items-center justify-center w-5 h-5">
                         <i data-tw-merge="" data-lucide="plus" class="stroke-1.5 h-4 w-4"></i>
                     </span></button>
                 <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150"
@@ -28,27 +28,27 @@
                     <div data-tw-merge=""
                         class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-40">
                         <a
-                            class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i
+                            class="flex items-center p-2 transition duration-300 ease-in-out rounded-md cursor-pointer hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i
                                 data-tw-merge="" data-lucide="printer" class="stroke-1.5 mr-2 h-4 w-4"></i>
                             Print</a>
                         <a
-                            class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i
+                            class="flex items-center p-2 transition duration-300 ease-in-out rounded-md cursor-pointer hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i
                                 data-tw-merge="" data-lucide="file-text" class="stroke-1.5 mr-2 h-4 w-4"></i>
                             Export to
                             Excel</a>
                         <a
-                            class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i
+                            class="flex items-center p-2 transition duration-300 ease-in-out rounded-md cursor-pointer hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i
                                 data-tw-merge="" data-lucide="file-text" class="stroke-1.5 mr-2 h-4 w-4"></i>
                             Export to
                             PDF</a>
                     </div>
                 </div>
             </div> --}}
-            <div class="mx-auto hidden text-slate-500 md:block">
+            <div class="hidden mx-auto text-slate-500 md:block">
                 Showing {{ $counseling_pendings->firstItem() }} to {{ $counseling_pendings->lastItem() }} of
                 {{ $counseling_pendings->total() }} entries
             </div>
-            <div class="mt-3 w-full sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
+            <div class="w-full mt-3 sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
                 <div class="relative w-56 text-slate-500">
                     <input data-tw-merge="" type="text" placeholder="Search..."
                         class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 !box w-56 pr-10">
@@ -58,36 +58,36 @@
             </div>
         </div>
         <!-- BEGIN: Data List -->
-        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+        <div class="col-span-12 overflow-auto intro-y lg:overflow-visible">
             <table data-tw-merge="" class="w-full text-left -mt-2 border-separate border-spacing-y-[10px]">
                 <thead data-tw-merge="" class="">
                     <tr data-tw-merge="" class="">
                         <th data-tw-merge=""
-                            class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0">
+                            class="px-5 py-3 font-medium border-b-0 dark:border-darkmode-300 whitespace-nowrap">
                             STUDENT ID
                         </th>
                         <th data-tw-merge=""
-                            class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0 text-center">
+                            class="px-5 py-3 font-medium text-center border-b-0 dark:border-darkmode-300 whitespace-nowrap">
                             FULL NAME
                         </th>
                         <th data-tw-merge=""
-                            class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0 text-center">
+                            class="px-5 py-3 font-medium text-center border-b-0 dark:border-darkmode-300 whitespace-nowrap">
                             PROGRAM
                         </th>
                         <th data-tw-merge=""
-                            class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0">
+                            class="px-5 py-3 font-medium border-b-0 dark:border-darkmode-300 whitespace-nowrap">
                             YEAR LEVEL
                         </th>
                         <th data-tw-merge=""
-                            class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0 text-center">
+                            class="px-5 py-3 font-medium text-center border-b-0 dark:border-darkmode-300 whitespace-nowrap">
                             DATE REQUESTED
                         </th>
                         <th data-tw-merge=""
-                            class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0 text-center">
+                            class="px-5 py-3 font-medium text-center border-b-0 dark:border-darkmode-300 whitespace-nowrap">
                             STATUS
                         </th>
                         <th data-tw-merge=""
-                            class="font-medium px-5 py-3 dark:border-darkmode-300 whitespace-nowrap border-b-0 text-center">
+                            class="px-5 py-3 font-medium text-center border-b-0 dark:border-darkmode-300 whitespace-nowrap">
                             ACTIONS
                         </th>
                     </tr>
@@ -101,7 +101,7 @@
                             </td>
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-                                <a class="whitespace-nowrap font-medium" href="">
+                                <a class="font-medium whitespace-nowrap" href="">
                                     {{ $counseling_pending->student->fname }} {{ $counseling_pending->student->m_i }}
                                     {{ $counseling_pending->student->lname }}
                                 </a>
@@ -111,7 +111,7 @@
                             </td>
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-                                {{ $counseling_pending->student->course }}
+                                {{ $counseling_pending->student->course->code }}
                             </td>
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
@@ -131,7 +131,8 @@
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600 before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400">
                                 <div class="flex items-center justify-center">
-                                    <a class="mr-3 flex items-center text-primary" href="#">
+                                    <a class="flex items-center mr-3 text-primary"
+                                        href="{{ route('admin.counseling.letter', $counseling_pending) }}">
                                         <i data-tw-merge="" data-lucide="mail" class="stroke-1.5 mr-1 h-4 w-4"></i>
                                         Letter
                                     </a>
@@ -149,7 +150,7 @@
         </div>
         <!-- END: Data List -->
         <!-- BEGIN: Pagination -->
-        <div class="intro-y col-span-12 flex flex-wrap items-center sm:flex-row sm:flex-nowrap">
+        <div class="flex flex-wrap items-center col-span-12 intro-y sm:flex-row sm:flex-nowrap">
             <nav class="w-full sm:mr-auto sm:w-auto">
                 {{ $counseling_pendings->links('vendor.pagination.tailwind') }}
             </nav>
@@ -201,7 +202,7 @@
                 <form action="{{ route('admin.couseling.date_scheduled', $counseling_pending) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div data-tw-merge="" class="p-5 grid grid-cols-12 gap-4 gap-y-3">
+                    <div data-tw-merge="" class="grid grid-cols-12 gap-4 p-5 gap-y-3">
                         <div class="col-span-12">
                             <label data-tw-merge="" for="pos-form-1"
                                 class="inline-block mb-2 group-[.form-inline]:mb-2 group-[.form-inline]:sm:mb-0 group-[.form-inline]:sm:mr-5 group-[.form-inline]:sm:text-right">
@@ -211,7 +212,7 @@
                                 placeholder="Customer name"
                                 class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 flex-1">
                             @error('date_scheduled')
-                                <div class="mt-1 text-red-600 text-sm">{{ $message }}</div>
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
