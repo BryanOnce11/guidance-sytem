@@ -41,23 +41,23 @@
                     <li class="relative w-[14rem]">
                         <a href="#" id="dropdownToggle" class="flex items-center px-4 py-2 text-orange-600 rounded hover:bg-gray-200">
                             <!-- Icon for Student List (group icon) -->
-                            <i class="fas fa-users w-5 h-5 mr-2"></i>
+                            <i class="w-5 h-5 mr-2 fas fa-users"></i>
                             <span class="font-medium">Student List</span>
-                            <i class="fas fa-chevron-down w-4 h-4 ml-auto"></i>
+                            <i class="w-4 h-4 ml-auto fas fa-chevron-down"></i>
                         </a>
                         <!-- Dropdown Menu (Initially hidden) -->
                         <ul id="dropdownMenu" class="hidden pl-8 mt-2 space-y-2">
                             <li>
                                 <a href="#" class="flex items-center px-4 py-2 text-gray-600 rounded hover:bg-gray-200">
                                     <!-- Icon for List of Students (person with checkmark) -->
-                                    <i class="fas fa-user-check w-5 h-5 mr-2"></i>
+                                    <i class="w-5 h-5 mr-2 fas fa-user-check"></i>
                                     <span>List of Students</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#" class="flex items-center px-4 py-2 text-gray-600 rounded hover:bg-gray-200">
                                     <!-- Icon for Student Request (person with an 'X') -->
-                                    <i class="fas fa-user-times w-5 h-5 mr-2"></i>
+                                    <i class="w-5 h-5 mr-2 fas fa-user-times"></i>
                                     <span>Student Request</span>
                                 </a>
                             </li>
