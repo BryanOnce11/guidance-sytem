@@ -86,10 +86,10 @@
                             class="px-5 py-3 font-medium text-center border-b-0 dark:border-darkmode-300 whitespace-nowrap">
                             STATUS
                         </th>
-                        {{-- <th data-tw-merge=""
+                        <th data-tw-merge=""
                             class="px-5 py-3 font-medium text-center border-b-0 dark:border-darkmode-300 whitespace-nowrap">
                             ACTIONS
-                        </th> --}}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -128,20 +128,19 @@
                                     {{ $approved_counseling->status }}
                                 </div>
                             </td>
-                            {{-- <td data-tw-merge=""
-                            class="px-5 py-3 border-b dark:border-darkmode-300 box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600 before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400">
-                            <div class="flex items-center justify-center">
-                                <a class="flex items-center mr-3" href="#">
-                                    <i data-tw-merge="" data-lucide="check-square" class="stroke-1.5 mr-1 h-4 w-4"></i>
-                                    Edit
-                                </a>
-                                <a class="flex items-center text-danger" data-tw-toggle="modal"
-                                    data-tw-target="#delete-confirmation-modal" href="#">
-                                    <i data-tw-merge="" data-lucide="trash" class="stroke-1.5 mr-1 h-4 w-4"></i>
-                                    Delete
-                                </a>
-                            </div>
-                        </td> --}}
+                            <td data-tw-merge=""
+                                class="px-5 py-3 border-b dark:border-darkmode-300 box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600 before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400">
+                                @if ($approved_counseling->date_scheduled->setTimezone('Asia/Manila')->isToday())
+                                    <div class="flex items-center justify-center">
+                                        <a class="flex items-center mr-3 text-success {{ $approved_counseling->date_scheduled->setTimezone('Asia/Manila')->isToday() ? '' : 'opacity-50 cursor-not-allowed' }}"
+                                            href="{{ $approved_counseling->date_scheduled->setTimezone('Asia/Manila')->isToday() ? route('video-call', $approved_counseling->id) : '#' }}"
+                                            @if (!$approved_counseling->date_scheduled->isToday()) aria-disabled="true" @endif>
+                                            <i data-tw-merge="" data-lucide="video" class="stroke-1.5 mr-1 h-4 w-4"></i>
+                                            Start
+                                        </a>
+                                    </div>
+                                @endif
+                            </td>
                         </tr>
                     @empty
                         <tr>

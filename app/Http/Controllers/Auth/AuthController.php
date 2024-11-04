@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFamilyBackgroundRequest;
 use App\Http\Requests\StoreStudentInfoRequest;
 use App\Http\Requests\StoreStudentRequest;
+use App\Models\CounselingNotes;
 use App\Models\Course;
 use App\Models\User;
 use App\Models\Student;
@@ -198,5 +199,44 @@ class AuthController extends Controller
         Auth::logout();
 
         return redirect()->route('login');
+    }
+
+    public function showVideoCall($video_counseling_id)
+    {
+        $counseling_id = CounselingNotes::where('virtual_counseling_id', $video_counseling_id)->exists();
+        if ($counseling_id) {
+            alert('Error', 'The meeting is already finished', 'error');
+            return back();
+        }
+        return view('auth.video-call', [
+            'id' => $video_counseling_id
+        ]);
+    }
+
+    public function videoCall(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'user_id' => 'required',
+                'counseling_id' => 'required',
+                'notes' => 'required',
+                'duration' => 'required'
+            ]);
+
+            CounselingNotes::create([
+                'user_id' => $validated['user_id'],
+                'virtual_counseling_id' => $validated['counseling_id'],
+                'notes' => $validated['notes'],
+                'duration' => $validated['duration']
+            ]);
+
+            return response()->json([
+                'message' => 'Meeting notes successefully created'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => $th->getMessage()
+            ]);
+        }
     }
 }

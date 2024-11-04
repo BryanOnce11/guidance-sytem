@@ -55,6 +55,10 @@ route::controller(VerificationController::class)->group(function () {
 
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('video-call/{video_counseling_id}', [AuthController::class, 'showVideoCall'])->name('video-call');
+    Route::post('video-call/notes', [AuthController::class, 'videoCall']);
+
     // student
     Route::controller(StudentController::class)->prefix('student')->group(function () {
         Route::get('good-moral/pending', 'pendingGoodmoral')->name('student.good-moral.pending');
