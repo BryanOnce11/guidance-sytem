@@ -25,7 +25,7 @@ class StoreStudentInfoRequest extends FormRequest
             'student_id' => 'required|string|max:20',
             'fname' => 'required|string|max:50',
             'lname' => 'required|string|max:50',
-            'm_i' => 'nullable|string|size:1',
+            'm_i' => 'nullable',
             'course_id' => 'required',
             'year_lvl' => 'required|string|max:10',
             'birth_date' => 'required|date',

@@ -131,8 +131,8 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label class="block text-gray-700">Middle Initial</label>
-                                        <input type="text" name="m_i" maxLength="1" value="{{ old('m_i') }}"
+                                        <label class="block text-gray-700">Middle Name</label>
+                                        <input type="text" name="m_i" value="{{ old('m_i') }}"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
                                         @error('m_i')
                                             <span class="text-sm text-red-500">{{ $message }}</span>
@@ -189,10 +189,13 @@
                                         <select name="civil_status"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                                             <option value="" hidden>Select Status</option>
-                                            <option value="single"
-                                                {{ old('civil_status') == 'single' ? 'selected' : '' }}>Single</option>
-                                            <option value="married"
-                                                {{ old('civil_status') == 'married' ? 'selected' : '' }}>Married
+                                            <option value="Single"
+                                                {{ old('civil_status') == 'Single' ? 'selected' : '' }}>Single</option>
+                                            <option value="Married"
+                                                {{ old('civil_status') == 'Married' ? 'selected' : '' }}>Married
+                                            </option>
+                                            <option value="Widowed"
+                                                {{ old('civil_status') == 'Widowed' ? 'selected' : '' }}>Widowed
                                             </option>
                                         </select>
                                         @error('civil_status')

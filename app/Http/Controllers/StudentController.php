@@ -107,12 +107,38 @@ class StudentController extends Controller
     public function updateStudentProfile(UpdateStudentRequest $request, Student $student)
     {
         $validated = $request->validated();
+        $user = User::where('id', auth()->id())->first();
+
+        $user->update([
+            'email' => $validated['email']
+        ]);
+
+        $student->family_back->father->update([
+            'fname' => $validated['f_fname'],
+            'lname' => $validated['f_lname'],
+            'm_i' => $validated['f_m_i'],
+            'occupation' => $validated['f_occupation']
+        ]);
+
+        $student->family_back->mother->update([
+            'fname' => $validated['m_fname'],
+            'lname' => $validated['m_lname'],
+            'm_i' => $validated['m_m_i'],
+            'occupation' => $validated['m_occupation']
+        ]);
+
+        $student->family_back->spouse->update([
+            'fname' => $validated['s_fname'],
+            'lname' => $validated['s_lname'],
+            'm_i' => $validated['s_m_i'],
+            'occupation' => $validated['s_occupation']
+        ]);
 
         $student->update($validated);
 
-        alert('success', 'You have successfully updated you personal information');
+        alert('success', 'You have successfully updated you personal information', 'success');
 
-        return redirect()->route('student.profile.update');
+        return redirect()->route('student.profile.show');
     }
 
 }

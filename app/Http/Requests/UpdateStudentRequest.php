@@ -11,7 +11,7 @@ class UpdateStudentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,34 +22,37 @@ class UpdateStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'email' => 'required|email|unique:users,email,' . auth()->id(),
             'student_id' => 'required|string|max:20',
             'fname' => 'required|string|max:50',
             'lname' => 'required|string|max:50',
-            'm_i' => 'nullable' | 'string' | 'size:1',
-            'course' => 'required|string|max:100',
+            'm_i' => 'nullable',
+            'course_id' => 'required',
             'year_lvl' => 'required|string|max:10',
             'birth_date' => 'required|date',
             'birth_place' => 'required|string|max:100',
-            'gender' => 'required|in:male,female,other',
+            'gender' => 'required|in:Male,Female',
             'citizenship' => 'required|string|max:50',
             'civil_status' => 'required|string|max:20',
             'contact_num' => 'required|string|size:11|regex:/^09\d{9}$/',
 
-            'e_fullname' => 'required|string|max:100',
-            'e_contact_num' => 'required|string|size:11|regex:/^09\d{9}$/',
-            'e_occupation' => 'required|string|max:100',
-
+            // 'e_fullname' => 'required|string|max:100',
+            // 'e_contact_num' => 'required|string|size:11|regex:/^09\d{9}$/',
+            // 'e_occupation' => 'required|string|max:100',
 
             'f_fname' => 'required|string|max:50',
             'f_lname' => 'required|string|max:50',
+            'f_m_i' => 'nullable',
             'f_occupation' => 'required|string|max:100',
 
             'm_fname' => 'required|string|max:50',
             'm_lname' => 'required|string|max:50',
+            'm_m_i' => 'nullable',
             'm_occupation' => 'required|string|max:100',
 
             's_fname' => 'required|string|max:50',
             's_lname' => 'required|string|max:50',
+            's_m_i' => 'nullable',
             's_occupation' => 'required|string|max:100',
         ];
     }
@@ -69,9 +72,9 @@ class UpdateStudentRequest extends FormRequest
             'lname.string' => 'The last name must be a string.',
             'lname.max' => 'The last name may not be greater than 50 characters.',
             'm_i.max' => 'Middle initial must be a single character.',
-            'course.required' => 'The course is required.',
-            'course.string' => 'The course must be a string.',
-            'course.max' => 'The course may not be greater than 100 characters.',
+            'course_id.required' => 'The course is required.',
+            'course_id.string' => 'The course must be a string.',
+            'course_id.max' => 'The course may not be greater than 100 characters.',
             'year_lvl.required' => 'The year level is required.',
             'year_lvl.string' => 'The year level must be a string.',
             'year_lvl.max' => 'The year level may not be greater than 10 characters.',

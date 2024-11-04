@@ -93,8 +93,8 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="block text-gray-700">Middle Initial</label>
-                                    <input type="text" name="f_m_i" maxLength="1" value="{{ old('f_m_i') }}"
+                                    <label class="block text-gray-700">Middle Name</label>
+                                    <input type="text" name="f_m_i" value="{{ old('f_m_i') }}"
                                         class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
                                     @error('f_m_i')
                                         <span class="text-sm text-red-500">{{ $message }}</span>
@@ -132,8 +132,8 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="block text-gray-700">Middle Initial</label>
-                                    <input type="text" name="m_m_i" maxLength="1" value="{{ old('m_m_i') }}"
+                                    <label class="block text-gray-700">Middle Name</label>
+                                    <input type="text" name="m_m_i" value="{{ old('m_m_i') }}"
                                         class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
                                     @error('m_m_i')
                                         <span class="text-sm text-red-500">{{ $message }}</span>
@@ -171,8 +171,8 @@
                                     @enderror
                                 </div>
                                 <div>
-                                    <label class="block text-gray-700">Middle Initial</label>
-                                    <input type="text" name="s_m_i" maxLength="1" value="{{ old('s_m_i') }}"
+                                    <label class="block text-gray-700">Middle Name</label>
+                                    <input type="text" name="s_m_i" value="{{ old('s_m_i') }}"
                                         class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
                                     @error('s_m_i')
                                         <span class="text-sm text-red-500">{{ $message }}</span>
