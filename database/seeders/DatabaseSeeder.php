@@ -22,15 +22,15 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
-            FatherInfoSeeder::class,
-            MotherInfoSeeder::class,
-            SpouseInfoSeeder::class,
-            FamilyBackgroundSeeder::class,
+                // FatherInfoSeeder::class,
+                // MotherInfoSeeder::class,
+                // SpouseInfoSeeder::class,
+                // FamilyBackgroundSeeder::class,
             CourseSeeder::class,
-            StudentSeeder::class,
-            AdminSeeder::class,
-            GoodMoralRequestSeeder::class,
-            VirtualCounselingSeeder::class
+            // StudentSeeder::class,
+            // AdminSeeder::class,
+            // GoodMoralRequestSeeder::class,
+            // VirtualCounselingSeeder::class
         ]);
     }
 }
