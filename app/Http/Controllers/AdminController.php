@@ -6,6 +6,7 @@ use App\Models\GoodMoralRequest;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\AdminHistory;
+use App\Models\CounselingNotes;
 use App\Models\Course;
 use App\Models\VirtualCounseling;
 use Illuminate\Http\Request;
@@ -190,7 +191,12 @@ class AdminController extends Controller
 
     public function recordHistory()
     {
-        return view('pages.admin.counseling.record-history');
+        $per_page = request('per_page', 10);
+        $counseling_notes = CounselingNotes::with('virtual_counseling.student', 'user.admin')
+            ->paginate($per_page);
+        return view('pages.admin.counseling.record-history', [
+            'counseling_notes' => $counseling_notes
+        ]);
     }
 
     public function historyLogs()

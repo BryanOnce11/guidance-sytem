@@ -27,4 +27,9 @@ class VirtualCounseling extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
+    public function counseling_notes()
+    {
+        return $this->hasOne(CounselingNotes::class);
+    }
 }

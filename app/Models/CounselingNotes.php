@@ -15,4 +15,14 @@ class CounselingNotes extends Model
         'notes',
         'duration'
     ];
+
+    public function virtual_counseling()
+    {
+        return $this->belongsTo(VirtualCounseling::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

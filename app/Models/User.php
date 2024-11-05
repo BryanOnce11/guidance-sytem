@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Admin::class);
     }
+
+    public function counseling_notes()
+    {
+        return $this->hasOne(CounselingNotes::class);
+    }
 }

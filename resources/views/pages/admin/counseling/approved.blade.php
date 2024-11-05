@@ -93,7 +93,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($counseling_approveds as $counseling_approved)
+                    @forelse ($counseling_approveds as $counseling_approved)
                         <tr data-tw-merge="" class="intro-x">
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
@@ -142,7 +142,11 @@
                                 @endif
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="7" class="py-4 text-center">No approved request found.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
