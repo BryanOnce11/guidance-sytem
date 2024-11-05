@@ -93,7 +93,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($verified_students as $verified_student)
+                    @forelse ($verified_students as $verified_student)
                         <tr data-tw-merge="" class="intro-x">
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
@@ -136,16 +136,20 @@
                                         <i data-tw-merge="" data-lucide="user" class="stroke-1.5 mr-1 h-4 w-4"></i>
                                         Profile
                                     </a>
-                                    <a class="flex items-center text-success" data-tw-toggle="modal"
-                                        data-tw-target="#delete-confirmation-modal" href="#">
-                                        <i data-tw-merge="" data-lucide="sticky-note" class="stroke-1.5 mr-1 h-4 w-4"></i>
-                                        Good Moral
-                                    </a>
+                                    {{-- <a class="flex items-center text-success" data-tw-toggle="modal"
+                                    data-tw-target="#delete-confirmation-modal" href="#">
+                                    <i data-tw-merge="" data-lucide="sticky-note" class="stroke-1.5 mr-1 h-4 w-4"></i>
+                                    Good Moral
+                                </a> --}}
                                 </div>
 
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="7" class="py-4 text-center">No virified student data found.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
