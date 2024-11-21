@@ -2,8 +2,9 @@
         <div
             class="mobile-menu group top-0 inset-x-0 fixed bg-theme-1/90 z-[60] border-b border-white/[0.08] dark:bg-darkmode-800/90 md:hidden before:content-[''] before:w-full before:h-screen before:z-10 before:fixed before:inset-x-0 before:bg-black/90 before:transition-opacity before:duration-200 before:ease-in-out before:invisible before:opacity-0 [&.mobile-menu--active]:before:visible [&.mobile-menu--active]:before:opacity-100">
             <div class="flex h-[70px] items-center px-3 sm:px-8">
-                <a class="mr-auto flex" href="">
-                    <img class="w-6" src="dist/images/logo.svg" alt="Midone - Tailwind Admin Dashboard Template">
+                <a class="flex mr-auto" href="">
+                    <img class="w-6" src="{{ asset('dist/images/logo.svg') }}"
+                        alt="Midone - Tailwind Admin Dashboard Template">
                 </a>
                 <a class="mobile-menu-toggler" href="#">
                     <i data-tw-merge="" data-lucide="bar-chart2"
@@ -36,7 +37,7 @@
                             </div>
                             <div class="menu__title">
                                 Good Moral Request
-                                <div class="menu__sub-icon transform rotate-180">
+                                <div class="transform rotate-180 menu__sub-icon">
                                     <i data-tw-merge="" data-lucide="chevron-down" class="stroke-1.5 w-5 h-5"></i>
                                 </div>
                             </div>
@@ -71,7 +72,7 @@
                             </div>
                             <div class="menu__title">
                                 Virtual Counseling
-                                <div class="menu__sub-icon transform rotate-180">
+                                <div class="transform rotate-180 menu__sub-icon">
                                     <i data-tw-merge="" data-lucide="chevron-down" class="stroke-1.5 w-5 h-5"></i>
                                 </div>
                             </div>
@@ -99,7 +100,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="menu__divider my-6"></li>
+                    <li class="my-6 menu__divider"></li>
                     <!-- END: First Child -->
                 </ul>
             </div>
