@@ -19,7 +19,7 @@ return new class extends Migration {
             // $table->string('lname');
             // $table->string('m_i');
             $table->string('role')->default('Student');
-            $table->string('status')->default('Pendimg');
+            $table->string('status')->default('Pending');
             // $table->rememberToken();
             $table->timestamps();
         });
