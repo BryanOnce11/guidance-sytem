@@ -17,7 +17,8 @@ class AdminSeeder extends Seeder
             'user_id' => 1,
             'fname' => 'John',
             'lname' => 'Smith',
-            'm_i' => 'R'
+            'm_i' => 'R',
+            'image' => 'test'
         ]);
     }
 }

@@ -13,7 +13,8 @@ class Admin extends Model
         'user_id',
         'fname',
         'lname',
-        'm_i'
+        'm_i',
+        'image'
     ];
 
     //belongs to important when using with()

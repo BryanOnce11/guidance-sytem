@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\GoodMoralRequest;
 use App\Models\Student;
 use App\Models\User;
@@ -148,7 +149,7 @@ class AdminController extends Controller
 
     public function virtualCounselingView(GoodMoralRequest $virtual_counseling)
     {
-        return view('pages.admin.good-moral.request-letter', [
+        return view('pages.admin.counseling.request-letter', [
             'virtual_counseling' => $virtual_counseling
         ]);
     }
@@ -197,6 +198,40 @@ class AdminController extends Controller
         return view('pages.admin.counseling.record-history', [
             'counseling_notes' => $counseling_notes
         ]);
+    }
+
+    public function showAdminList()
+    {
+        $per_page = request('per_page', 10);
+        $admin_lists = Admin::with('user')
+            ->paginate($per_page);
+        return view('pages.admin.settings.admin-list', [
+            'admin_lists' => $admin_lists
+        ]);
+    }
+
+    public function storeAdminList(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => ['bail', 'required', 'email'],
+            'password' => ['required'],
+            'fname' => ['required'],
+            'lname' => ['required'],
+            'm_i' => ['required'],
+            'image' => ['bail', 'required', 'image', 'mimes:jpeg,png,jpg', 'max:20480'],
+        ]);
+
+        $user = User::create($validated);
+        $validated['user_id'] = $user->id;
+
+        $imagePath = $validated['image']->store('students', 'public');
+        $validated['image'] = $imagePath;
+
+        Admin::create($validated);
+
+        alert('Success', 'You have successfully created an admin account', 'success');
+
+        return back();
     }
 
     public function historyLogs()

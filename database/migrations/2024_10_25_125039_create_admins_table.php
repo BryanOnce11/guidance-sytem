@@ -14,6 +14,7 @@ return new class extends Migration {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
+            $table->string('image');
             $table->string('fname');
             $table->string('lname');
             $table->string('m_i');

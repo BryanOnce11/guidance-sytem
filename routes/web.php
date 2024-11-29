@@ -87,6 +87,7 @@ Route::middleware('auth')->group(function () {
         Route::get('counseling/approved', 'approvedCounseling')->name('admin.counseling.approved');
         Route::put('counseling/date-scheduled/{virtual_counseling}', 'dateScheduledCounseling')->name('admin.couseling.date_scheduled');
         Route::get('counseling/record-history', 'recordHistory')->name('admin.counseling.record_history');
+        Route::get('settings/admin-list', 'showAdminList')->name('admin.settings.admin-list');
         Route::get('settings/history-logs', 'historyLogs')->name('admin.settings.history_logs');
     });
 });

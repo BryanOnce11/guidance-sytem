@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Guidance Office Portal - Login</title>
     <link href="{{ asset('dist/images/logo.svg') }}" rel="shortcut icon">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     @vite('resources/css/app.css') <!-- Ensure Vite is managing your CSS -->
     <style>
         /* Custom styles to create the circular left-side design */

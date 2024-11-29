@@ -17,18 +17,18 @@
         <h2 class="mb-4 font-bold text-center">PALAWAN STATE UNIVERSITY -- BROOKES POINT CAMPUS</h2>
         <h2 class="mb-10 font-bold text-center ">BROOKES POINT PALAWAN</h2>
         <p class="mb-8 text-right">Date:
-            {{ $virtual_counseling->created_at->setTimeZone('Asia/Manila')->format('F j, Y') }}</p>
+            {{ $good_moral->created_at->setTimeZone('Asia/Manila')->format('F j, Y') }}</p>
         <p class="mb-8">Dear: <span class="font-bold">Ma'am Wynchell O. Mollenido</span></p>
-        <p class="mb-4 ml-4">I am {{ $virtual_counseling->student->fname }} {{ $virtual_counseling->student->m_i }}
-            {{ $virtual_counseling->student->lname }}, I hope this message finds you well. I would like to request a
+        <p class="mb-4 ml-4">I am {{ $good_moral->student->fname }} {{ $good_moral->student->m_i }}
+            {{ $good_moral->student->lname }}, I hope this message finds you well. I would like to request a
             meeting to discuss:</p>
-        <p class="mb-4 ml-4">{{ $virtual_counseling->reason }}.</p>
+        <p class="mb-4 ml-4">{{ $good_moral->reason }}.</p>
         <p class="mb-8 ml-4">Thank you for your assistance.</p>
 
         <p class="mb-4 ml-4 font-bold text-left">Sincerely Yours,</p>
-        <p class="ml-4 font-bold text-left">{{ $virtual_counseling->student->fname }}
-            {{ $virtual_counseling->student->m_i }}
-            {{ $virtual_counseling->student->lname }}</p>
+        <p class="ml-4 font-bold text-left">{{ $good_moral->student->fname }}
+            {{ $good_moral->student->m_i }}
+            {{ $good_moral->student->lname }}</p>
         <p class="ml-4 font-bold text-left">(name)</p>
     </div>
 </body>

@@ -21,7 +21,7 @@
         <p class="mb-8">Dear: <span class="font-bold">Ma'am Wynchell O. Mollenido</span></p>
         <p class="mb-4 ml-4">I am {{ $virtual_counseling->student->fname }} {{ $virtual_counseling->student->m_i }}
             {{ $virtual_counseling->student->lname }}, I hope this message finds you well. I would like to request a
-            Good Moral Certificate.</p>
+            meeting to discuss:</p>
         <p class="mb-4 ml-4">{{ $virtual_counseling->reason }}.</p>
         <p class="mb-8 ml-4">Thank you for your assistance.</p>
 

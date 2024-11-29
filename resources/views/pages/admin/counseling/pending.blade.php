@@ -132,7 +132,7 @@
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600 before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400">
                                 <div class="flex items-center justify-center">
                                     <a class="flex items-center mr-3 text-primary"
-                                        href="{{ route('admin.counseling.letter', $counseling_pending) }}">
+                                        href="{{ route('admin.counseling.letter', $counseling_pending->id) }}">
                                         <i data-tw-merge="" data-lucide="mail" class="stroke-1.5 mr-1 h-4 w-4"></i>
                                         Letter
                                     </a>
