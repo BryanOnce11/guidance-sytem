@@ -39,9 +39,9 @@ class AuthController extends Controller
             $user = auth()->user();
 
             if ($user->role == 'Student') {
-                return redirect()->route('student.profile.show');
+                return redirect()->route('student.home-page');
             } else {
-                return redirect()->route('admin.student-list.pending');
+                return redirect()->route('admin.home-page');
             }
         }
 
@@ -80,24 +80,30 @@ class AuthController extends Controller
     {
         $validated = $request->validated();
 
-        $request->session()->put('student_id', $validated['student_id']);
-        $request->session()->put('fname', $validated['fname']);
-        $request->session()->put('lname', $validated['lname']);
-        $request->session()->put('m_i', $validated['m_i']);
-        $request->session()->put('course_id', $validated['course_id']);
-        $request->session()->put('year_lvl', $validated['year_lvl']);
-        $request->session()->put('birth_date', $validated['birth_date']);
-        $request->session()->put('birth_place', $validated['birth_place']);
-        $request->session()->put('gender', $validated['gender']);
-        $request->session()->put('citizenship', $validated['citizenship']);
-        $request->session()->put('civil_status', $validated['civil_status']);
-        $request->session()->put('contact_num', $validated['contact_num']);
+        $email = $request->session()->get('email');
+        $password = $request->session()->get('password');
 
-        $request->session()->put('e_fullname', $validated['e_fullname']);
-        $request->session()->put('e_contact_num', $validated['e_contact_num']);
-        $request->session()->put('e_occupation', $validated['e_occupation']);
+        $user = User::create([
+            'email' => $email,
+            'password' => $password
+        ]);
 
-        return redirect()->route('student.family-background');
+        $validated['user_id'] = $user->id;
+        $imagePath = $validated['image']->store('students', 'public');
+        $validated['image'] = $imagePath;
+        Student::create($validated);
+
+
+        Auth::login($user);
+
+        // Send email verification notification
+        $user->sendEmailVerificationNotification();
+
+        event(new Registered($user));
+
+        alert('Successfully', 'We send you an email verification!', 'success');
+
+        return redirect()->route('verification.notice');
     }
 
     public function showFamilyBackGround()
@@ -125,7 +131,8 @@ class AuthController extends Controller
 
         $e_fullname = $request->session()->get('e_fullname');
         $e_contact_num = $request->session()->get('e_contact_num');
-        $e_occupation = $request->session()->get('e_occupation');
+        $e_relationship = $request->session()->get('e_relationship');
+        $e_address = $request->session()->get('e_address');
 
         $validated = $request->validated();
 
@@ -178,7 +185,8 @@ class AuthController extends Controller
             'contact_num' => $contact_num,
             'emergency_fullname' => $e_fullname,
             'emergency_contact_num' => $e_contact_num,
-            'emergency_occupation' => $e_occupation
+            'emergency_relationship' => $e_relationship,
+            'emergency_address' => $e_address
         ]);
 
 

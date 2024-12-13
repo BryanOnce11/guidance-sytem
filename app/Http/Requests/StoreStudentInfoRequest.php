@@ -23,21 +23,31 @@ class StoreStudentInfoRequest extends FormRequest
     {
         return [
             'student_id' => 'required|string|max:20',
+            'image' => 'required|image|mimes:png,jpg',
+            'status' => 'required',
             'fname' => 'required|string|max:50',
             'lname' => 'required|string|max:50',
             'm_i' => 'nullable',
             'course_id' => 'required',
             'year_lvl' => 'required|string|max:10',
+            'age' => 'required',
             'birth_date' => 'required|date',
             'birth_place' => 'required|string|max:100',
             'gender' => 'required|in:Male,Female,other',
             'citizenship' => 'required|string|max:50',
             'civil_status' => 'required|string|max:20',
             'contact_num' => 'required|string|size:11|regex:/^09\d{9}$/',
+            'height' => 'required',
+            'weight' => 'required',
+            'blood_type' => 'required',
+            'present_address' => 'required',
+            'permanent_address' => 'required',
+            'where_staying' => 'required',
 
-            'e_fullname' => 'required|string|max:100',
-            'e_contact_num' => 'required|string|size:11|regex:/^09\d{9}$/',
-            'e_occupation' => 'required|string|max:100',
+            // 'e_fullname' => 'required|string|max:100',
+            // 'e_contact_num' => 'required|string|size:11|regex:/^09\d{9}$/',
+            // 'e_relationship' => 'required|string|max:100',
+            // 'e_address' => 'required|string|max:100',
         ];
     }
 
@@ -83,9 +93,12 @@ class StoreStudentInfoRequest extends FormRequest
             'e_contact_num.required' => 'The emergency contact number is required.',
             'e_contact_num.size' => 'Contact number must be exactly 11 digits.',
             'e_contact_num.regex' => 'Contact number must be in the format 09********.',
-            'e_occupation.required' => 'The emergency contact occupation is required.',
-            'e_occupation.string' => 'The emergency contact occupation must be a string.',
-            'e_occupation.max' => 'The emergency contact occupation may not be greater than 100 characters.',
+            'e_relationship.required' => 'The emergency contact relationship is required.',
+            'e_relationship.string' => 'The emergency contact relationship must be a string.',
+            'e_relationship.max' => 'The emergency contact relationship may not be greater than 100 characters.',
+            'e_address.required' => 'The emergency contact relationship is required.',
+            'e_address.string' => 'The emergency contact relationship must be a string.',
+            'e_address.max' => 'The emergency contact relationship may not be greater than 100 characters.',
         ];
     }
 }

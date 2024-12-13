@@ -220,6 +220,21 @@
                             @enderror
                         </div>
                     </div>
+
+                    <div data-tw-merge="" class="grid grid-cols-12 gap-4 p-5 gap-y-3">
+                        <div class="col-span-12">
+                            <label data-tw-merge="" for="pos-form-1"
+                                class="inline-block mb-2 group-[.form-inline]:mb-2 group-[.form-inline]:sm:mb-0 group-[.form-inline]:sm:mr-5 group-[.form-inline]:sm:text-right">
+                                Time To Scheduled
+                            </label>
+                            <input data-tw-merge="" name="time_scheduled" id="pos-form-1" type="time"
+                                placeholder="Customer name"
+                                class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 flex-1">
+                            @error('time_scheduled')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="px-5 py-3 text-right border-t border-slate-200/60 dark:border-darkmode-400"><button
                             data-tw-merge="" data-tw-dismiss="modal" type="button"
                             class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mr-1 w-32">Cancel</button>

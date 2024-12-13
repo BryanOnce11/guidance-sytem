@@ -44,9 +44,10 @@
         </div>
 
         <!-- Right Side - Registration Form (Full Width and Height) -->
-        <div class="w-[60rem] bg-white p-12 flex flex-col justify-center items-center h-screen">
+        <div class="w-[60rem] bg-white p-12 flex flex-col justify-center items-center h-screen bg-center bg-no-repeat bg-cover"
+            style="background-image: url('{{ asset('image/bgbrookes2.jpg') }}');">
             <div class="w-full max-w-4xl p-8 mx-auto">
-                <div class="bg-white rounded-lg shadow-md">
+                <div class="rounded-lg shadow-md ">
                     <div class="px-8 py-4">
                         <h2 class="text-3xl font-bold text-center">Register</h2>
                     </div>
@@ -66,21 +67,54 @@
                         </div>
 
                         <form method="POST" action="{{ route('student.personal-info.post') }}" id="registration-form"
-                            class="space-y-6">
+                            class="space-y-6" enctype="multipart/form-data">
                             @csrf
                             <div id="" class="step">
-                                <h3 class="mb-4 text-lg font-semibold">Personal Information</h3>
-                                <div class="mb-4">
-                                    <label class="block text-gray-700">Student ID</label>
-                                    <input type="text" name="student_id" value="{{ old('student_id') }}"
-                                        class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
-                                    @error('student_id')
-                                        <span class="text-sm text-red-500">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="grid grid-cols-2 gap-4 mb-4">
+                                <h3 class="mb-2 text-lg font-semibold">Personal Information</h3>
+                                <div class="grid grid-cols-2 gap-4 mb-2 ">
                                     <div>
-                                        <label class="block text-gray-700">Course</label>
+                                        <label for="update-profile-form-8" class="inline-block mb-2 text-black">Student
+                                            Status</label>
+                                        <select name="status" id="update-profile-form-8"
+                                            class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                            <option value="Old" {{ old('status') == 'Old' ? 'selected' : '' }}>
+                                                Old</option>
+                                            <option value="New" {{ old('status') == 'New' ? 'selected' : '' }}>
+                                                New</option>
+                                        </select>
+                                        @error('status')
+                                            <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div>
+                                        <label for="image-upload" class="inline-block mb-2 text-black">Upload
+                                            Image</label>
+
+                                        <input type="file" name="image" id="image-upload"
+                                            class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                            accept="image/*" onchange="previewImage(event)">
+
+                                        <!-- Image preview -->
+                                        {{-- <div id="image-preview-container" class="mt-2">
+                                        <img id="image-preview" src="" alt="Image Preview" class="hidden w-full h-auto rounded-md"/>
+                                    </div>
+                                     --}}
+                                        @error('image')
+                                            <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-4 mb-2 ">
+                                    <div>
+                                        <label class="block text-black">Student ID</label>
+                                        <input type="text" name="student_id" value="{{ old('student_id') }}"
+                                            class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
+                                        @error('student_id')
+                                            <span class="text-sm text-red-500">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div>
+                                        <label class="block text-black">Course</label>
                                         <select name="course_id"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                                             <option value="" hidden>Select Course</option>
@@ -96,7 +130,7 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label class="block text-gray-700">Year Level</label>
+                                        <label class="block text-black">Year Level</label>
                                         <select name="year_lvl"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                                             <option value="" hidden>Select Year Level</option>
@@ -114,9 +148,9 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-3 gap-4 mb-4">
+                                <div class="grid grid-cols-3 gap-4 mb-2 ">
                                     <div>
-                                        <label class="block text-gray-700">First Name</label>
+                                        <label class="block text-black">First Name</label>
                                         <input type="text" name="fname" value="{{ old('fname') }}"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
                                         @error('fname')
@@ -124,7 +158,7 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label class="block text-gray-700">Last Name</label>
+                                        <label class="block text-black">Last Name</label>
                                         <input type="text" name="lname" value="{{ old('lname') }}"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
                                         @error('lname')
@@ -132,7 +166,7 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label class="block text-gray-700">Middle Name</label>
+                                        <label class="block text-black">Middle Name</label>
                                         <input type="text" name="m_i" value="{{ old('m_i') }}"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
                                         @error('m_i')
@@ -140,28 +174,39 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-3 gap-4 mb-4">
+                                <div class="grid grid-cols-2 gap-4 mb-2 ">
                                     <div>
-                                        <label class="block text-gray-700">Birth Date</label>
+                                        <label class="block text-black">Age</label>
+                                        <input type="number" min="18" name="age"
+                                            value="{{ old('age') }}"
+                                            class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
+                                        @error('age')
+                                            <span class="text-sm text-red-500">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div>
+                                        <label class="block text-black">Birth Date</label>
                                         <input type="date" name="birth_date" value="{{ old('birth_date') }}"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
                                         @error('birth_date')
                                             <span class="text-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 mb-2">
                                     <div>
-                                        <label class="block text-gray-700">Birth Place</label>
+                                        <label class="block text-black">Birth Place</label>
                                         <input type="text" name="birth_place" value="{{ old('birth_place') }}"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
                                         @error('birth_place')
                                             <span class="text-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div>
-                                        <label class="block text-gray-700">Contact Number</label>
-                                        <input type="tel" name="contact_num" value="{{ old('contact_num') }}"
+                                    <div class="">
+                                        <label class="block text-black">Citizenship</label>
+                                        <input type="text" name="citizenship" value="{{ old('citizenship') }}"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
-                                        @error('contact_num')
+                                        @error('citizenship')
                                             <span class="text-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -169,10 +214,10 @@
                             </div>
 
                             <div id="" class="hidden step">
-                                <h3 class="mb-4 text-lg font-semibold">Personal Information</h3>
-                                <div class="grid grid-cols-3 gap-4">
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700">Gender</label>
+                                <h3 class="mb-2 text-lg font-semibold">Personal Information</h3>
+                                <div class="grid grid-cols-3 gap-4 mb-2">
+                                    <div class="">
+                                        <label class="block text-black">Gender</label>
                                         <select name="gender"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                                             <option value="" hidden>Select Gender</option>
@@ -185,8 +230,8 @@
                                             <span class="text-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700">Civil Status</label>
+                                    <div class="">
+                                        <label class="block text-black">Civil Status</label>
                                         <select name="civil_status"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                                             <option value="" hidden>Select Status</option>
@@ -203,48 +248,84 @@
                                             <span class="text-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700">Citizenship</label>
-                                        <input type="text" name="citizenship" value="{{ old('citizenship') }}"
+                                    <div>
+                                        <label class="block text-black">Contact Number</label>
+                                        <input type="tel" name="contact_num" value="{{ old('contact_num') }}"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
-                                        @error('citizenship')
+                                        @error('contact_num')
                                             <span class="text-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="space-y-4">
-                                    <h4 class="font-medium">Emergency Contact</h4>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700">Full Name</label>
-                                        <input type="text" name="e_fullname" value="{{ old('e_fullname') }}"
+                                <div class="grid grid-cols-3 gap-4 mb-2">
+                                    <div>
+                                        <label class="block text-black">Height</label>
+                                        <input type="text" name="height" value="{{ old('height') }}"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
-                                        @error('e_fullname')
+                                        @error('height')
                                             <span class="text-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700">Contact Number</label>
-                                        <input type="tel" name="e_contact_num"
-                                            value="{{ old('e_contact_num') }}"
+                                    <div>
+                                        <label class="block text-black">Weight</label>
+                                        <input type="text" name="weight" value="{{ old('weight') }}"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
-                                        @error('e_contact_num')
+                                        @error('weight')
                                             <span class="text-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="mb-4">
-                                        <label class="block text-gray-700">Occupation</label>
-                                        <input type="text" name="e_occupation" value="{{ old('e_occupation') }}"
+                                    <div>
+                                        <label class="block text-black">Blood Type</label>
+                                        <input type="text" name="blood_type" value="{{ old('blood_type') }}"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
-                                        @error('e_occupation')
+                                        @error('blood_type')
                                             <span class="text-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                </div>
+                                <div class="mb-2">
+                                    <label class="block text-black">Present Address</label>
+                                    <textarea name="present_address" rows="1"
+                                        class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">{{ old('present_address') }}</textarea>
+                                    @error('present_address')
+                                        <span class="text-sm text-red-500">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-2">
+                                    <label class="block text-black">Permanent Address</label>
+                                    <textarea name="permanent_address" rows="1"
+                                        class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">{{ old('permanent_address') }}</textarea>
+                                    @error('permanent_address')
+                                        <span class="text-sm text-red-500">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-2">
+                                    <label class="block text-black">While Studying At Palawan State University, You
+                                        Are Staying?</label>
+                                    <select name="where_staying"
+                                        class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                        <option value="With Parents"
+                                            {{ old('where_staying') == 'With Parents' ? 'selected' : '' }}>
+                                            With Parents</option>
+                                        <option value="With Relatives"
+                                            {{ old('where_staying') == 'With Relatives' ? 'selected' : '' }}>
+                                            With Relatives</option>
+                                        <option value="In Boarding House"
+                                            {{ old('where_staying') == 'In Boarding House' ? 'selected' : '' }}>
+                                            In Boarding House</option>
+                                        <option value="With Employer"
+                                            {{ old('where_staying') == 'With Employer' ? 'selected' : '' }}>
+                                            With Employer</option>
+                                    </select>
+                                    @error('where_staying')
+                                        <span class="text-sm text-red-500">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="flex justify-between mt-8">
                                 <button type="button" id="prev-btn"
-                                    class="hidden px-6 py-3 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100">Previous</button>
+                                    class="hidden px-6 py-3 text-black bg-white border border-gray-300 rounded-lg hover:bg-gray-100">Previous</button>
                                 <button type="button" id="next-btn"
                                     class="px-6 py-3 text-white bg-orange-500 rounded-lg hover:bg-orange-600">Next</button>
                             </div>

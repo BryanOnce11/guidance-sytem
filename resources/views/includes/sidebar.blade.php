@@ -3,6 +3,17 @@
                 <ul>
                     @if (auth()->user()->role == 'Student')
                         <li>
+                            <a href="{{ route('student.home-page') }}" class="side-menu">
+                                <div class="side-menu__icon">
+                                    <i data-tw-merge="" data-lucide="home" class="stroke-1.5 w-5 h-5"></i>
+                                    <!-- Profile icon -->
+                                </div>
+                                <div class="side-menu__title">
+                                    Home Page
+                                </div>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('student.profile.show') }}" class="side-menu">
                                 <div class="side-menu__icon">
                                     <i data-tw-merge="" data-lucide="user" class="stroke-1.5 w-5 h-5"></i>
@@ -105,6 +116,17 @@
                         @endif
                     @else
                         <li>
+                            <a href="{{ route('admin.home-page') }}" class="side-menu">
+                                <div class="side-menu__icon">
+                                    <i data-tw-merge="" data-lucide="home" class="stroke-1.5 w-5 h-5"></i>
+                                    <!-- Profile icon -->
+                                </div>
+                                <div class="side-menu__title">
+                                    Home Page
+                                </div>
+                            </a>
+                        </li>
+                        <li>
                             <a href="javascript:;"
                                 class="side-menu {{ request()->routeIs('admin.student-list.pending') || request()->routeIs('admn.student-list.verified') ? 'side-menu--active' : '' }}">
                                 <div class="side-menu__icon">
@@ -158,7 +180,8 @@
                                     Good Moral Requests
                                     <div
                                         class="side-menu__sub-icon {{ request()->routeIs('admin.good-moral.pending') || request()->routeIs('admin.good-moral.ready_to_pickup') ? 'transform rotate-180' : '' }}">
-                                        <i data-tw-merge="" data-lucide="chevron-down" class="stroke-1.5 w-5 h-5"></i>
+                                        <i data-tw-merge="" data-lucide="chevron-down"
+                                            class="stroke-1.5 w-5 h-5"></i>
                                     </div>
                                 </div>
                             </a>
@@ -248,7 +271,7 @@
                         </li>
                         <li>
                             <a href="javascript:;"
-                                class="side-menu {{ request()->routeIs('admin.settings.history_logs') ? 'side-menu--active' : '' }}">
+                                class="side-menu {{ request()->routeIs('admin.settings.history_logs') || request()->routeIs('admin.settings.admin-list') ? 'side-menu--active' : '' }}">
                                 <div class="side-menu__icon">
                                     <i data-tw-merge="" data-lucide="settings" class="stroke-1.5 w-5 h-5"></i>
                                     <!-- Settings icon -->
@@ -256,14 +279,14 @@
                                 <div class="side-menu__title">
                                     Settings
                                     <div
-                                        class="side-menu__sub-icon {{ request()->routeIs('admin.settings.history_logs') ? 'transform rotate-180' : '' }}">
+                                        class="side-menu__sub-icon {{ request()->routeIs('admin.settings.history_logs') || request()->routeIs('admin.settings.admin-list') ? 'transform rotate-180' : '' }}">
                                         <i data-tw-merge="" data-lucide="chevron-down"
                                             class="stroke-1.5 w-5 h-5"></i>
                                     </div>
                                 </div>
                             </a>
                             <ul
-                                class="{{ request()->routeIs('admin.settings.history_logs') ? 'side-menu__sub-open' : '' }}">
+                                class="{{ request()->routeIs('admin.settings.history_logs') || request()->routeIs('admin.settings.admin-list') ? 'side-menu__sub-open' : '' }}">
                                 <li>
                                     <a href="{{ route('admin.settings.history_logs') }}"
                                         class="side-menu {{ request()->routeIs('admin.settings.history_logs') ? 'side-menu--active' : '' }}">
@@ -273,6 +296,18 @@
                                         </div>
                                         <div class="side-menu__title">
                                             History Logs
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.settings.admin-list') }}"
+                                        class="side-menu {{ request()->routeIs('admin.settings.admin-list') ? 'side-menu--active' : '' }}">
+                                        <div class="side-menu__icon">
+                                            <i data-tw-merge="" data-lucide="file-text"
+                                                class="stroke-1.5 w-5 h-5"></i> <!-- History Logs icon -->
+                                        </div>
+                                        <div class="side-menu__title">
+                                            Account List
                                         </div>
                                     </a>
                                 </li>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="flex items-center h-10 mt-10 intro-y">
-        <h2 class="mr-5 text-lg font-medium truncate">Admun List</h2>
+        <h2 class="mr-5 text-lg font-medium truncate">Admin List</h2>
         <a class="flex items-center ml-auto text-primary" href="">
             <i data-tw-merge="" data-lucide="refresh-ccw" class="stroke-1.5 mr-3 h-4 w-4"></i>
             Reload Data
@@ -103,7 +103,11 @@
                         <tr data-tw-merge="" class="intro-x">
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-
+                                <div class="w-10 h-10 image-fit zoom-in">
+                                    <img data-placement="top" src="{{ asset('storage/' . $admin_list->image) }}"
+                                        alt="Midone - Tailwind Admin Dashboard Template"
+                                        class="tooltip cursor-pointer rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]">
+                                </div>
                             </td>
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
@@ -205,9 +209,9 @@
         <div data-tw-merge=""
             class="w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-[margin-top,transform] duration-[0.4s,0.3s] -mt-16 group-[.show]:mt-16 group-[.modal-static]:scale-[1.05] dark:bg-darkmode-600 sm:w-[460px]">
             <div class="flex items-center px-5 py-3 border-b border-slate-200/60 dark:border-darkmode-400">
-                <h2 class="mr-auto text-base font-medium">Request Appointmeant</h2>
+                <h2 class="mr-auto text-base font-medium">Create Admin</h2>
             </div>
-            <form action="{{ route('student.counseling.store') }}" method="POST">
+            <form action="{{ route('admin.settings.admin-list.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div data-tw-merge="" class="grid grid-cols-12 gap-4 p-5 gap-y-3">
                     <div class="col-span-12">

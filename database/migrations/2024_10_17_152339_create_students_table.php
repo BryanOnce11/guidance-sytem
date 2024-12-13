@@ -16,23 +16,33 @@ return new class extends Migration {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->foreignIdFor(FamilyBackground::class);
+            $table->foreignIdFor(FamilyBackground::class)->nullable();
             $table->foreignIdFor(Course::class);
             $table->string('student_id');
+            $table->string('status');
+            $table->string('image');
             // $table->string('course');
             $table->string('year_lvl');
             $table->string('fname');
             $table->string('lname');
             $table->string('m_i');
+            $table->string('age');
             $table->date('birth_date');
             $table->string('birth_place');
             $table->string('gender');
             $table->string('citizenship');
             $table->string('civil_status');
             $table->string('contact_num');
-            $table->string('emergency_fullname');
-            $table->string('emergency_contact_num');
-            $table->string('emergency_occupation');
+            $table->string('height');
+            $table->string('weight');
+            $table->string('blood_type');
+            $table->string('present_address');
+            $table->string('permanent_address');
+            $table->string('where_staying');
+            // $table->string('emergency_fullname');
+            // $table->string('emergency_contact_num');
+            // $table->string('emergency_relationship');
+            // $table->string('emergency_address');
             $table->timestamps();
         });
     }

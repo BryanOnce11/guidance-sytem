@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
 
     // student
     Route::controller(StudentController::class)->prefix('student')->group(function () {
+        Route::get('home-page', 'homePage')->name('student.home-page');
         Route::get('good-moral/pending', 'pendingGoodmoral')->name('student.good-moral.pending');
         Route::get('good-moral/ready-to-pickup', 'readyToPickupGoodmoral')->name('student.good-moral.ready_to_pickup');
         Route::post('good-moral', 'storeGoodmoral')->name('student.good-moral.store');
@@ -73,6 +74,7 @@ Route::middleware('auth')->group(function () {
 
     //admin
     Route::controller(AdminController::class)->prefix('admin')->group(function () {
+        Route::get('home-page', 'homePage')->name('admin.home-page');
         Route::get('student-list/pending', 'pendingStudents')->name('admin.student-list.pending');
         Route::get('student-list/verified', 'verifiedStudents')->name('admn.student-list.verified');
         Route::put('student-list/verify/{user}', 'verifyStudent')->name('admin.student-list.verify');
@@ -88,6 +90,7 @@ Route::middleware('auth')->group(function () {
         Route::put('counseling/date-scheduled/{virtual_counseling}', 'dateScheduledCounseling')->name('admin.couseling.date_scheduled');
         Route::get('counseling/record-history', 'recordHistory')->name('admin.counseling.record_history');
         Route::get('settings/admin-list', 'showAdminList')->name('admin.settings.admin-list');
+        Route::post('settings/admin-list/store', 'storeAdminList')->name('admin.settings.admin-list.store');
         Route::get('settings/history-logs', 'historyLogs')->name('admin.settings.history_logs');
     });
 });

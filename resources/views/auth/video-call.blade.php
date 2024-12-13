@@ -7,7 +7,6 @@
     <title>Guidance Office Portal - Login</title>
     <link href="{{ asset('dist/images/logo.svg') }}" rel="shortcut icon">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel='stylesheet' type='text/css' media='screen' href='{{ asset('agora/main.css') }}'>
 </head>

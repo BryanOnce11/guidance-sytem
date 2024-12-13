@@ -15,7 +15,14 @@ return new class extends Migration {
             $table->string('fname');
             $table->string('lname');
             $table->string('m_i');
+            $table->date('birth_date')->nullable();
+            $table->string('educational_attainment')->nullable();
+            $table->string('contact_num')->nullable();
+            $table->string('email')->nullable();
             $table->string('occupation');
+            $table->string('company_name')->nullable();
+            $table->string('company_address')->nullable();
+            $table->string('avg_monthly_income')->nullable();
             $table->timestamps();
         });
     }

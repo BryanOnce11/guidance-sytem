@@ -13,7 +13,14 @@ class SpouseInfo extends Model
         'fname',
         'lname',
         'm_i',
-        'occupation'
+        'birth_date',
+        'educational_attainment',
+        'contact_num',
+        'email',
+        'occupation',
+        'company_name',
+        'company_address',
+        'avg_monthly_income'
     ];
 
     public function family_back_spouse()

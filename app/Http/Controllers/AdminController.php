@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function homePage()
+    {
+        return view('pages.admin.home-page');
+    }
+
     public function pendingStudents()
     {
         $per_page = request('per_page', 10);
@@ -71,6 +76,7 @@ class AdminController extends Controller
         $per_page = request('per_page', 10);
         $good_moral_pendings = GoodMoralRequest::with('student')
             ->where('status', 'Pending')
+            ->oldest()
             ->paginate($per_page);
         return view('pages.admin.good-moral.pending', [
             'good_moral_pendings' => $good_moral_pendings
@@ -107,12 +113,28 @@ class AdminController extends Controller
     public function readyToPickupGoodMoral()
     {
         $per_page = request('per_page', 10);
+        $course = request('course', '');
+
         $good_moral_ready_to_pickups = GoodMoralRequest::with('student')
             ->where('status', 'Ready To Pickup')
             ->orWhere('status', 'Picked Up')
+            ->when($course, function ($q) use ($course) {
+                $q->whereHas('student', function ($s) use ($course) {
+                    $s->whereHas('course', function ($c) use ($course) {
+                        $c->where('code', $course);
+                    });
+                });
+            })
+            ->orderBy(Student::select('fname')
+                ->whereColumn('students.id', 'virtual_counselings.student_id')
+                ->limit(1))  // Ensure we are ordering by the correct `fname`
             ->paginate($per_page);
+
+        $courses = Course::all();
+
         return view('pages.admin.good-moral.ready-to-pickup', [
-            'good_moral_ready_to_pickups' => $good_moral_ready_to_pickups
+            'good_moral_ready_to_pickups' => $good_moral_ready_to_pickups,
+            'courses' => $courses
         ]);
     }
 
@@ -141,13 +163,14 @@ class AdminController extends Controller
         $per_page = request('per_page', 10);
         $counseling_pendings = VirtualCounseling::with('student')
             ->where('status', 'Pending')
+            ->oldest()
             ->paginate($per_page);
         return view('pages.admin.counseling.pending', [
             'counseling_pendings' => $counseling_pendings
         ]);
     }
 
-    public function virtualCounselingView(GoodMoralRequest $virtual_counseling)
+    public function virtualCounselingView(VirtualCounseling $virtual_counseling)
     {
         return view('pages.admin.counseling.request-letter', [
             'virtual_counseling' => $virtual_counseling
@@ -157,11 +180,13 @@ class AdminController extends Controller
     public function dateScheduledCounseling(Request $request, VirtualCounseling $virtual_counseling)
     {
         $validated = $request->validate([
-            'date_scheduled' => 'bail|required|date'
+            'date_scheduled' => 'bail|required|date',
+            'time_scheduled' => 'bail|required|date_format:H:i',
         ]);
 
         $virtual_counseling->update([
             'status' => 'Approved',
+            'time_scheduled' => $validated['time_scheduled'],
             'date_scheduled' => $validated['date_scheduled']
         ]);
 
@@ -182,21 +207,52 @@ class AdminController extends Controller
     public function approvedCounseling()
     {
         $per_page = request('per_page', 10);
+        $course = request('course', '');
+
         $counseling_approveds = VirtualCounseling::with('student')
             ->where('status', 'Approved')
+            ->when($course, function ($q) use ($course) {
+                $q->whereHas('student', function ($s) use ($course) {
+                    $s->whereHas('course', function ($c) use ($course) {
+                        $c->where('code', $course);
+                    });
+                });
+            })
+            ->orderBy(Student::select('fname')
+                ->whereColumn('students.id', 'virtual_counselings.student_id')
+                ->limit(1))  // Ensure we are ordering by the correct `fname`
             ->paginate($per_page);
+
+        $courses = Course::all();
+
         return view('pages.admin.counseling.approved', [
-            'counseling_approveds' => $counseling_approveds
+            'counseling_approveds' => $counseling_approveds,
+            'courses' => $courses
         ]);
     }
 
     public function recordHistory()
     {
         $per_page = request('per_page', 10);
+        $course = request('course', '');  // Filter criterion for course code
+
         $counseling_notes = CounselingNotes::with('virtual_counseling.student', 'user.admin')
+            ->when($course, function ($query) use ($course) {
+                // Filter by the course code associated with the student
+                $query->whereHas('virtual_counseling.student.course', function ($q) use ($course) {
+                    $q->where('code', $course);  // Assuming 'code' is the course code in the 'course' table
+                });
+            })
+            ->orderBy(Student::select('fname')
+                ->whereColumn('students.id', 'virtual_counselings.student_id')
+                ->limit(1))  // Order by the student's first name (fname)
             ->paginate($per_page);
+
+        $courses = Course::all();
+
         return view('pages.admin.counseling.record-history', [
-            'counseling_notes' => $counseling_notes
+            'counseling_notes' => $counseling_notes,
+            'courses' => $courses
         ]);
     }
 
@@ -224,7 +280,7 @@ class AdminController extends Controller
         $user = User::create($validated);
         $validated['user_id'] = $user->id;
 
-        $imagePath = $validated['image']->store('students', 'public');
+        $imagePath = $validated['image']->store('admins', 'public');
         $validated['image'] = $imagePath;
 
         Admin::create($validated);

@@ -13,6 +13,7 @@ class VirtualCounseling extends Model
         'student_id',
         'date_requested',
         'date_scheduled',
+        'time_scheduled',
         'reason',
         'status',
     ];
@@ -20,6 +21,7 @@ class VirtualCounseling extends Model
     protected $casts = [
         'date_requested' => 'datetime',
         'date_scheduled' => 'datetime',
+        'time_scheduled' => 'datetime',
     ];
 
 

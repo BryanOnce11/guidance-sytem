@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\EmergencyContactInfo;
 use App\Models\FatherInfo;
+use App\Models\GuardianInfo;
 use App\Models\MotherInfo;
 use App\Models\SpouseInfo;
 use Illuminate\Database\Migrations\Migration;
@@ -18,6 +20,13 @@ return new class extends Migration {
             $table->foreignIdFor(FatherInfo::class);
             $table->foreignIdFor(MotherInfo::class);
             $table->foreignIdFor(SpouseInfo::class);
+            $table->foreignIdFor(GuardianInfo::class);
+            $table->foreignIdFor(EmergencyContactInfo::class);
+            $table->string('source_of_income');
+            $table->string('parent_status');
+            $table->string('birth_rank');
+            $table->string('number_of_siblings');
+            $table->string('number_of_children');
             $table->timestamps();
         });
     }

@@ -44,6 +44,19 @@
                     </div>
                 </div>
             </div> --}}
+            <!-- BEGIN: Pagination -->
+            <div class="flex flex-wrap items-center col-span-12 intro-y sm:flex-row sm:flex-nowrap">
+                <select onChange="window.location.href=this.value" data-tw-merge=""
+                    class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 !box mt-3 w-32 sm:mt-0">
+                    @foreach ($courses as $course)
+                        <option value="{{ request()->fullUrlWithQuery(['course' => $course->code]) }}"
+                            {{ request('course') == $course->code ? 'selected' : '' }}>
+                            {{ $course->code }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <!-- END: Pagination -->
             <div class="hidden mx-auto text-slate-500 md:block">
                 Showing {{ $counseling_notes->firstItem() }} to {{ $counseling_notes->lastItem() }} of
                 {{ $counseling_notes->total() }} entries
@@ -210,8 +223,8 @@
                         class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 flex-1">
                 </div>
             </div>
-            <div class="px-5 py-3 text-right border-t border-slate-200/60 dark:border-darkmode-400"><button data-tw-merge=""
-                    data-tw-dismiss="modal" type="button"
+            <div class="px-5 py-3 text-right border-t border-slate-200/60 dark:border-darkmode-400"><button
+                    data-tw-merge="" data-tw-dismiss="modal" type="button"
                     class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mr-1 w-32">Cancel</button>
                 <button data-tw-merge="" type="button"
                     class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-32">Create

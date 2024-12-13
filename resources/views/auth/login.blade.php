@@ -43,7 +43,8 @@
         </div>
 
         <!-- Right Side - Registration Form (Full Width and Height) -->
-        <div class="w-[60rem] bg-white p-12 flex flex-col justify-center items-center h-screen">
+        <div class="w-[60rem] bg-white p-12 flex flex-col justify-center items-center h-screen bg-center bg-no-repeat bg-cover"
+            style="background-image: url('{{ asset('image/bgbrookes2.jpg') }}');">
             <div class="w-full max-w-md">
                 <h2 class="mb-8 text-4xl font-bold text-center text-gray-800">Login</h2>
                 <form action="{{ route('login.post') }}" method="POST" class="space-y-6">

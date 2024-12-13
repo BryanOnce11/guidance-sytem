@@ -44,6 +44,19 @@
                     </div>
                 </div>
             </div> --}}
+            <!-- BEGIN: Pagination -->
+            <div class="flex flex-wrap items-center col-span-12 intro-y sm:flex-row sm:flex-nowrap">
+                <select onChange="window.location.href=this.value" data-tw-merge=""
+                    class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 !box mt-3 w-32 sm:mt-0">
+                    @foreach ($courses as $course)
+                        <option value="{{ request()->fullUrlWithQuery(['course' => $course->code]) }}"
+                            {{ request('course') == $course->code ? 'selected' : '' }}>
+                            {{ $course->code }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <!-- END: Pagination -->
             <div class="hidden mx-auto text-slate-500 md:block">
                 Showing {{ $counseling_approveds->firstItem() }} to {{ $counseling_approveds->lastItem() }} of
                 {{ $counseling_approveds->total() }} entries
@@ -125,16 +138,20 @@
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box w-40 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
                                 <div class="flex items-center justify-center text-slate-600">
                                     <i data-tw-merge="" data-lucide="check-square" class="stroke-1.5 mr-2 h-8 w-8"></i>
-                                    {{ 'SCHEDULED AT: ' . $counseling_approved->updated_at->setTimezone('Asia/Manila')->format('M d, Y h:i A') }}
+                                    {{ 'SCHEDULED AT: ' . $counseling_approved->date_requested->setTimezone('Asia/Manila')->format('M d, Y') . ' ' . $counseling_approved->time_scheduled->format('h:i A') }}
                                 </div>
                             </td>
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600 before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400">
-                                @if ($counseling_approved->date_scheduled->setTimezone('Asia/Manila')->isToday())
+                                @if (
+                                    $counseling_approved->date_scheduled->setTimezone('Asia/Manila')->isToday() &&
+                                        $counseling_approved->time_scheduled->format('H:i') < now('Asia/Manila')->format('H:i'))
                                     <div class="flex items-center justify-center">
-                                        <a class="flex items-center mr-3 text-success {{ $counseling_approved->date_scheduled->isToday() ? '' : 'opacity-50 cursor-not-allowed' }}"
-                                            href="{{ $counseling_approved->date_scheduled->setTimezone('Asia/Manila')->isToday() ? route('video-call', $counseling_approved->id) : '#' }}"
-                                            @if (!$counseling_approved->date_scheduled->isToday()) aria-disabled="true" @endif>
+                                        <a class="flex items-center mr-3 text-success {{ $counseling_approved->date_scheduled->isToday() && $counseling_approved->time_scheduled->format('H:i') < now('Asia/Manila')->format('H:i') ? '' : 'opacity-50 cursor-not-allowed' }}"
+                                            href="{{ $counseling_approved->date_scheduled->setTimezone('Asia/Manila')->isToday() && $counseling_approved->time_scheduled->format('H:i') < now('Asia/Manila')->format('H:i') ? route('video-call', $counseling_approved->id) : '#' }}"
+                                            @if (
+                                                !$counseling_approved->date_scheduled->isToday() &&
+                                                    !$counseling_approved->time_scheduled->format('H:i') < now('Asia/Manila')->format('H:i')) aria-disabled="true" @endif>
                                             <i data-tw-merge="" data-lucide="video" class="stroke-1.5 mr-1 h-4 w-4"></i>
                                             Start
                                         </a>

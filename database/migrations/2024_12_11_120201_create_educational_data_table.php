@@ -11,14 +11,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('virtual_counselings', function (Blueprint $table) {
+        Schema::create('educational_data', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Student::class);
-            $table->date('date_requested')->default(now());
-            $table->date('date_scheduled')->nullable();
-            $table->time('time_scheduled')->nullable();
-            $table->string('reason');
-            $table->string('status')->default('Pending');
+            $table->json('elementary');
+            $table->json('high_school');
+            $table->json('vocational');
+            $table->json('college');
+            $table->string('scholarship');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('virtual_counselings');
+        Schema::dropIfExists('educational_data');
     }
 };

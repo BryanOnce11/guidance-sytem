@@ -44,6 +44,19 @@
                     </div>
                 </div>
             </div> --}}
+            <!-- BEGIN: Pagination -->
+            <div class="flex flex-wrap items-center col-span-12 intro-y sm:flex-row sm:flex-nowrap">
+                <select onChange="window.location.href=this.value" data-tw-merge=""
+                    class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 !box mt-3 w-32 sm:mt-0">
+                    @foreach ($courses as $course)
+                        <option value="{{ request()->fullUrlWithQuery(['course' => $course->code]) }}"
+                            {{ request('course') == $course->code ? 'selected' : '' }}>
+                            {{ $course->code }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <!-- END: Pagination -->
             <div class="hidden mx-auto text-slate-500 md:block">
                 Showing {{ $good_moral_ready_to_pickups->firstItem() }} to {{ $good_moral_ready_to_pickups->lastItem() }}
                 of

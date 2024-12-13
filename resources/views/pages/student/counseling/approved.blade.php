@@ -130,11 +130,15 @@
                             </td>
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600 before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400">
-                                @if ($approved_counseling->date_scheduled->setTimezone('Asia/Manila')->isToday())
+                                @if (
+                                    $approved_counseling->date_scheduled->setTimezone('Asia/Manila')->isToday() &&
+                                        $approved_counseling->time_scheduled->format('H:i') < now('Asia/Manila')->format('H:i'))
                                     <div class="flex items-center justify-center">
-                                        <a class="flex items-center mr-3 text-success {{ $approved_counseling->date_scheduled->setTimezone('Asia/Manila')->isToday() ? '' : 'opacity-50 cursor-not-allowed' }}"
-                                            href="{{ $approved_counseling->date_scheduled->setTimezone('Asia/Manila')->isToday() ? route('video-call', $approved_counseling->id) : '#' }}"
-                                            @if (!$approved_counseling->date_scheduled->isToday()) aria-disabled="true" @endif>
+                                        <a class="flex items-center mr-3 text-success {{ $approved_counseling->date_scheduled->setTimezone('Asia/Manila')->isToday() && $approved_counseling->time_scheduled->format('H:i') < now('Asia/Manila')->format('H:i') ? '' : 'opacity-50 cursor-not-allowed' }}"
+                                            href="{{ $approved_counseling->date_scheduled->setTimezone('Asia/Manila')->isToday() && $approved_counseling->time_scheduled->format('H:i') < now('Asia/Manila')->format('H:i') ? route('video-call', $approved_counseling->id) : '#' }}"
+                                            @if (
+                                                !$approved_counseling->date_scheduled->isToday() &&
+                                                    !$approved_counseling->time_scheduled->format('H:i') < now('Asia/Manila')->format('H:i')) aria-disabled="true" @endif>
                                             <i data-tw-merge="" data-lucide="video" class="stroke-1.5 mr-1 h-4 w-4"></i>
                                             Start
                                         </a>

@@ -296,7 +296,7 @@
                 <div data-tw-merge="" data-tw-placement="bottom-end" class="relative dropdown"><button
                         data-tw-toggle="dropdown" aria-expanded="false"
                         class="block w-8 h-8 overflow-hidden scale-110 rounded-full shadow-lg cursor-pointer image-fit zoom-in intro-x"><img
-                            src="{{ asset('dist/images/fakers/profile-12.jpg') }}"
+                            src="{{ auth()->user()->role == 'Student' ? asset('storage/' . auth()->user()->student->image) : asset('dist/images/fakers/profile-12.jpg') }}"
                             alt="Midone Tailwind HTML Admin Template">
                     </button>
                     <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150"

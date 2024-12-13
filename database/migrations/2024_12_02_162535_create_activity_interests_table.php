@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,14 +12,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('virtual_counselings', function (Blueprint $table) {
+        Schema::create('activity_interests', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Student::class);
-            $table->date('date_requested')->default(now());
-            $table->date('date_scheduled')->nullable();
-            $table->time('time_scheduled')->nullable();
-            $table->string('reason');
-            $table->string('status')->default('Pending');
+            $table->json('extra_curricular');
+            $table->string('special_skills');
+            $table->string('hobbies');
+            $table->json('interest');
+            $table->string('subject_best_like');
+            $table->string('subject_least_like');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('virtual_counselings');
+        Schema::dropIfExists('activity_interests');
     }
 };

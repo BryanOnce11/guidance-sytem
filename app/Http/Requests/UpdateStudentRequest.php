@@ -43,17 +43,91 @@ class UpdateStudentRequest extends FormRequest
             'f_fname' => 'required|string|max:50',
             'f_lname' => 'required|string|max:50',
             'f_m_i' => 'nullable',
+            'f_birth_date' => 'required',
+            'f_educational_attainment' => 'required',
+            'f_contact_num' => 'required',
+            'f_email' => 'required',
             'f_occupation' => 'required|string|max:100',
+            'f_company_name' => 'required',
+            'f_company_address' => 'required',
+            'f_avg_monthly_income' => 'required',
 
             'm_fname' => 'required|string|max:50',
             'm_lname' => 'required|string|max:50',
             'm_m_i' => 'nullable',
+            'm_birth_date' => 'required',
+            'm_educational_attainment' => 'required',
+            'm_contact_num' => 'required',
+            'm_email' => 'required',
             'm_occupation' => 'required|string|max:100',
+            'm_company_name' => 'required',
+            'm_company_address' => 'required',
+            'm_avg_monthly_income' => 'required',
 
             's_fname' => 'required|string|max:50',
             's_lname' => 'required|string|max:50',
             's_m_i' => 'nullable',
+            's_birth_date' => 'required',
+            's_educational_attainment' => 'required',
+            's_contact_num' => 'required',
+            's_email' => 'required',
             's_occupation' => 'required|string|max:100',
+            's_company_name' => 'required',
+            's_company_address' => 'required',
+            's_avg_monthly_income' => 'required',
+
+            'g_full_name' => 'required',
+            'g_contact_num' => 'required',
+            'g_occupation' => 'required',
+            'g_company_name' => 'required',
+            'g_relationship' => 'required',
+            'g_address' => 'required',
+
+            'e_full_name' => 'required',
+            'e_contact_num' => 'required',
+            'e_relationship' => 'required',
+            'e_address' => 'required',
+
+            'source_of_income' => 'required',
+            'parent_status' => 'required',
+            'birth_rank' => 'required',
+            'number_of_siblings' => 'required',
+            'number_of_children' => 'required',
+
+            'elementary' => 'required|array',
+            'high_school' => 'required|array',
+            'vocational' => 'required|array',
+            'college' => 'required|array',
+            'scholarship' => 'required|string',
+
+            'extra_curricular' => 'required',
+            'special_skills' => 'required',
+            'hobbies' => 'required',
+            'interest' => 'required',
+            'subject_best_like' => 'required',
+            'subject_least_like' => 'required',
+
+            'cigarette' => 'required',
+            'liquior' => 'required',
+            'drugs' => 'required',
+            'discipline' => 'required',
+
+            'counselling_record_1' => 'nullable',
+            'counselling_record_2' => 'nullable',
+            'counselling_record_3' => 'nullable',
+
+            'scholastic_record_1' => 'nullable',
+            'scholastic_record_2' => 'nullable',
+            'scholastic_record_3' => 'nullable',
+            'scholastic_record_4' => 'nullable',
+            'scholastic_record_5' => 'nullable',
+            'scholastic_record_6' => 'nullable',
+            'scholastic_record_7' => 'nullable',
+            'scholastic_record_8' => 'nullable',
+            'scholastic_record_9' => 'nullable',
+            'scholastic_record_10' => 'nullable',
+
+            'check_list' => 'required'
         ];
     }
 
@@ -135,6 +209,13 @@ class UpdateStudentRequest extends FormRequest
             's_occupation.required' => 'The occupation is required.',
             's_occupation.string' => 'The occupation must be a string.',
             's_occupation.max' => 'The occupation may not be greater than 100 characters.',
+
+            'extra_curricular.required' => 'Please select at least one extracurricular activity.',
+            'special_skills.required' => 'The special skills is required.',
+            'hobbies.required' => 'The hobbies is required.',
+            'interest.required' => 'Please choose your areas of interest.',
+            'subject_best_like.required' => 'The subject you like the most is required.',
+            'subject_least_like.required' => 'The subject you like the least is required.',
         ];
     }
 }
