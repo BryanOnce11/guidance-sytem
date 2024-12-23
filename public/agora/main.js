@@ -1,5 +1,5 @@
 const APP_ID = "2bb5a78066e44dc590d693b2f1b3f7ea"
-const TOKEN = "007eJxTYFi5otV408Ff3/9NlbywfW1kYMCRa3KCR9Z6Htu0ku35t5IwBQajpCTTRHMLAzOzVBOTlGRTS4MUM0vjJKM0wyTjNPPUxDdbo9MbAhkZ/n04ycTIAIEgvgBDemlmSmJecqpucWVxSWquEQMDAFkSKOM="
+const TOKEN = "007eJxTYOiMFn8wzfSx8imfR6GTL15dNPHRmfm/b6p+DbPIv/4vwjZEgcEoKck00dzCwMws1cQkJdnU0iDFzNI4ySjNMMk4zTw1UWNyZnpDICPD+c6rDIxQCOILMKSXZqYk5iWn6hZXFpek5hoxMAAA+pQnQg=="
 const CHANNEL = "guidance-system2"
 
 const client = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' })
