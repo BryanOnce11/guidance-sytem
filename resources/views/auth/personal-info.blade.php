@@ -257,7 +257,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-3 gap-4 mb-2">
+                                {{-- <div class="grid grid-cols-3 gap-4 mb-2">
                                     <div>
                                         <label class="block text-black">Height</label>
                                         <input type="text" name="height" value="{{ old('height') }}"
@@ -282,7 +282,7 @@
                                             <span class="text-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="mb-2">
                                     <label class="block text-black">Present Address</label>
                                     <textarea name="present_address" rows="1"

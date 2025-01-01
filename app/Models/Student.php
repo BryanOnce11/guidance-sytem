@@ -53,7 +53,7 @@ class Student extends Model
     // Capitalize the first letter of the middle initial 'm_i'
     public function setMIAttribute($value)
     {
-        $this->attributes['m_i'] = strtoupper($value); // Typically, initials are uppercase
+        $this->attributes['m_i'] = ucfirst($value); // Typically, initials are uppercase
     }
 
     // You can add mutators for other fields as needed (e.g., 'birth_place', 'present_address', etc.)

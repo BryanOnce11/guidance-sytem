@@ -171,7 +171,7 @@
                         </li>
                         <li>
                             <a href="javascript:;"
-                                class="side-menu {{ request()->routeIs('admin.good-moral.pending') || request()->routeIs('admin.good-moral.ready_to_pickup') ? 'side-menu--active' : '' }}">
+                                class="side-menu {{ request()->routeIs('admin.good-moral.pending') || request()->routeIs('admin.good-moral.ready_to_pickup') || request()->routeIs('admin.good-moral.show-picked_up') ? 'side-menu--active' : '' }}">
                                 <div class="side-menu__icon">
                                     <i data-tw-merge="" data-lucide="file-text" class="stroke-1.5 w-5 h-5"></i>
                                     <!-- Good Moral icon -->
@@ -179,14 +179,14 @@
                                 <div class="side-menu__title">
                                     Good Moral Requests
                                     <div
-                                        class="side-menu__sub-icon {{ request()->routeIs('admin.good-moral.pending') || request()->routeIs('admin.good-moral.ready_to_pickup') ? 'transform rotate-180' : '' }}">
+                                        class="side-menu__sub-icon {{ request()->routeIs('admin.good-moral.pending') || request()->routeIs('admin.good-moral.ready_to_pickup') || request()->routeIs('admin.good-moral.show-picked_up') ? 'transform rotate-180' : '' }}">
                                         <i data-tw-merge="" data-lucide="chevron-down"
                                             class="stroke-1.5 w-5 h-5"></i>
                                     </div>
                                 </div>
                             </a>
                             <ul
-                                class="{{ request()->routeIs('admin.good-moral.pending') || request()->routeIs('admin.good-moral.ready_to_pickup') ? 'side-menu__sub-open' : '' }}">
+                                class="{{ request()->routeIs('admin.good-moral.pending') || request()->routeIs('admin.good-moral.ready_to_pickup') || request()->routeIs('admin.good-moral.show-picked_up') ? 'side-menu__sub-open' : '' }}">
                                 <li>
                                     <a href="{{ route('admin.good-moral.pending') }}"
                                         class="side-menu {{ request()->routeIs('admin.good-moral.pending') ? 'side-menu--active' : '' }}">
@@ -208,6 +208,18 @@
                                         </div>
                                         <div class="side-menu__title">
                                             Ready To Pickup Request
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.good-moral.show-picked_up') }}"
+                                        class="side-menu {{ request()->routeIs('admin.good-moral.show-picked_up') ? 'side-menu--active' : '' }}">
+                                        <div class="side-menu__icon">
+                                            <i data-tw-merge="" data-lucide="history" class="stroke-1.5 w-5 h-5"></i>
+                                            <!-- History icon -->
+                                        </div>
+                                        <div class="side-menu__title">
+                                            Picked Up Request
                                         </div>
                                     </a>
                                 </li>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="flex items-center h-10 mt-10 intro-y">
-        <h2 class="mr-5 text-lg font-medium truncate">Record History</h2>
+        <h2 class="mr-5 text-lg font-medium truncate">Good Moral Request</h2>
         <a class="flex items-center ml-auto text-primary" href="">
             <i data-tw-merge="" data-lucide="refresh-ccw" class="stroke-1.5 mr-3 h-4 w-4"></i>
             Reload Data
@@ -58,8 +58,9 @@
             </div>
             <!-- END: Pagination -->
             <div class="hidden mx-auto text-slate-500 md:block">
-                Showing {{ $counseling_notes->firstItem() }} to {{ $counseling_notes->lastItem() }} of
-                {{ $counseling_notes->total() }} entries
+                Showing {{ $good_moral_picked_ups->firstItem() }} to {{ $good_moral_picked_ups->lastItem() }}
+                of
+                {{ $good_moral_picked_ups->total() }} entries
             </div>
             <div class="w-full mt-3 sm:ml-auto sm:mt-0 sm:w-auto md:ml-0">
                 {{-- <div class="relative w-56 text-slate-500">
@@ -93,77 +94,77 @@
                         </th>
                         <th data-tw-merge=""
                             class="px-5 py-3 font-medium text-center border-b-0 dark:border-darkmode-300 whitespace-nowrap">
-                            NOTES
+                            DATE REQUESTED
                         </th>
                         <th data-tw-merge=""
                             class="px-5 py-3 font-medium text-center border-b-0 dark:border-darkmode-300 whitespace-nowrap">
-                            DURATION
+                            STATUS
                         </th>
-                        {{-- <th data-tw-merge=""
+                        <th data-tw-merge=""
                             class="px-5 py-3 font-medium text-center border-b-0 dark:border-darkmode-300 whitespace-nowrap">
                             ACTIONS
-                        </th> --}}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                <tbody>
-                    @forelse ($counseling_notes as $counseling_note)
+                    @forelse ($good_moral_picked_ups as $good_moral_picked_up)
                         <tr data-tw-merge="" class="intro-x">
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-                                {{ $counseling_note->virtual_counseling->student->student_id }}
+                                {{ $good_moral_picked_up->student->student_id }}
                             </td>
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
                                 <a class="font-medium whitespace-nowrap" href="">
-                                    {{ $counseling_note->virtual_counseling->student->fname }}
-                                    {{ $counseling_note->virtual_counseling->student->m_i }}
-                                    {{ $counseling_note->virtual_counseling->student->lname }}
+                                    {{ $good_moral_picked_up->student->fname }}
+                                    {{ $good_moral_picked_up->student->m_i }}
+                                    {{ $good_moral_picked_up->student->lname }}
                                 </a>
                                 <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
-                                    {{ $counseling_note->virtual_counseling->student->gender }}
+                                    {{ $good_moral_picked_up->student->gender }}
                                 </div>
                             </td>
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-                                {{ $counseling_note->virtual_counseling->student->course->code }}
+                                {{ $good_moral_picked_up->student->course->code }}
                             </td>
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-                                {{ $counseling_note->virtual_counseling->student->year_lvl }}
+                                {{ $good_moral_picked_up->student->year_lvl }}
                             </td>
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-                                <a href="{{ route('admin.counseling.record_history.notes', $counseling_note->id) }}"
-                                    class="underline">
-                                    {{ \Illuminate\Support\Str::limit($counseling_note->notes, 10) }}
-                                </a>
-
+                                {{ $good_moral_picked_up->date_requested->setTimezone('Asia/Manila')->format('M d, Y') }}
                             </td>
                             <td data-tw-merge=""
-                                class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
-                                {{ round($counseling_note->duration / 60) }} Minutes
+                                class="px-5 py-3 border-b dark:border-darkmode-300 box w-40 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
+                                <div class="flex items-center justify-center text-pending">
+                                    <i data-tw-merge="" data-lucide="check-square"
+                                        class="stroke-1.5 mr-2 {{ $good_moral_picked_up->status == 'Picked Up' ? 'h-8 w-8' : 'h-4 w-4' }}"></i>
+                                    {{ $good_moral_picked_up->status == 'Picked Up' ? $good_moral_picked_up->status . '--' . $good_moral_picked_up->date_to_pickup->setTimezone('Asia/Manila')->format('M d, Y') : $good_moral_picked_up->status }}
+                                </div>
                             </td>
-                            {{-- <td data-tw-merge=""
-                            class="px-5 py-3 border-b dark:border-darkmode-300 box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600 before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400">
-                            @if ($counseling_notes->date_scheduled->setTimezone('Asia/Manila')->isToday())
+                            <td data-tw-merge=""
+                                class="px-5 py-3 border-b dark:border-darkmode-300 box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600 before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400">
                                 <div class="flex items-center justify-center">
-                                    <a class="flex items-center mr-3 text-success {{ $counseling_notes->date_scheduled->isToday() ? '' : 'opacity-50 cursor-not-allowed' }}"
-                                        href="{{ $counseling_notes->date_scheduled->setTimezone('Asia/Manila')->isToday() ? route('video-call', $counseling_notes->id) : '#' }}"
-                                        @if (!$counseling_notes->date_scheduled->isToday()) aria-disabled="true" @endif>
-                                        <i data-tw-merge="" data-lucide="video" class="stroke-1.5 mr-1 h-4 w-4"></i>
-                                        Start
+                                    <a class="flex items-center mr-3 text-success"
+                                        href="{{ route('admin.good-moral.generate-pdf', $good_moral_picked_up->id) }}">
+                                        <i data-tw-merge="" data-lucide="file-text" class="stroke-1.5 mr-1 h-4 w-4"></i>
+                                        Generate PDF
                                     </a>
+                                    {{-- <a class="flex items-center text-danger" data-tw-toggle="modal"
+                                    data-tw-target="#delete-confirmation-modal" href="#">
+                                    <i data-tw-merge="" data-lucide="trash" class="stroke-1.5 mr-1 h-4 w-4"></i>
+                                    Delete
+                                </a> --}}
                                 </div>
-                            @endif
-                        </td> --}}
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="py-4 text-center">No record history found.</td>
+                            <td colspan="7" class="py-4 text-center">No ready to pickup request found.</td>
                         </tr>
                     @endforelse
-                </tbody>
                 </tbody>
             </table>
         </div>
@@ -171,7 +172,7 @@
         <!-- BEGIN: Pagination -->
         <div class="flex flex-wrap items-center col-span-12 intro-y sm:flex-row sm:flex-nowrap">
             <nav class="w-full sm:mr-auto sm:w-auto">
-                {{ $counseling_notes->links('vendor.pagination.tailwind') }}
+                {{ $good_moral_picked_ups->links('vendor.pagination.tailwind') }}
             </nav>
             <select onChange="window.location.href=this.value" data-tw-merge=""
                 class="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 group-[.form-inline]:flex-1 !box mt-3 w-20 sm:mt-0">
@@ -186,28 +187,37 @@
         <!-- END: Pagination -->
     </div>
 
-    <!-- BEGIN: Delete Confirmation Modal -->
-    <div data-tw-backdrop="" aria-hidden="true" tabindex="-1" id="delete-confirmation-modal"
-        class="modal group bg-black/60 transition-[visibility,opacity] w-screen h-screen fixed left-0 top-0 [&:not(.show)]:duration-[0s,0.2s] [&:not(.show)]:delay-[0.2s,0s] [&:not(.show)]:invisible [&:not(.show)]:opacity-0 [&.show]:visible [&.show]:opacity-100 [&.show]:duration-[0s,0.4s]">
-        <div data-tw-merge=""
-            class="w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-[margin-top,transform] duration-[0.4s,0.3s] -mt-16 group-[.show]:mt-16 group-[.modal-static]:scale-[1.05] dark:bg-darkmode-600 sm:w-[460px]">
-            <div class="p-5 text-center">
-                <i data-tw-merge="" data-lucide="x-circle" class="stroke-1.5 mx-auto mt-3 h-16 w-16 text-danger"></i>
-                <div class="mt-5 text-3xl">Are you sure?</div>
-                <div class="mt-2 text-slate-500">
-                    Do you really want to delete these records? <br>
-                    This process cannot be undone.
+    @foreach ($good_moral_picked_ups as $good_moral_picked_up)
+        <!-- BEGIN: Confirmation Modal -->
+        <div data-tw-backdrop="" aria-hidden="true" tabindex="-1" id="confirmation-modal{{ $good_moral_picked_up->id }}"
+            class="modal group bg-black/60 transition-[visibility,opacity] w-screen h-screen fixed left-0 top-0 [&:not(.show)]:duration-[0s,0.2s] [&:not(.show)]:delay-[0.2s,0s] [&:not(.show)]:invisible [&:not(.show)]:opacity-0 [&.show]:visible [&.show]:opacity-100 [&.show]:duration-[0s,0.4s]">
+            <div data-tw-merge=""
+                class="w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-[margin-top,transform] duration-[0.4s,0.3s] -mt-16 group-[.show]:mt-16 group-[.modal-static]:scale-[1.05] dark:bg-darkmode-600 sm:w-[460px]">
+                <div class="p-5 text-center">
+                    <i data-tw-merge="" data-lucide="shield-check"
+                        class="stroke-1.5 mx-auto mt-3 h-16 w-16 text-success"></i>
+                    <div class="mt-5 text-3xl">Confirmation</div>
+                    <div class="mt-2 text-slate-500">
+                        You are about to confirm that the student has picked up their good moral request. <br>
+                        This process cannot be undone.
+                    </div>
                 </div>
-            </div>
-            <div class="px-5 pb-8 text-center">
-                <button data-tw-merge="" data-tw-dismiss="modal" type="button"
-                    class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mr-1 w-24">Cancel</button>
-                <button data-tw-merge="" type="button"
-                    class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-danger border-danger text-white dark:border-danger w-24">Delete</button>
+                <form action="{{ route('admin.good-moral.picked_up', $good_moral_picked_up) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="px-5 pb-8 text-center">
+                        <button data-tw-merge="" data-tw-dismiss="modal" type="button"
+                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mr-1 w-24">Cancel</button>
+                        <button data-tw-merge="" type="submit"
+                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-24">Confirm</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
-    <!-- END: Delete Confirmation Modal -->
+        <!-- END: Confirmation Modal -->
+    @endforeach
+
+
 
     <!-- BEGIN: New Order Modal -->
     <div data-tw-backdrop="" aria-hidden="true" tabindex="-1" id="new-order-modal"

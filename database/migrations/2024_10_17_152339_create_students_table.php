@@ -33,9 +33,9 @@ return new class extends Migration {
             $table->string('citizenship');
             $table->string('civil_status');
             $table->string('contact_num');
-            $table->string('height');
-            $table->string('weight');
-            $table->string('blood_type');
+            $table->string('height')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('blood_type')->nullable();
             $table->string('present_address');
             $table->string('permanent_address');
             $table->string('where_staying');

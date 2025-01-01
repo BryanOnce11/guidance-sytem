@@ -10,6 +10,7 @@ use App\Models\AdminHistory;
 use App\Models\CounselingNotes;
 use App\Models\Course;
 use App\Models\VirtualCounseling;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -50,12 +51,39 @@ class AdminController extends Controller
     public function verifiedStudents()
     {
         $per_page = request('per_page', 10);
+        $course = request('course', '');
+        $search_term = request('search', '');
+
         $verified_students = User::with('student')
             ->where('status', 'Verified')
             ->where('role', 'Student')
+            ->when($course, function ($q) use ($course) {
+                $q->whereHas('student', function ($s) use ($course) {
+                    $s->whereHas('course', function ($c) use ($course) {
+                        $c->where('code', $course);
+                    });
+                });
+            })
+            ->when($search_term, function ($q) use ($search_term) {
+                $q->where(function ($query) use ($search_term) {
+                    // Searching on User's name (fname, lname, m_i)
+                    $query->whereHas('student', function ($student_query) use ($search_term) {
+                        $student_query->where('fname', 'like', '%' . $search_term . '%')
+                            ->orWhere('lname', 'like', '%' . $search_term . '%')
+                            ->orWhere('m_i', 'like', '%' . $search_term . '%')
+                            ->orWhere('student_id', 'like', '%' . $search_term . '%');
+                    });
+                });
+            })
+            ->orderBy(Student::select('fname')
+                ->whereColumn('students.user_id', 'users.id') // Correctly reference the foreign key
+                ->limit(1))
             ->paginate($per_page);
+
+        $courses = Course::all();
         return view('pages.admin.student-list.verified', [
-            'verified_students' => $verified_students
+            'verified_students' => $verified_students,
+            'courses' => $courses
         ]);
     }
 
@@ -117,7 +145,6 @@ class AdminController extends Controller
 
         $good_moral_ready_to_pickups = GoodMoralRequest::with('student')
             ->where('status', 'Ready To Pickup')
-            ->orWhere('status', 'Picked Up')
             ->when($course, function ($q) use ($course) {
                 $q->whereHas('student', function ($s) use ($course) {
                     $s->whereHas('course', function ($c) use ($course) {
@@ -126,7 +153,7 @@ class AdminController extends Controller
                 });
             })
             ->orderBy(Student::select('fname')
-                ->whereColumn('students.id', 'virtual_counselings.student_id')
+                ->whereColumn('students.id', 'good_moral_requests.student_id')
                 ->limit(1))  // Ensure we are ordering by the correct `fname`
             ->paginate($per_page);
 
@@ -157,6 +184,63 @@ class AdminController extends Controller
 
         return redirect()->route('admin.good-moral.ready_to_pickup');
     }
+
+    public function getpickedUpGoodMoral()
+    {
+        $per_page = request('per_page', 10);
+        $course = request('course', '');
+
+        $good_moral_picked_ups = GoodMoralRequest::with('student')
+            ->where('status', 'Picked Up')
+            ->when($course, function ($q) use ($course) {
+                $q->whereHas('student', function ($s) use ($course) {
+                    $s->whereHas('course', function ($c) use ($course) {
+                        $c->where('code', $course);
+                    });
+                });
+            })
+            ->orderBy(Student::select('fname')
+                ->whereColumn('students.id', 'good_moral_requests.student_id')
+                ->limit(1))  // Ensure we are ordering by the correct `fname`
+            ->paginate($per_page);
+
+        $courses = Course::all();
+
+        return view('pages.admin.good-moral.picked-up', [
+            'good_moral_picked_ups' => $good_moral_picked_ups,
+            'courses' => $courses
+        ]);
+    }
+
+    public function showGoodMoralPDF(GoodMoralRequest $good_moral_request)
+    {
+        return view('pages.admin.good-moral.picked-up-pdf', [
+            'good_moral_request' => $good_moral_request,
+        ]);
+    }
+
+    public function generatePdf(GoodMoralRequest $good_moral_request)
+    {
+        $currentMonth = date('n'); // Current month (1 to 12)
+        $currentYear = date('Y'); // Current year (e.g. 2025)
+        $semester = ''; // Initialize the semester
+        // Determine the semester based on the month and set the academic year
+        if ($currentMonth >= 8 && $currentMonth <= 12) {
+            // First Semester runs from August to December
+            $semester = 'First Semester ' . $currentYear . '-' . ($currentYear + 1);
+        } elseif ($currentMonth >= 1 && $currentMonth <= 5) {
+            // Second Semester runs from January to May
+            $semester = 'Second Semester ' . $currentYear . '-' . ($currentYear + 1);
+        }
+
+        $pdf = Pdf::loadView('pages.admin.good-moral.picked-up-pdf', compact('good_moral_request'));
+
+        $pdf->setPaper('legal', 'portrait');
+        $pdf->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
+        return $pdf->download('good_moral' . $good_moral_request->student->lname . '.pdf');
+    }
+
 
     public function pendingCounseling()
     {
@@ -243,9 +327,9 @@ class AdminController extends Controller
                     $q->where('code', $course);  // Assuming 'code' is the course code in the 'course' table
                 });
             })
-            ->orderBy(Student::select('fname')
-                ->whereColumn('students.id', 'virtual_counselings.student_id')
-                ->limit(1))  // Order by the student's first name (fname)
+            ->join('virtual_counselings', 'virtual_counselings.id', '=', 'counseling_notes.virtual_counseling_id') // Join virtual_counselings table
+            ->join('students', 'students.id', '=', 'virtual_counselings.student_id') // Join students table
+            ->orderBy('students.fname', 'asc')  // Order by the student's first name (fname)
             ->paginate($per_page);
 
         $courses = Course::all();
@@ -253,6 +337,13 @@ class AdminController extends Controller
         return view('pages.admin.counseling.record-history', [
             'counseling_notes' => $counseling_notes,
             'courses' => $courses
+        ]);
+    }
+
+    public function recordHistoryNotes(CounselingNotes $counseling_notes)
+    {
+        return view('pages.admin.counseling.record-history-notes', [
+            'counseling_notes' => $counseling_notes
         ]);
     }
 

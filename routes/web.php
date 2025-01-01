@@ -84,11 +84,15 @@ Route::middleware('auth')->group(function () {
         Route::get('good-moral/ready-to-pickup', 'readyToPickupGoodmoral')->name('admin.good-moral.ready_to_pickup');
         Route::put('good-moral/approved/{good_moral_request}', 'approvedGoodMoral')->name('admin.good-moral.approved');
         Route::put('good-moral/picked-up/{good_moral_request}', 'pickedUpGoodMoral')->name('admin.good-moral.picked_up');
+        Route::get('good-moral/picked-up', 'getPickedUpGoodmoral')->name('admin.good-moral.show-picked_up');
+        Route::get('good-moral/show-pdf/{good_moral_request}', 'showGoodMoralPDF')->name('admin.good-moral.show-pdf');
+        Route::get('good-moral/generate-pdf/{good_moral_request}', 'generatePdf')->name('admin.good-moral.generate-pdf');
         Route::get('counseling/pending', 'pendingCounseling')->name(name: 'admin.counseling.pending');
         Route::get('counseling/letter/{virtual_counseling}', 'virtualCounselingView')->name('admin.counseling.letter');
         Route::get('counseling/approved', 'approvedCounseling')->name('admin.counseling.approved');
         Route::put('counseling/date-scheduled/{virtual_counseling}', 'dateScheduledCounseling')->name('admin.couseling.date_scheduled');
         Route::get('counseling/record-history', 'recordHistory')->name('admin.counseling.record_history');
+        Route::get('counseling/record-history/notes/{counseling_notes}', 'recordHistoryNotes')->name('admin.counseling.record_history.notes');
         Route::get('settings/admin-list', 'showAdminList')->name('admin.settings.admin-list');
         Route::post('settings/admin-list/store', 'storeAdminList')->name('admin.settings.admin-list.store');
         Route::get('settings/history-logs', 'historyLogs')->name('admin.settings.history_logs');

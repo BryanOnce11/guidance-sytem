@@ -17,6 +17,56 @@
         </div>
         <div class="p-5">
             <div class="flex flex-wrap gap-x-5">
+                <div class="mb-6 ">
+                    <label for="image-upload" class="inline-block mb-2">Student Image</label>
+
+                    <!-- Image Preview Section -->
+                    <div id="image-preview-container" class="mt-2">
+                        <!-- Display the current image if it exists -->
+                        @if ($user->student->image)
+                            <img id="image-preview" src="{{ asset('storage/' . $user->student->image) }}"
+                                alt="Image Preview"
+                                class="block w-20 h-20 overflow-hidden scale-110 rounded-full shadow-lg cursor-pointer image-fit zoom-in intro-x">
+                        @else
+                            <img id="image-preview" src="" alt="Image Preview"
+                                class="hidden w-20 h-20 overflow-hidden scale-110 rounded-full shadow-lg cursor-pointer image-fit zoom-in intro-x">
+                        @endif
+                    </div>
+
+                    <!-- Image Upload Input -->
+                    {{-- <input type="file" name="image" id="image-upload"
+                        class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
+                        accept="image/*" onchange="previewImage(event)"> --}}
+
+                    <!-- Optionally Display a message about updating the image -->
+                    @if (isset($imagePath) && $imagePath)
+                        <div class="mt-2 text-sm text-gray-600">You can update your image by selecting a new one.
+                        </div>
+                    @endif
+
+                    <!-- Error message for image upload -->
+                    @error('image')
+                        <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                    @enderror
+                </div>
+                <script>
+                    function previewImage(event) {
+                        const input = event.target;
+                        const previewContainer = document.getElementById('image-preview-container');
+                        const previewImage = document.getElementById('image-preview');
+
+                        if (input.files && input.files[0]) {
+                            const reader = new FileReader();
+
+                            reader.onload = function(e) {
+                                previewImage.src = e.target.result;
+                                previewImage.classList.remove('hidden'); // Make the preview visible
+                            }
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                </script>
                 <div class="flex flex-row w-full gap-3">
                     <div class="flex-1">
                         <label for="update-profile-form-8" class="inline-block mb-2">Student Status</label>
@@ -28,22 +78,6 @@
                                 New</option>
                         </select>
                         @error('status')
-                            <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="flex-1">
-                        <label for="image-upload" class="inline-block mb-2">Upload Image</label>
-
-                        <input type="file" name="image" id="image-upload"
-                            class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
-                            accept="image/*" onchange="previewImage(event)">
-
-                        <!-- Image preview -->
-                        {{-- <div id="image-preview-container" class="mt-2">
-                        <img id="image-preview" src="" alt="Image Preview" class="hidden w-full h-auto rounded-md"/>
-                    </div>
-                     --}}
-                        @error('image')
                             <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                         @enderror
                     </div>
@@ -2573,7 +2607,8 @@
 
                     <div class="flex items-center w-full mb-4 mr-4">
                         <input name="check_list[]" type="checkbox" id="checkbox9" class="cursor-pointer"
-                            value="Unsure of future financial support" @if (in_array(
+                            value="Unsure of future financial support"
+                            @if (in_array(
                                     'Unsure of future financial support',
                                     old('check_list', $user->student->problem_checklist->check_list ?? []))) checked @endif />
                         <label for="checkbox9" class="ml-2 cursor-pointer">Unsure of future financial
@@ -2585,7 +2620,8 @@
 
                     <div class="flex items-center w-full mb-4 mr-4">
                         <input name="check_list[]" type="checkbox" id="checkbox10" class="cursor-pointer"
-                            value="Living in an inconvenient location" @if (in_array(
+                            value="Living in an inconvenient location"
+                            @if (in_array(
                                     'Living in an inconvenient location',
                                     old('check_list', $user->student->problem_checklist->check_list ?? []))) checked @endif />
                         <label for="checkbox10" class="ml-2 cursor-pointer">Living in an inconvenient
