@@ -18,7 +18,7 @@
             text-align: center;
             border: 1px solid #ccc;
             padding: 40px;
-            margin: 20px;
+            margin: 10px;
         }
 
         .logo {
@@ -71,7 +71,7 @@
         .certification-title {
             font-weight: bold;
             font-size: 20px;
-            margin: 30px 0;
+            margin: 15px 0;
         }
 
         .content {
@@ -80,7 +80,7 @@
         }
 
         .signature-section {
-            margin-top: 60px;
+            margin-top: 10px;
             text-align: center;
         }
 
@@ -113,7 +113,8 @@
 
 <body>
     <div class="container">
-        <img src="{{ asset('psu.png') }}" alt="PSU Logo" class="logo" />
+        <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('psu.png'))) }}" alt="PSU Logo"
+            class="logo" />
 
         <div class="header">
             <div class="republic">Republic of the Philippines</div>
@@ -128,9 +129,8 @@
             <p>
                 This is to certify that <strong>{{ $good_moral_request->student->fname }}
                     {{ $good_moral_request->student->lname }}</strong> was officially
-                enrolled in this University during the and
-                took up Bachelor of Science in Business Administration major in
-                Financial Management.
+                enrolled in this University during the {{ $semester }} and
+                took up {{ $good_moral_request->student->course->name }}.
             </p>
 
             <p>
@@ -142,12 +142,29 @@
 
             <p>
                 This certification is issued upon request of
-                <strong>{{ $good_moral_request->student->gender == 'Male' ? 'MR' : 'MS' }}. AMIROL</strong> for whatever
+                <strong>{{ $good_moral_request->student->gender == 'Male' ? 'MR' : 'MS' }}.
+                    {{ $good_moral_request->student->lname }}</strong> for whatever
                 legal purpose it may serve
                 her best.
             </p>
 
-            <p>Issued this {{ now()->format('j') }}<sup>th</sup> day of {{ now()->format('F') }}
+            @php
+                $day = now()->format('j');
+
+                if ($day % 10 == 1 && $day != 11) {
+                    $suffix = 'st';
+                } elseif ($day % 10 == 2 && $day != 12) {
+                    $suffix = 'nd';
+                } elseif ($day % 10 == 3 && $day != 13) {
+                    $suffix = 'rd';
+                } else {
+                    $suffix = 'th';
+                }
+            @endphp
+
+            <p>Issued this
+                {{ now()->format('j') }}<sup>{{ $suffix }}</sup> day
+                of {{ now()->format('F') }}
                 {{ now()->format('Y') }}.</p>
         </div>
 

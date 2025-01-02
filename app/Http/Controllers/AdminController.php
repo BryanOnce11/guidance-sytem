@@ -15,6 +15,12 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        set_time_limit(3000);
+    }
+
     public function homePage()
     {
         return view('pages.admin.home-page');
@@ -214,8 +220,21 @@ class AdminController extends Controller
 
     public function showGoodMoralPDF(GoodMoralRequest $good_moral_request)
     {
+        $currentMonth = date('n'); // Current month (1 to 12)
+        $currentYear = date('Y'); // Current year (e.g. 2025)
+        $semester = ''; // Initialize the semester
+        // Determine the semester based on the month and set the academic year
+        if ($currentMonth >= 8 && $currentMonth <= 12) {
+            // First Semester runs from August to December
+            $semester = 'First Semester ' . $currentYear . '-' . ($currentYear + 1);
+        } elseif ($currentMonth >= 1 && $currentMonth <= 5) {
+            // Second Semester runs from January to May
+            $semester = 'Second Semester ' . $currentYear . '-' . ($currentYear + 1);
+        }
+
         return view('pages.admin.good-moral.picked-up-pdf', [
             'good_moral_request' => $good_moral_request,
+            'semester' => $semester,
         ]);
     }
 
@@ -233,7 +252,13 @@ class AdminController extends Controller
             $semester = 'Second Semester ' . $currentYear . '-' . ($currentYear + 1);
         }
 
-        $pdf = Pdf::loadView('pages.admin.good-moral.picked-up-pdf', compact('good_moral_request'));
+        $pdf = Pdf::loadView(
+            'pages.admin.good-moral.picked-up-pdf',
+            compact(
+                'good_moral_request',
+                'semester'
+            )
+        );
 
         $pdf->setPaper('legal', 'portrait');
         $pdf->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
