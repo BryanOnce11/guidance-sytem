@@ -38,6 +38,11 @@ class AuthController extends Controller
 
             $user = auth()->user();
 
+            if ($user->status == 'Rejected') {
+                alert('Error', 'Your account is rejected. Please contact the administrator', 'error');
+                return back();
+            }
+
             if ($user->role == 'Student') {
                 return redirect()->route('student.home-page');
             } else {

@@ -54,6 +54,22 @@ class AdminController extends Controller
         return redirect()->route('admin.student-list.pending');
     }
 
+    public function rejectStudent(User $user)
+    {
+        $user->update([
+            'status' => 'Rejected'
+        ]);
+
+        AdminHistory::create([
+            'action' => 'Student Rejected',
+            'details' => "Admin " . auth()->user()->admin->fname . " rejected the account of {$user->student->fname} {$user->student->lname}"
+        ]);
+
+        alert('Success', "You have successfully rejected {$user->student->fname} {$user->student->m_i} {$user->student->lname}", 'success');
+
+        return redirect()->route('admin.student-list.pending');
+    }
+
     public function verifiedStudents()
     {
         $per_page = request('per_page', 10);
