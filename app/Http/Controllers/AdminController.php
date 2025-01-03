@@ -354,6 +354,7 @@ class AdminController extends Controller
             })
             ->join('virtual_counselings', 'virtual_counselings.id', '=', 'counseling_notes.virtual_counseling_id') // Join virtual_counselings table
             ->join('students', 'students.id', '=', 'virtual_counselings.student_id') // Join students table
+            ->select('counseling_notes.*', 'students.fname', 'students.lname', 'students.id as student_id') // Select specific columns to avoid collision
             ->orderBy('students.fname', 'asc')  // Order by the student's first name (fname)
             ->paginate($per_page);
 
