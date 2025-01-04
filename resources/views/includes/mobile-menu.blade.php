@@ -20,86 +20,287 @@
                 </a>
                 <ul class="py-2">
                     <!-- BEGIN: First Child -->
-                    <li>
-                        <a class="menu" href="enigma-side-menu-inbox-page.html">
-                            <div class="menu__icon">
-                                <i data-tw-merge="" data-lucide="inbox" class="stroke-1.5 w-5 h-5"></i>
-                            </div>
-                            <div class="menu__title">
-                                Profile
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="menu menu--active" href="javascript:;">
-                            <div class="menu__icon">
-                                <i data-tw-merge="" data-lucide="home" class="stroke-1.5 w-5 h-5"></i>
-                            </div>
-                            <div class="menu__title">
-                                Good Moral Request
-                                <div class="transform rotate-180 menu__sub-icon">
-                                    <i data-tw-merge="" data-lucide="chevron-down" class="stroke-1.5 w-5 h-5"></i>
+                    @if (auth()->user()->role == 'Student')
+                        <li>
+                            <a href="{{ route('student.home-page') }}" class="menu">
+                                <div class="menu__icon">
+                                    <i data-tw-merge="" data-lucide="home" class="stroke-1.5 w-5 h-5"></i>
                                 </div>
-                            </div>
-                        </a>
-                        <ul class="menu__sub-open">
-                            <li>
-                                <a class="menu menu--active" href="enigma-side-menu-dashboard-overview-1-page.html">
-                                    <div class="menu__icon">
-                                        <i data-tw-merge="" data-lucide="activity" class="stroke-1.5 w-5 h-5"></i>
-                                    </div>
-                                    <div class="menu__title">
-                                        Overview 1
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="menu" href="enigma-side-menu-dashboard-overview-2-page.html">
-                                    <div class="menu__icon">
-                                        <i data-tw-merge="" data-lucide="activity" class="stroke-1.5 w-5 h-5"></i>
-                                    </div>
-                                    <div class="menu__title">
-                                        Overview 2
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="menu menu--active" href="javascript:;">
-                            <div class="menu__icon">
-                                <i data-tw-merge="" data-lucide="home" class="stroke-1.5 w-5 h-5"></i>
-                            </div>
-                            <div class="menu__title">
-                                Virtual Counseling
-                                <div class="transform rotate-180 menu__sub-icon">
-                                    <i data-tw-merge="" data-lucide="chevron-down" class="stroke-1.5 w-5 h-5"></i>
+                                <div class="menu__title">Home Page</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('student.profile.show') }}" class="menu">
+                                <div class="menu__icon">
+                                    <i data-tw-merge="" data-lucide="user" class="stroke-1.5 w-5 h-5"></i>
                                 </div>
-                            </div>
-                        </a>
-                        <ul class="menu__sub-open">
+                                <div class="menu__title">Profile</div>
+                            </a>
+                        </li>
+                        @if (auth()->user()->status == 'Verified')
                             <li>
-                                <a class="menu menu--active" href="enigma-side-menu-dashboard-overview-1-page.html">
+                                <a href="javascript:;"
+                                    class="menu {{ request()->routeIs('student.good-moral.pending') || request()->routeIs('student.good-moral.ready_to_pickup') ? 'menu--active' : '' }}">
                                     <div class="menu__icon">
-                                        <i data-tw-merge="" data-lucide="activity" class="stroke-1.5 w-5 h-5"></i>
+                                        <i data-tw-merge="" data-lucide="file-text" class="stroke-1.5 w-5 h-5"></i>
                                     </div>
                                     <div class="menu__title">
-                                        Overview 1
+                                        Good Moral Request
+                                        <div
+                                            class="menu__sub-icon {{ request()->routeIs('student.good-moral.pending') || request()->routeIs('student.good-moral.ready_to_pickup') ? 'transform rotate-180' : '' }}">
+                                            <i data-tw-merge="" data-lucide="chevron-down"
+                                                class="stroke-1.5 w-5 h-5"></i>
+                                        </div>
                                     </div>
                                 </a>
+                                <ul
+                                    class="{{ request()->routeIs('student.good-moral.pending') || request()->routeIs('student.good-moral.ready_to_pickup') ? 'menu__sub-open' : '' }}">
+                                    <li>
+                                        <a href="{{ route('student.good-moral.pending') }}"
+                                            class="menu {{ request()->routeIs('student.good-moral.pending') ? 'menu--active' : '' }}">
+                                            <div class="menu__icon">
+                                                <i data-tw-merge="" data-lucide="hourglass"
+                                                    class="stroke-1.5 w-5 h-5"></i>
+                                            </div>
+                                            <div class="menu__title">Pending Request</div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('student.good-moral.ready_to_pickup') }}"
+                                            class="menu {{ request()->routeIs('student.good-moral.ready_to_pickup') ? 'menu--active' : '' }}">
+                                            <div class="menu__icon">
+                                                <i data-tw-merge="" data-lucide="check-circle"
+                                                    class="stroke-1.5 w-5 h-5"></i>
+                                            </div>
+                                            <div class="menu__title">Ready To Pickup Request</div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                                <a class="menu" href="enigma-side-menu-dashboard-overview-2-page.html">
+                                <a href="javascript:;"
+                                    class="menu {{ request()->routeIs('student.counseling.pending') || request()->routeIs('student.counseling.approved') ? 'menu--active' : '' }}">
                                     <div class="menu__icon">
-                                        <i data-tw-merge="" data-lucide="activity" class="stroke-1.5 w-5 h-5"></i>
+                                        <i data-tw-merge="" data-lucide="chat-square" class="stroke-1.5 w-5 h-5"></i>
                                     </div>
                                     <div class="menu__title">
-                                        Overview 2
+                                        Virtual Counseling
+                                        <div
+                                            class="menu__sub-icon {{ request()->routeIs('student.counseling.pending') || request()->routeIs('student.counseling.approved') ? 'transform rotate-180' : '' }}">
+                                            <i data-tw-merge="" data-lucide="chevron-down"
+                                                class="stroke-1.5 w-5 h-5"></i>
+                                        </div>
                                     </div>
                                 </a>
+                                <ul
+                                    class="{{ request()->routeIs('student.counseling.pending') || request()->routeIs('student.counseling.approved') ? 'menu__sub-open' : '' }}">
+                                    <li>
+                                        <a href="{{ route('student.counseling.pending') }}"
+                                            class="menu {{ request()->routeIs('student.counseling.pending') ? 'menu--active' : '' }}">
+                                            <div class="menu__icon">
+                                                <i data-tw-merge="" data-lucide="hourglass"
+                                                    class="stroke-1.5 w-5 h-5"></i>
+                                            </div>
+                                            <div class="menu__title">Pending</div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('student.counseling.approved') }}"
+                                            class="menu {{ request()->routeIs('student.counseling.approved') ? 'menu--active' : '' }}">
+                                            <div class="menu__icon">
+                                                <i data-tw-merge="" data-lucide="check-circle"
+                                                    class="stroke-1.5 w-5 h-5"></i>
+                                            </div>
+                                            <div class="menu__title">Approved</div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
-                        </ul>
-                    </li>
+                        @endif
+                    @else
+                        <li>
+                            <a href="{{ route('admin.home-page') }}" class="menu">
+                                <div class="menu__icon">
+                                    <i data-tw-merge="" data-lucide="home" class="stroke-1.5 w-5 h-5"></i>
+                                </div>
+                                <div class="menu__title">Home Page</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;"
+                                class="menu {{ request()->routeIs('admin.student-list.pending') || request()->routeIs('admn.student-list.verified') ? 'menu--active' : '' }}">
+                                <div class="menu__icon">
+                                    <i data-tw-merge="" data-lucide="users" class="stroke-1.5 w-5 h-5"></i>
+                                </div>
+                                <div class="menu__title">
+                                    Students List
+                                    <div
+                                        class="menu__sub-icon {{ request()->routeIs('admin.student-list.pending') || request()->routeIs('admn.student-list.verified') ? 'transform rotate-180' : '' }}">
+                                        <i data-tw-merge="" data-lucide="chevron-down"
+                                            class="stroke-1.5 w-5 h-5"></i>
+                                    </div>
+                                </div>
+                            </a>
+                            <ul
+                                class="{{ request()->routeIs('admin.student-list.pending') || request()->routeIs('admn.student-list.verified') ? 'menu__sub-open' : '' }}">
+                                <li>
+                                    <a href="{{ route('admin.student-list.pending') }}"
+                                        class="menu {{ request()->routeIs('admin.student-list.pending') ? 'menu--active' : '' }}">
+                                        <div class="menu__icon">
+                                            <i data-tw-merge="" data-lucide="hourglass"
+                                                class="stroke-1.5 w-5 h-5"></i>
+                                        </div>
+                                        <div class="menu__title">Pending</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admn.student-list.verified') }}"
+                                        class="menu {{ request()->routeIs('admn.student-list.verified') ? 'menu--active' : '' }}">
+                                        <div class="menu__icon">
+                                            <i data-tw-merge="" data-lucide="check-circle"
+                                                class="stroke-1.5 w-5 h-5"></i>
+                                        </div>
+                                        <div class="menu__title">Verified</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;"
+                                class="menu {{ request()->routeIs('admin.good-moral.pending') || request()->routeIs('admin.good-moral.ready_to_pickup') || request()->routeIs('admin.good-moral.show-picked_up') ? 'menu--active' : '' }}">
+                                <div class="menu__icon">
+                                    <i data-tw-merge="" data-lucide="file-text" class="stroke-1.5 w-5 h-5"></i>
+                                </div>
+                                <div class="menu__title">
+                                    Good Moral Requests
+                                    <div
+                                        class="menu__sub-icon {{ request()->routeIs('admin.good-moral.pending') || request()->routeIs('admin.good-moral.ready_to_pickup') || request()->routeIs('admin.good-moral.show-picked_up') ? 'transform rotate-180' : '' }}">
+                                        <i data-tw-merge="" data-lucide="chevron-down"
+                                            class="stroke-1.5 w-5 h-5"></i>
+                                    </div>
+                                </div>
+                            </a>
+                            <ul
+                                class="{{ request()->routeIs('admin.good-moral.pending') || request()->routeIs('admin.good-moral.ready_to_pickup') || request()->routeIs('admin.good-moral.show-picked_up') ? 'menu__sub-open' : '' }}">
+                                <li>
+                                    <a href="{{ route('admin.good-moral.pending') }}"
+                                        class="menu {{ request()->routeIs('admin.good-moral.pending') ? 'menu--active' : '' }}">
+                                        <div class="menu__icon">
+                                            <i data-tw-merge="" data-lucide="hourglass"
+                                                class="stroke-1.5 w-5 h-5"></i>
+                                        </div>
+                                        <div class="menu__title">Pending Request</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.good-moral.ready_to_pickup') }}"
+                                        class="menu {{ request()->routeIs('admin.good-moral.ready_to_pickup') ? 'menu--active' : '' }}">
+                                        <div class="menu__icon">
+                                            <i data-tw-merge="" data-lucide="check-circle"
+                                                class="stroke-1.5 w-5 h-5"></i>
+                                        </div>
+                                        <div class="menu__title">Ready To Pickup Request</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.good-moral.show-picked_up') }}"
+                                        class="menu {{ request()->routeIs('admin.good-moral.show-picked_up') ? 'menu--active' : '' }}">
+                                        <div class="menu__icon">
+                                            <i data-tw-merge="" data-lucide="history" class="stroke-1.5 w-5 h-5"></i>
+                                        </div>
+                                        <div class="menu__title">Picked Up Request</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;"
+                                class="menu {{ request()->routeIs('admin.counseling.pending') || request()->routeIs('admin.counseling.approved') || request()->routeIs('admin.counseling.record_history') ? 'menu--active' : '' }}">
+                                <div class="menu__icon">
+                                    <i data-tw-merge="" data-lucide="chat-square" class="stroke-1.5 w-5 h-5"></i>
+                                </div>
+                                <div class="menu__title">
+                                    Virtual Counseling
+                                    <div
+                                        class="menu__sub-icon {{ request()->routeIs('admin.counseling.pending') || request()->routeIs('admin.counseling.approved') || request()->routeIs('admin.counseling.record_history') ? 'transform rotate-180' : '' }}">
+                                        <i data-tw-merge="" data-lucide="chevron-down"
+                                            class="stroke-1.5 w-5 h-5"></i>
+                                    </div>
+                                </div>
+                            </a>
+                            <ul
+                                class="{{ request()->routeIs('admin.counseling.pending') || request()->routeIs('admin.counseling.approved') || request()->routeIs('admin.counseling.record_history') ? 'menu__sub-open' : '' }}">
+                                <li>
+                                    <a href="{{ route('admin.counseling.pending') }}"
+                                        class="menu {{ request()->routeIs('admin.counseling.pending') ? 'menu--active' : '' }}">
+                                        <div class="menu__icon">
+                                            <i data-tw-merge="" data-lucide="hourglass"
+                                                class="stroke-1.5 w-5 h-5"></i>
+                                        </div>
+                                        <div class="menu__title">Pending</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.counseling.approved') }}"
+                                        class="menu {{ request()->routeIs('admin.counseling.approved') ? 'menu--active' : '' }}">
+                                        <div class="menu__icon">
+                                            <i data-tw-merge="" data-lucide="check-circle"
+                                                class="stroke-1.5 w-5 h-5"></i>
+                                        </div>
+                                        <div class="menu__title">Approved</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.counseling.record_history') }}"
+                                        class="menu {{ request()->routeIs('admin.counseling.record_history') ? 'menu--active' : '' }}">
+                                        <div class="menu__icon">
+                                            <i data-tw-merge="" data-lucide="history" class="stroke-1.5 w-5 h-5"></i>
+                                        </div>
+                                        <div class="menu__title">Record History</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;"
+                                class="menu {{ request()->routeIs('admin.settings.history_logs') || request()->routeIs('admin.settings.admin-list') ? 'menu--active' : '' }}">
+                                <div class="menu__icon">
+                                    <i data-tw-merge="" data-lucide="settings" class="stroke-1.5 w-5 h-5"></i>
+                                </div>
+                                <div class="menu__title">
+                                    Settings
+                                    <div
+                                        class="menu__sub-icon {{ request()->routeIs('admin.settings.history_logs') || request()->routeIs('admin.settings.admin-list') ? 'transform rotate-180' : '' }}">
+                                        <i data-tw-merge="" data-lucide="chevron-down"
+                                            class="stroke-1.5 w-5 h-5"></i>
+                                    </div>
+                                </div>
+                            </a>
+                            <ul
+                                class="{{ request()->routeIs('admin.settings.history_logs') || request()->routeIs('admin.settings.admin-list') ? 'menu__sub-open' : '' }}">
+                                <li>
+                                    <a href="{{ route('admin.settings.history_logs') }}"
+                                        class="menu {{ request()->routeIs('admin.settings.history_logs') ? 'menu--active' : '' }}">
+                                        <div class="menu__icon">
+                                            <i data-tw-merge="" data-lucide="file-text"
+                                                class="stroke-1.5 w-5 h-5"></i>
+                                        </div>
+                                        <div class="menu__title">History Logs</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.settings.admin-list') }}"
+                                        class="menu {{ request()->routeIs('admin.settings.admin-list') ? 'menu--active' : '' }}">
+                                        <div class="menu__icon">
+                                            <i data-tw-merge="" data-lucide="file-text"
+                                                class="stroke-1.5 w-5 h-5"></i>
+                                        </div>
+                                        <div class="menu__title">Account List</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
                     <li class="my-6 menu__divider"></li>
                     <!-- END: First Child -->
                 </ul>
