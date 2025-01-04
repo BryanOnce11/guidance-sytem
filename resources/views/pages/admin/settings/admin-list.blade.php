@@ -92,10 +92,10 @@
                             class="px-5 py-3 font-medium text-center border-b-0 dark:border-darkmode-300 whitespace-nowrap">
                             STATUS
                         </th> --}}
-                        {{-- <th data-tw-merge=""
+                        <th data-tw-merge=""
                             class="px-5 py-3 font-medium text-center border-b-0 dark:border-darkmode-300 whitespace-nowrap">
                             ACTIONS
-                        </th> --}}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,6 +122,18 @@
                             <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
                                 {{ $admin_list->user->email }}
+                            </td>
+                            <td data-tw-merge=""
+                                class="px-5 py-3 border-b dark:border-darkmode-300 box w-56 rounded-l-none rounded-r-none border-x-0 shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600 before:absolute before:inset-y-0 before:left-0 before:my-auto before:block before:h-8 before:w-px before:bg-slate-200 before:dark:bg-darkmode-400">
+                                <div class="flex items-center justify-center">
+                                    @if ($admin_list->user->email != 'admin@gmail.com')
+                                        <a class="flex items-center mr-3 text-danger" data-tw-toggle="modal"
+                                            data-tw-target="#reject-confirmation-modal{{ $admin_list->id }}" href="#">
+                                            <i data-tw-merge="" data-lucide="trash-2" class="stroke-1.5 mr-1 h-4 w-4"></i>
+                                            Disable
+                                        </a>
+                                    @endif
+                                </div>
                             </td>
                             {{-- <td data-tw-merge=""
                                 class="px-5 py-3 border-b dark:border-darkmode-300 box rounded-l-none rounded-r-none border-x-0 text-center shadow-[5px_3px_5px_#00000005] first:rounded-l-[0.6rem] first:border-l last:rounded-r-[0.6rem] last:border-r dark:bg-darkmode-600">
@@ -219,8 +231,8 @@
                             class="inline-block mb-2 group-[.form-inline]:mb-2 group-[.form-inline]:sm:mb-0 group-[.form-inline]:sm:mr-5 group-[.form-inline]:sm:text-right">
                             Email
                         </label>
-                        <input data-tw-merge="" name="email" id="pos-form-1" type="text" value="{{ old('email') }}"
-                            placeholder="Input your email"
+                        <input data-tw-merge="" name="email" id="pos-form-1" type="text"
+                            value="{{ old('email') }}" placeholder="Input your email"
                             class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 flex-1">
                         @error('email')
                             <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
@@ -297,4 +309,34 @@
         </div>
     </div>
     <!-- END: New Order Modal -->
+
+    @foreach ($admin_lists as $admin_list)
+        <!-- BEGIN: Delete Confirmation Modal -->
+        <div data-tw-backdrop="" aria-hidden="true" tabindex="-1" id="reject-confirmation-modal{{ $admin_list->id }}"
+            class="modal group bg-black/60 transition-[visibility,opacity] w-screen h-screen fixed left-0 top-0 [&:not(.show)]:duration-[0s,0.2s] [&:not(.show)]:delay-[0.2s,0s] [&:not(.show)]:invisible [&:not(.show)]:opacity-0 [&.show]:visible [&.show]:opacity-100 [&.show]:duration-[0s,0.4s]">
+            <div data-tw-merge=""
+                class="w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-[margin-top,transform] duration-[0.4s,0.3s] -mt-16 group-[.show]:mt-16 group-[.modal-static]:scale-[1.05] dark:bg-darkmode-600 sm:w-[460px]">
+                <div class="p-5 text-center">
+                    <i data-tw-merge="" data-lucide="shield-alert"
+                        class="stroke-1.5 mx-auto mt-3 h-16 w-16 text-warning"></i>
+                    <div class="mt-5 text-3xl">Are you sure?</div>
+                    <div class="mt-2 text-slate-500">
+                        Do you really want to disable this account? <br>
+                        This process cannot be undone.
+                    </div>
+                </div>
+                <form action="{{ route('admin.settings.admin-list.disable', $admin_list) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="px-5 pb-8 text-center">
+                        <button data-tw-merge="" data-tw-dismiss="modal" type="button"
+                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mr-1 w-24">Cancel</button>
+                        <button data-tw-merge="" type="submit"
+                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-24">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END: Delete Confirmation Modal -->
+    @endforeach
 @endsection

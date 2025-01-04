@@ -9,9 +9,12 @@ use App\Models\User;
 use App\Models\AdminHistory;
 use App\Models\CounselingNotes;
 use App\Models\Course;
+use App\Models\Notification;
 use App\Models\VirtualCounseling;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Mockery\Matcher\Not;
 
 class AdminController extends Controller
 {
@@ -157,7 +160,7 @@ class AdminController extends Controller
 
         alert('Success', "You have successfully approved the good moral request of {$good_moral_request->student->fname} {$good_moral_request->student->m_i} {$good_moral_request->student->lname}", 'success');
 
-        return redirect()->route('admin.counseling.pending');
+        return redirect()->route('admin.good-moral.pending');
     }
 
     public function readyToPickupGoodMoral()
@@ -207,6 +210,31 @@ class AdminController extends Controller
         return redirect()->route('admin.good-moral.ready_to_pickup');
     }
 
+    public function rejectGoodMoral(GoodMoralRequest $good_moral_request)
+    {
+        $good_moral_request->update([
+            'status' => 'Rejected'
+        ]);
+
+        AdminHistory::create([
+            'action' => 'Good Moral Request Rejected',
+            'details' => "Admin " . auth()->user()->admin->fname . " rejected the request Good Moral of {$good_moral_request->student->fname} {$good_moral_request->student->lname}"
+        ]);
+
+        $date_requested = Carbon::parse($good_moral_request->created_at->format('Y-m-d'));
+
+        Notification::create([
+            'student_id' => $good_moral_request->student_id,
+            'type' => 'Good Moral',
+            'date_requested' => $date_requested,
+            'date_rejected' => now()
+        ]);
+
+        alert('Success', "You have successfully rejected {$good_moral_request->student->fname} {$good_moral_request->student->m_i} {$good_moral_request->student->lname}", 'success');
+
+        return redirect()->route('admin.good-moral.pending');
+    }
+
     public function getpickedUpGoodMoral()
     {
         $per_page = request('per_page', 10);
@@ -221,9 +249,10 @@ class AdminController extends Controller
                     });
                 });
             })
-            ->orderBy(Student::select('fname')
-                ->whereColumn('students.id', 'good_moral_requests.student_id')
-                ->limit(1))  // Ensure we are ordering by the correct `fname`
+            ->orderBy(
+                Student::select('fname')
+                    ->whereColumn('students.id', 'good_moral_requests.student_id')
+            )  // Ensure we are ordering by the correct `fname`
             ->paginate($per_page);
 
         $courses = Course::all();
@@ -329,6 +358,32 @@ class AdminController extends Controller
         return redirect()->route('admin.counseling.pending');
     }
 
+    public function rejectVirtualCounseling(VirtualCounseling $virtual_counseling)
+    {
+        $virtual_counseling->update([
+            'status' => 'Rejected'
+        ]);
+
+        AdminHistory::create([
+            'action' => 'Virtual Counseling Request Rejected',
+            'details' => "Admin " . auth()->user()->admin->fname . " rejected the request Virtual Counseling of {$virtual_counseling->student->fname} {$virtual_counseling->student->lname}"
+        ]);
+
+        $date_requested = Carbon::parse($virtual_counseling->created_at->format('Y-m-d'));
+        //no need to parse just use $virtual_counseling->created_at->toDateString();
+
+        Notification::create([
+            'student_id' => $virtual_counseling->student_id,
+            'type' => 'Virtual Counseling',
+            'date_requested' => $date_requested,
+            'date_rejected' => now()
+        ]);
+
+        alert('Success', "You have successfully rejected {$virtual_counseling->student->fname} {$virtual_counseling->student->m_i} {$virtual_counseling->student->lname}", 'success');
+
+        return redirect()->route('admin.counseling.pending');
+    }
+
     public function approvedCounseling()
     {
         $per_page = request('per_page', 10);
@@ -343,9 +398,10 @@ class AdminController extends Controller
                     });
                 });
             })
-            ->orderBy(Student::select('fname')
-                ->whereColumn('students.id', 'virtual_counselings.student_id')
-                ->limit(1))  // Ensure we are ordering by the correct `fname`
+            ->orderBy(
+                Student::select('fname')
+                    ->whereColumn('students.id', 'virtual_counselings.student_id')
+            )  // Ensure we are ordering by the correct `fname`
             ->paginate($per_page);
 
         $courses = Course::all();
@@ -421,6 +477,22 @@ class AdminController extends Controller
         alert('Success', 'You have successfully created an admin account', 'success');
 
         return back();
+    }
+
+    public function disableAdmin(Admin $admin)
+    {
+        $admin->user->update([
+            'status' => 'Rejected'
+        ]);
+
+        // AdminHistory::create([
+        //     'action' => 'Virtual Counseling Request Rejected',
+        //     'details' => "Admin " . auth()->user()->admin->fname . " rejected the request Virtual Counseling of {$user->student->fname} {$user->student->lname}"
+        // ]);
+
+        // alert('Success', "You have successfully rejected {$user->student->fname} {$user->student->m_i} {$user->student->lname}", 'success');
+
+        return redirect()->route('admin.student-list.pending');
     }
 
     public function historyLogs()

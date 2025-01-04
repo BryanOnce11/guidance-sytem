@@ -155,6 +155,11 @@
                                             Picked Up
                                         </a>
                                     @endif
+                                    <a class="flex items-center mr-3 text-success"
+                                        href="{{ route('admin.good-moral.generate-pdf', $good_moral_ready_to_pickup->id) }}">
+                                        <i data-tw-merge="" data-lucide="file-text" class="stroke-1.5 mr-1 h-4 w-4"></i>
+                                        Generate PDF
+                                    </a>
                                     {{-- <a class="flex items-center text-danger" data-tw-toggle="modal"
                                     data-tw-target="#delete-confirmation-modal" href="#">
                                     <i data-tw-merge="" data-lucide="trash" class="stroke-1.5 mr-1 h-4 w-4"></i>

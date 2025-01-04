@@ -84,6 +84,7 @@ Route::middleware('auth')->group(function () {
         Route::get('good-moral/letter/{good_moral}', 'goodMoralView')->name('admin.good-moral.letter');
         Route::get('good-moral/ready-to-pickup', 'readyToPickupGoodmoral')->name('admin.good-moral.ready_to_pickup');
         Route::put('good-moral/approved/{good_moral_request}', 'approvedGoodMoral')->name('admin.good-moral.approved');
+        Route::put('good-moral/reject/{good_moral_request}', 'rejectGoodMoral')->name('admin.good-moral.reject');
         Route::put('good-moral/picked-up/{good_moral_request}', 'pickedUpGoodMoral')->name('admin.good-moral.picked_up');
         Route::get('good-moral/picked-up', 'getPickedUpGoodmoral')->name('admin.good-moral.show-picked_up');
         Route::get('good-moral/show-pdf/{good_moral_request}', 'showGoodMoralPDF')->name('admin.good-moral.show-pdf');
@@ -92,10 +93,12 @@ Route::middleware('auth')->group(function () {
         Route::get('counseling/letter/{virtual_counseling}', 'virtualCounselingView')->name('admin.counseling.letter');
         Route::get('counseling/approved', 'approvedCounseling')->name('admin.counseling.approved');
         Route::put('counseling/date-scheduled/{virtual_counseling}', 'dateScheduledCounseling')->name('admin.couseling.date_scheduled');
+        Route::put('counseling/reject/{virtual_counseling}', 'rejectVirtualCounseling')->name('admin.counseling.reject');
         Route::get('counseling/record-history', 'recordHistory')->name('admin.counseling.record_history');
         Route::get('counseling/record-history/notes/{counseling_notes}', 'recordHistoryNotes')->name('admin.counseling.record_history.notes');
         Route::get('settings/admin-list', 'showAdminList')->name('admin.settings.admin-list');
         Route::post('settings/admin-list/store', 'storeAdminList')->name('admin.settings.admin-list.store');
+        Route::put('settings/admin-list/disable/{user}', 'disableAdmin')->name('admin.settings.admin-list.disable');
         Route::get('settings/history-logs', 'historyLogs')->name('admin.settings.history_logs');
     });
 });

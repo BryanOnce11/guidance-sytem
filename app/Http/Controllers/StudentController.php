@@ -15,6 +15,7 @@ use App\Models\FamilyBackground;
 use App\Models\FatherInfo;
 use App\Models\GuardianInfo;
 use App\Models\MotherInfo;
+use App\Models\Notification;
 use App\Models\PersonalHistory;
 use App\Models\ProblemChecklist;
 use App\Models\ScholasticRecord;
@@ -27,29 +28,52 @@ class StudentController extends Controller
 {
     public function homePage()
     {
-        return view('pages.student.home-page');
+        $notifications = Notification::where('student_id', auth()->user()->student->id)
+            ->latest()
+            ->limit(10)
+            ->get();
+
+        return view('pages.student.home-page', [
+            'notifications' => $notifications
+        ]);
     }
 
     public function pendingGoodMoral()
     {
         $per_page = request('per_page', 10);
+
         $pending_good_morals = GoodMoralRequest::where('student_id', auth()->user()->student->id)
             ->where('status', 'Pending')
             ->paginate($per_page);
+
+        $notifications = Notification::where('student_id', auth()->user()->student->id)
+            ->latest()
+            ->limit(10)
+            ->get();
+
         return view('pages.student.good-moral.pending', [
-            'pending_good_morals' => $pending_good_morals
+            'pending_good_morals' => $pending_good_morals,
+            'notifications' => $notifications
         ]);
     }
 
     public function readyToPickupGoodMoral()
     {
         $per_page = request('per_page', 10);
+
         $ready_to_pickup_good_morals = GoodMoralRequest::where('student_id', auth()->user()->student->id)
             ->where('status', 'Ready To Pickup')
             ->orWhere('status', 'Picked Up')
             ->paginate($per_page);
+
+        $notifications = Notification::where('student_id', auth()->user()->student->id)
+            ->latest()
+            ->limit(10)
+            ->get();
+
         return view('pages.student.good-moral.ready-to-pickup', [
-            'ready_to_pickup_good_morals' => $ready_to_pickup_good_morals
+            'ready_to_pickup_good_morals' => $ready_to_pickup_good_morals,
+            'notifications' => $notifications
         ]);
     }
 
@@ -72,22 +96,38 @@ class StudentController extends Controller
     public function pendingCounseling()
     {
         $per_page = request('per_page', 10);
+
         $pending_counselings = VirtualCounseling::where('student_id', auth()->user()->student->id)
             ->where('status', 'Pending')
             ->paginate($per_page);
+
+        $notifications = Notification::where('student_id', auth()->user()->student->id)
+            ->latest()
+            ->limit(10)
+            ->get();
+
         return view('pages.student.counseling.pending', [
-            'pending_counselings' => $pending_counselings
+            'pending_counselings' => $pending_counselings,
+            'notifications' => $notifications
         ]);
     }
 
     public function approvedCounseling()
     {
         $per_page = request('per_page', 10);
+
         $approved_counselings = VirtualCounseling::where('student_id', auth()->user()->student->id)
             ->where('status', 'Approved')
             ->paginate($per_page);
+
+        $notifications = Notification::where('student_id', auth()->user()->student->id)
+            ->latest()
+            ->limit(10)
+            ->get();
+
         return view('pages.student.counseling.approved', [
-            'approved_counselings' => $approved_counselings
+            'approved_counselings' => $approved_counselings,
+            'notifications' => $notifications
         ]);
     }
 
@@ -115,9 +155,15 @@ class StudentController extends Controller
 
         $courses = Course::all();
 
+        $notifications = Notification::where('student_id', auth()->user()->student->id)
+            ->latest()
+            ->limit(10)
+            ->get();
+
         return view('pages.student.profile', [
             'user' => $user,
-            'courses' => $courses
+            'courses' => $courses,
+            'notifications' => $notifications
         ]);
     }
 
