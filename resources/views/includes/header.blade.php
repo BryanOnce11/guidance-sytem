@@ -157,140 +157,46 @@
                 </div> --}}
                 <!-- END: Search -->
                 <!-- BEGIN: Notifications -->
-                {{-- <div data-tw-merge="" data-tw-placement="bottom-end" class="relative mr-4 dropdown intro-x sm:mr-6">
-                    <div data-tw-toggle="dropdown" aria-expanded="false"
-                        class="cursor-pointer relative block text-white/70 outline-none before:absolute before:right-0 before:top-[-2px] before:h-[8px] before:w-[8px] before:rounded-full before:bg-danger before:content-['']">
-                        <i data-tw-merge="" data-lucide="bell" class="stroke-1.5 w-5 h-5 dark:text-slate-500"></i>
-                    </div>
-                    <div data-transition="" data-selector=".show"
-                        data-enter="transition-all ease-linear duration-150"
-                        data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
-                        data-enter-to="!mt-1 visible opacity-100 translate-y-0"
-                        data-leave="transition-all ease-linear duration-150"
-                        data-leave-from="!mt-1 visible opacity-100 translate-y-0"
-                        data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1"
-                        class="dropdown-menu absolute z-[9999] hidden">
-                        <div data-tw-merge=""
-                            class="dropdown-content rounded-md border-transparent bg-white shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 mt-2 w-[280px] p-5 sm:w-[350px]">
-                            <div class="mb-5 font-medium">Notifications</div>
-                            <div class="relative flex items-center cursor-pointer">
-                                <div class="relative flex-none w-12 h-12 mr-1 image-fit">
-                                    <img class="rounded-full" src="dist/images/fakers/profile-13.jpg"
-                                        alt="Midone Tailwind HTML Admin Template">
-                                    <div
-                                        class="absolute bottom-0 right-0 w-3 h-3 border-2 border-white rounded-full bg-success dark:border-darkmode-600">
-                                    </div>
-                                </div>
-                                <div class="ml-2 overflow-hidden">
-                                    <div class="flex items-center">
-                                        <a class="mr-5 font-medium truncate" href="">
-                                            Christian Bale
-                                        </a>
-                                        <div class="ml-auto text-xs whitespace-nowrap text-slate-400">
-                                            05:09 AM
+                @if (auth()->user()->role == 'Student')
+                    <div data-tw-merge="" data-tw-placement="bottom-end" class="relative mr-4 dropdown intro-x sm:mr-6">
+                        <div data-tw-toggle="dropdown" aria-expanded="false"
+                            class="cursor-pointer relative block text-white/70 outline-none before:absolute before:right-0 before:top-[-2px] before:h-[8px] before:w-[8px] before:rounded-full before:bg-danger before:content-['']">
+                            <i data-tw-merge="" data-lucide="bell" class="stroke-1.5 w-5 h-5 dark:text-slate-500"></i>
+                        </div>
+                        <div data-transition="" data-selector=".show"
+                            data-enter="transition-all ease-linear duration-150"
+                            data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
+                            data-enter-to="!mt-1 visible opacity-100 translate-y-0"
+                            data-leave="transition-all ease-linear duration-150"
+                            data-leave-from="!mt-1 visible opacity-100 translate-y-0"
+                            data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1"
+                            class="dropdown-menu absolute z-[9999] hidden">
+                            <div data-tw-merge=""
+                                class="dropdown-content rounded-md border-transparent bg-white shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 mt-2 w-[280px] p-5 sm:w-[350px]">
+                                <div class="mb-5 font-medium">Notifications</div>
+                                @foreach ($notifications as $notification)
+                                    <div class="relative flex items-center cursor-pointer">
+                                        <div class="ml-2">
+                                            <div class="flex items-center">
+                                                <a class="mr-5 font-medium" href="">
+                                                    Reject Request!
+                                                </a>
+                                                <div class="ml-auto text-xs whitespace-nowrap text-slate-400">
+                                                    Date Requested:
+                                                    {{ \Carbon\Carbon::parse($notification->date_requested)->format('M d, Y') }}
+                                                </div>
+                                            </div>
+                                            <div class="mt-0.5 w-full text-slate-500">
+                                                Your request, {{ $notification->type }}, has been rejected on
+                                                {{ \Carbon\Carbon::parse($notification->date_rejected)->format('M d, Y') }}.
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="mt-0.5 w-full truncate text-slate-500">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="relative flex items-center mt-5 cursor-pointer">
-                                <div class="relative flex-none w-12 h-12 mr-1 image-fit">
-                                    <img class="rounded-full" src="dist/images/fakers/profile-9.jpg"
-                                        alt="Midone Tailwind HTML Admin Template">
-                                    <div
-                                        class="absolute bottom-0 right-0 w-3 h-3 border-2 border-white rounded-full bg-success dark:border-darkmode-600">
-                                    </div>
-                                </div>
-                                <div class="ml-2 overflow-hidden">
-                                    <div class="flex items-center">
-                                        <a class="mr-5 font-medium truncate" href="">
-                                            Kevin Spacey
-                                        </a>
-                                        <div class="ml-auto text-xs whitespace-nowrap text-slate-400">
-                                            01:10 PM
-                                        </div>
-                                    </div>
-                                    <div class="mt-0.5 w-full truncate text-slate-500">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                        Ipsum has been the industry's standard dummy text ever since the 1500
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="relative flex items-center mt-5 cursor-pointer">
-                                <div class="relative flex-none w-12 h-12 mr-1 image-fit">
-                                    <img class="rounded-full" src="dist/images/fakers/profile-15.jpg"
-                                        alt="Midone Tailwind HTML Admin Template">
-                                    <div
-                                        class="absolute bottom-0 right-0 w-3 h-3 border-2 border-white rounded-full bg-success dark:border-darkmode-600">
-                                    </div>
-                                </div>
-                                <div class="ml-2 overflow-hidden">
-                                    <div class="flex items-center">
-                                        <a class="mr-5 font-medium truncate" href="">
-                                            Tom Cruise
-                                        </a>
-                                        <div class="ml-auto text-xs whitespace-nowrap text-slate-400">
-                                            05:09 AM
-                                        </div>
-                                    </div>
-                                    <div class="mt-0.5 w-full truncate text-slate-500">
-                                        There are many variations of passages of Lorem Ipsum available, but the majority
-                                        have suffered alteration in some form, by injected humour, or randomi
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="relative flex items-center mt-5 cursor-pointer">
-                                <div class="relative flex-none w-12 h-12 mr-1 image-fit">
-                                    <img class="rounded-full" src="dist/images/fakers/profile-14.jpg"
-                                        alt="Midone Tailwind HTML Admin Template">
-                                    <div
-                                        class="absolute bottom-0 right-0 w-3 h-3 border-2 border-white rounded-full bg-success dark:border-darkmode-600">
-                                    </div>
-                                </div>
-                                <div class="ml-2 overflow-hidden">
-                                    <div class="flex items-center">
-                                        <a class="mr-5 font-medium truncate" href="">
-                                            Johnny Depp
-                                        </a>
-                                        <div class="ml-auto text-xs whitespace-nowrap text-slate-400">
-                                            06:05 AM
-                                        </div>
-                                    </div>
-                                    <div class="mt-0.5 w-full truncate text-slate-500">
-                                        It is a long established fact that a reader will be distracted by the readable
-                                        content of a page when looking at its layout. The point of using Lorem
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="relative flex items-center mt-5 cursor-pointer">
-                                <div class="relative flex-none w-12 h-12 mr-1 image-fit">
-                                    <img class="rounded-full" src="dist/images/fakers/profile-12.jpg"
-                                        alt="Midone Tailwind HTML Admin Template">
-                                    <div
-                                        class="absolute bottom-0 right-0 w-3 h-3 border-2 border-white rounded-full bg-success dark:border-darkmode-600">
-                                    </div>
-                                </div>
-                                <div class="ml-2 overflow-hidden">
-                                    <div class="flex items-center">
-                                        <a class="mr-5 font-medium truncate" href="">
-                                            Kevin Spacey
-                                        </a>
-                                        <div class="ml-auto text-xs whitespace-nowrap text-slate-400">
-                                            05:09 AM
-                                        </div>
-                                    </div>
-                                    <div class="mt-0.5 w-full truncate text-slate-500">
-                                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
-                                        in a piece of classical Latin literature from 45 BC, making it over 20
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                @endif
                 <!-- END: Notifications -->
                 <!-- BEGIN: Account Menu -->
                 <div data-tw-merge="" data-tw-placement="bottom-end" class="relative dropdown"><button
