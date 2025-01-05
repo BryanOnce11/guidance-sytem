@@ -14,7 +14,7 @@ return new class extends Migration {
         Schema::create('virtual_counselings', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Student::class);
-            $table->date('date_requested')->default(now());
+            $table->date('date_requested')->default(now()->setTimezone('Asia/Manila'));
             $table->date('date_scheduled')->nullable();
             $table->time('time_scheduled')->nullable();
             $table->string('reason');

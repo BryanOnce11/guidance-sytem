@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(Student::class);
             $table->string('reason');
-            $table->date('date_requested')->default(now());
+            $table->date('date_requested')->default(now()->setTimezone('Asia/Manila'));
             $table->string('date_to_pickup')->nullable();
             $table->string('status')->default('Pending');
             $table->timestamps();
