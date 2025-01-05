@@ -54,7 +54,7 @@ route::controller(VerificationController::class)->group(function () {
 });
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('video-call/{video_counseling_id}', [AuthController::class, 'showVideoCall'])->name('video-call');
     Route::post('video-call/notes', [AuthController::class, 'videoCall']);
