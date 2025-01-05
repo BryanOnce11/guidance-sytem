@@ -11,11 +11,11 @@
     @vite('resources/css/app.css') <!-- Ensure Vite is managing your CSS -->
     <style>
         /* Custom styles to create the circular left-side design */
-        .curved-bg {
+        /* .curved-bg {
             clip-path: ellipse(90% 100% at 10% 50%);
             background-color: #D87A0D;
             height: 100vh;
-        }
+        } */
 
         @media (min-width: 768px) {
             .curved-bg {
