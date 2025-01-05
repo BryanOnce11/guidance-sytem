@@ -15,9 +15,9 @@ class AdminSeeder extends Seeder
     {
         Admin::create([
             'user_id' => 1,
-            'fname' => 'John',
-            'lname' => 'Smith',
-            'm_i' => 'R',
+            'fname' => 'Wynchell',
+            'lname' => 'Mollenido',
+            'm_i' => 'O',
             'image' => 'test'
         ]);
     }
