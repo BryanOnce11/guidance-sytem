@@ -51,12 +51,21 @@ let joinAndDisplayLocalStream = async () => {
 
 
 let joinStream = async () => {
-    await joinAndDisplayLocalStream()
-    document.getElementById('join-btn').style.display = 'none'
-    document.getElementById('stream-controls').style.display = 'flex'
-    console.log('test123', counselingId);
+    try {
+        // Explicitly request camera and microphone access before joining
+        await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
 
-}
+        // Join Agora stream once permissions are granted
+        await joinAndDisplayLocalStream();
+
+        document.getElementById('join-btn').style.display = 'none';
+        document.getElementById('stream-controls').style.display = 'flex';
+        console.log('test123', counselingId);
+    } catch (err) {
+        console.error('Permission denied or error with media devices:', err);
+        alert('Please allow camera and microphone access.');
+    }
+};
 
 let handleUserJoined = async (user, mediaType) => {
     remoteUsers[user.uid] = user
