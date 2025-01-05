@@ -1139,15 +1139,15 @@
                     <h2 class="mr-auto text-base font-medium">
                         Extra-Curricular activities during elementary and high school (please check):
                     </h2>
-                    <div class="flex flex-row w-full gap-4 mt-5 mb-4">
-                        <div class="flex items-center">
+                    <div class="flex flex-row flex-wrap w-full gap-4 mt-5 mb-4">
+                        <div class="flex items-center w-full sm:w-auto">
                             <input name="extra_curricular[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-4" value="Sports"
                                 {{ in_array('Sports', old('extra_curricular', $user->student->activity_interest->extra_curricular ?? [])) ? 'checked' : '' }} />
                             <label data-tw-merge for="checkbox-switch-4" class="ml-2 cursor-pointer">Sports</label>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center w-full sm:w-auto">
                             <input name="extra_curricular[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-5" value="Theatre/Dramatic Guild"
@@ -1155,14 +1155,14 @@
                             <label data-tw-merge for="checkbox-switch-5" class="ml-2 cursor-pointer">Theatre/Dramatic
                                 Guild</label>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center w-full sm:w-auto">
                             <input name="extra_curricular[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-6" value="Choir"
                                 {{ in_array('Choir', old('extra_curricular', $user->student->activity_interest->extra_curricular ?? [])) ? 'checked' : '' }} />
                             <label data-tw-merge for="checkbox-switch-6" class="ml-2 cursor-pointer">Choir</label>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center w-full sm:w-auto">
                             <input name="extra_curricular[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-7" value="School Paper"
@@ -1170,14 +1170,14 @@
                             <label data-tw-merge for="checkbox-switch-7" class="ml-2 cursor-pointer">School
                                 Paper</label>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center w-full sm:w-auto">
                             <input name="extra_curricular[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-8" value="Literacy"
                                 {{ in_array('Literacy', old('extra_curricular', $user->student->activity_interest->extra_curricular ?? [])) ? 'checked' : '' }} />
                             <label data-tw-merge for="checkbox-switch-8" class="ml-2 cursor-pointer">Literacy</label>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center w-full sm:w-auto">
                             <input name="extra_curricular[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-9" value="Dance Group"
@@ -1212,16 +1212,16 @@
                     @enderror
 
                     <label>Interest</label>
-                    <div class="flex flex-row w-full gap-4 mt-3">
+                    <div class="flex flex-row flex-wrap w-full gap-4 mt-5 mb-4">
                         <!-- Row 1: Dancing, Singing/Music, Acting -->
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-dancing" value="Dancing"
                                 {{ in_array('Dancing', old('interest', $user->student->activity_interest->interest ?? [])) ? 'checked' : '' }} />
                             <label data-tw-merge for="checkbox-switch-dancing" class="ml-2 cursor-pointer">Dancing</label>
                         </div>
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-singing" value="Singing/Music"
@@ -1229,7 +1229,7 @@
                             <label data-tw-merge for="checkbox-switch-singing"
                                 class="ml-2 cursor-pointer">Singing/Music</label>
                         </div>
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-acting" value="Acting"
@@ -1237,7 +1237,7 @@
                             <label data-tw-merge for="checkbox-switch-acting" class="ml-2 cursor-pointer">Acting</label>
                         </div>
 
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-politics" value="Politics"
@@ -1247,23 +1247,23 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-row w-full gap-4 mt-3">
+                    <div class="flex flex-row flex-wrap w-full gap-4 mt-5 mb-4">
                         <!-- Row 2: Debate, Oration, Storytelling -->
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-debate" value="Debate"
                                 {{ in_array('Debate', old('interest', $user->student->activity_interest->interest ?? [])) ? 'checked' : '' }} />
                             <label data-tw-merge for="checkbox-switch-debate" class="ml-2 cursor-pointer">Debate</label>
                         </div>
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-oration" value="Oration"
                                 {{ in_array('Oration', old('interest', $user->student->activity_interest->interest ?? [])) ? 'checked' : '' }} />
                             <label data-tw-merge for="checkbox-switch-oration" class="ml-2 cursor-pointer">Oration</label>
                         </div>
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-storytelling" value="Storytelling"
@@ -1271,7 +1271,7 @@
                             <label data-tw-merge for="checkbox-switch-storytelling"
                                 class="ml-2 cursor-pointer">Storytelling</label>
                         </div>
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-poetry" value="Poetry Interpretation"
@@ -1281,30 +1281,30 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-row w-full gap-4 mt-3">
+                    <div class="flex flex-row flex-wrap w-full gap-4 mt-5 mb-4">
                         <!-- Row 4: Musical Instruments -->
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-piano" value="Piano"
                                 {{ in_array('Piano', old('interest', $user->student->activity_interest->interest ?? [])) ? 'checked' : '' }} />
                             <label data-tw-merge for="checkbox-switch-piano" class="ml-2 cursor-pointer">Piano</label>
                         </div>
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-guitar" value="Guitar"
                                 {{ in_array('Guitar', old('interest', $user->student->activity_interest->interest ?? [])) ? 'checked' : '' }} />
                             <label data-tw-merge for="checkbox-switch-guitar" class="ml-2 cursor-pointer">Guitar</label>
                         </div>
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-violin" value="Violin"
                                 {{ in_array('Violin', old('interest', $user->student->activity_interest->interest ?? [])) ? 'checked' : '' }} />
                             <label data-tw-merge for="checkbox-switch-violin" class="ml-2 cursor-pointer">Violin</label>
                         </div>
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-drums" value="Drums"
@@ -1313,9 +1313,9 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-row w-full gap-4 mt-3">
+                    <div class="flex flex-row flex-wrap w-full gap-4 mt-5 mb-4">
                         <!-- Row 3: Sports -->
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-basketball" value="Basketball"
@@ -1323,14 +1323,14 @@
                             <label data-tw-merge for="checkbox-switch-basketball"
                                 class="ml-2 cursor-pointer">Basketball</label>
                         </div>
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-soccer" value="Soccer"
                                 {{ in_array('Soccer', old('interest', $user->student->activity_interest->interest ?? [])) ? 'checked' : '' }} />
                             <label data-tw-merge for="checkbox-switch-soccer" class="ml-2 cursor-pointer">Soccer</label>
                         </div>
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-football" value="Football"
@@ -1338,7 +1338,7 @@
                             <label data-tw-merge for="checkbox-switch-football"
                                 class="ml-2 cursor-pointer">Football</label>
                         </div>
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-track" value="Track and Field"
@@ -1346,7 +1346,7 @@
                             <label data-tw-merge for="checkbox-switch-track" class="ml-2 cursor-pointer">Track and
                                 Field</label>
                         </div>
-                        <div class="flex items-center w-full mb-4 mr-4">
+                        <div class="flex items-center w-full mr-4 sm:w-auto">
                             <input name="interest[]" data-tw-merge type="checkbox"
                                 class="transition-all duration-100 ease-in-out rounded shadow-sm cursor-pointer border-slate-200 focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50"
                                 id="checkbox-switch-volleyball" value="Volleyball"

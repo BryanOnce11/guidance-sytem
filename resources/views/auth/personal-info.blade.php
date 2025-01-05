@@ -14,9 +14,13 @@
         .curved-bg {
             clip-path: ellipse(90% 100% at 10% 50%);
             background-color: #D87A0D;
-            /* Matches the orange background */
             height: 100vh;
-            /* Ensures full height */
+        }
+
+        @media (min-width: 768px) {
+            .curved-bg {
+                clip-path: ellipse(90% 100% at 10% 50%);
+            }
         }
     </style>
 </head>
@@ -24,34 +28,39 @@
 <body class="bg-gray-100">
     @include('sweetalert::alert')
 
-    <div class="flex w-full h-screen"> <!-- Full width and height of screen -->
-        <!-- Left Side with Curved Background (Full Width and Height) -->
-        <div class="w-[40rem] curved-bg flex flex-col justify-center items-center text-white">
-            <div class="absolute flex items-center space-x-2 top-8 left-8">
-                <!-- Replace with your logo -->
+    <div class="flex flex-col w-full min-h-screen md:flex-row">
+        <!-- Left Side with Curved Background -->
+        <div
+            class="w-full md:w-[40rem] curved-bg flex flex-col justify-center items-center text-white bg-[#D87A0D] relative px-4 py-8 md:py-0">
+            <!-- Logo Header -->
+            <div class="flex items-center mb-8 space-x-2 md:absolute md:top-8 md:left-8 md:mb-0">
                 <img src="{{ asset('psu.png') }}" alt="PSU Logo" class="w-8 h-8">
                 <span class="font-bold">PSU - Brookes Point</span>
             </div>
 
+            <!-- Center Logo -->
             <div class="flex justify-center">
-                <img src="{{ asset('psu.png') }}" alt="PSU Logo" class="w-48 mb-4 opacity-75">
+                <img src="{{ asset('psu.png') }}" alt="PSU Logo" class="w-32 mb-4 opacity-75 md:w-48">
             </div>
 
-            <div class="mt-6 text-center">
-                <h1 class="text-3xl font-bold">PSU BROOKES POINT CAMPUS</h1>
-                <p class="mt-2 text-lg">Student Information Management and Virtual Counseling</p>
+            <!-- Text Content -->
+            <div class="px-4 mt-6 text-center">
+                <h1 class="text-2xl font-bold md:text-3xl">PSU BROOKES POINT CAMPUS</h1>
+                <p class="mt-2 text-base md:text-lg">Student Information Management and Virtual Counseling</p>
             </div>
         </div>
 
-        <!-- Right Side - Registration Form (Full Width and Height) -->
-        <div class="w-[60rem] bg-white p-12 flex flex-col justify-center items-center h-screen bg-center bg-no-repeat bg-cover"
+        <!-- Right Side - Registration Form -->
+        <div class="w-full md:w-[60rem] bg-white p-4 md:p-12 flex flex-col justify-center items-center min-h-screen bg-center bg-no-repeat bg-cover"
             style="background-image: url('{{ asset('image/bgbrookes2.jpg') }}');">
-            <div class="w-full max-w-4xl p-8 mx-auto">
-                <div class="rounded-lg shadow-md ">
-                    <div class="px-8 py-4">
-                        <h2 class="text-3xl font-bold text-center">Register</h2>
+            <div class="w-full max-w-4xl p-4 mx-auto rounded-lg md:p-8 bg-white/95">
+                <div class="rounded-lg shadow-md">
+                    <div class="px-4 py-4 md:px-8">
+                        <h2 class="text-2xl font-bold text-center md:text-3xl">Register</h2>
                     </div>
-                    <div class="px-8 py-4">
+
+                    <div class="px-4 py-4 md:px-8">
+                        <!-- Step Indicator -->
                         <div class="flex justify-center mb-8" id="step-indicator">
                             <div class="flex items-center">
                                 <div id="step1"
@@ -66,45 +75,44 @@
                             </div>
                         </div>
 
+                        <!-- Registration Form -->
                         <form method="POST" action="{{ route('student.personal-info.post') }}" id="registration-form"
                             class="space-y-6" enctype="multipart/form-data">
                             @csrf
+                            <!-- Step 1 -->
                             <div id="" class="step">
-                                <h3 class="mb-2 text-lg font-semibold">Personal Information</h3>
-                                <div class="grid grid-cols-2 gap-4 mb-2 ">
+                                <h3 class="mb-4 text-lg font-semibold">Personal Information</h3>
+
+                                <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2">
                                     <div>
                                         <label for="update-profile-form-8" class="inline-block mb-2 text-black">Student
                                             Status</label>
                                         <select name="status" id="update-profile-form-8"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
-                                            <option value="Old" {{ old('status') == 'Old' ? 'selected' : '' }}>
-                                                Old</option>
-                                            <option value="New" {{ old('status') == 'New' ? 'selected' : '' }}>
-                                                New</option>
+                                            <option value="Old" {{ old('status') == 'Old' ? 'selected' : '' }}>Old
+                                            </option>
+                                            <option value="New" {{ old('status') == 'New' ? 'selected' : '' }}>New
+                                            </option>
                                         </select>
+
                                         @error('status')
-                                            <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                                            <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                                         @enderror
                                     </div>
+
                                     <div>
                                         <label for="image-upload" class="inline-block mb-2 text-black">Upload
                                             Image</label>
-
                                         <input type="file" name="image" id="image-upload"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                                             accept="image/*" onchange="previewImage(event)">
 
-                                        <!-- Image preview -->
-                                        {{-- <div id="image-preview-container" class="mt-2">
-                                        <img id="image-preview" src="" alt="Image Preview" class="hidden w-full h-auto rounded-md"/>
-                                    </div>
-                                     --}}
                                         @error('image')
-                                            <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                                            <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-3 gap-4 mb-2 ">
+                                <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-3">
                                     <div>
                                         <label class="block text-black">Student ID</label>
                                         <input type="text" name="student_id" value="{{ old('student_id') }}"
@@ -148,7 +156,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-3 gap-4 mb-2 ">
+                                <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-3">
                                     <div>
                                         <label class="block text-black">First Name</label>
                                         <input type="text" name="fname" value="{{ old('fname') }}"
@@ -174,7 +182,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-2 gap-4 mb-2 ">
+                                <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2">
                                     <div>
                                         <label class="block text-black">Age</label>
                                         <input type="number" min="18" name="age"
@@ -193,7 +201,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-2 gap-4 mb-2">
+                                <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2">
                                     <div>
                                         <label class="block text-black">Birth Place</label>
                                         <input type="text" name="birth_place" value="{{ old('birth_place') }}"
@@ -211,11 +219,15 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                <!-- Continue with the rest of the form fields following the same pattern... -->
+                                <!-- Note: I've truncated the middle section for brevity, but it follows the same structure -->
                             </div>
 
+
+                            <!-- Step 2 -->
                             <div id="" class="hidden step">
-                                <h3 class="mb-2 text-lg font-semibold">Personal Information</h3>
-                                <div class="grid grid-cols-3 gap-4 mb-2">
+                                <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-3">
                                     <div class="">
                                         <label class="block text-black">Gender</label>
                                         <select name="gender"
@@ -323,6 +335,7 @@
                                 </div>
                             </div>
 
+                            <!-- Navigation Buttons -->
                             <div class="flex justify-between mt-8">
                                 <button type="button" id="prev-btn"
                                     class="hidden px-6 py-3 text-black bg-white border border-gray-300 rounded-lg hover:bg-gray-100">Previous</button>
@@ -330,62 +343,61 @@
                                     class="px-6 py-3 text-white bg-orange-500 rounded-lg hover:bg-orange-600">Next</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-</body>
+    <script>
+        // Your existing JavaScript remains the same
+        const steps = document.querySelectorAll('.step');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
 
-<script>
-    const steps = document.querySelectorAll('.step');
-    const nextBtn = document.getElementById('next-btn');
-    const prevBtn = document.getElementById('prev-btn');
-    const step1 = document.getElementById('step1')
-    const step2 = document.getElementById('step2');
+        let currentStep = 0;
 
-    let currentStep = 0;
+        function updateStepDisplay() {
+            steps.forEach((step, index) => {
+                step.classList.toggle('hidden', index !== currentStep);
+            });
 
-    function updateStepDisplay() {
-        steps.forEach((step, index) => {
-            step.classList.toggle('hidden', index !== currentStep);
+            if (currentStep === steps.length - 1) {
+                step2.classList.remove('bg-gray-200');
+                step2.classList.add('bg-orange-500');
+                step1.classList.remove('bg-orange-500');
+                step1.classList.add('bg-gray-200');
+            } else {
+                step2.classList.add('bg-gray-200');
+                step2.classList.remove('bg-orange-500');
+                step1.classList.add('bg-orange-500');
+                step1.classList.remove('bg-gray-200');
+            }
+
+            prevBtn.classList.toggle('hidden', currentStep === 0);
+            nextBtn.textContent = currentStep === steps.length - 1 ? 'Submit' : 'Next';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+            } else {
+                document.getElementById('registration-form').submit();
+            }
+            updateStepDisplay();
         });
 
-        if (currentStep === steps.length - 1) {
-            step2.classList.remove('bg-gray-200')
-            step2.classList.add('bg-orange-500')
-            step1.classList.remove('bg-orange-500')
-            step1.classList.add('bg-gray-200')
-        } else {
-            step2.classList.add('bg-gray-200')
-            step2.classList.remove('bg-orange-500')
-            step1.classList.add('bg-orange-500')
-            step1.classList.remove('bg-gray-200')
-        }
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+            }
+            updateStepDisplay();
+        });
 
-        prevBtn.classList.toggle('hidden', currentStep === 0);
-        nextBtn.textContent = currentStep === steps.length - 1 ? 'Submit' : 'Next';
-    }
-
-    nextBtn.addEventListener('click', () => {
-        if (currentStep < steps.length - 1) {
-            currentStep++;
-        } else {
-            document.getElementById('registration-form').submit();
-        }
         updateStepDisplay();
-    });
-
-    prevBtn.addEventListener('click', () => {
-        if (currentStep > 0) {
-            currentStep--;
-        }
-        updateStepDisplay();
-    });
-
-    updateStepDisplay();
-</script>
+    </script>
+</body>
 
 </html>
