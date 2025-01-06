@@ -17,6 +17,8 @@ use App\Models\SpouseInfo;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -88,28 +90,53 @@ class AuthController extends Controller
         $email = $request->session()->get('email');
         $password = $request->session()->get('password');
 
-        $user = User::create([
-            'email' => $email,
-            'password' => $password
-        ]);
+        DB::beginTransaction();
 
-        $validated['user_id'] = $user->id;
-        $imagePath = $validated['image']->store('students', 'public');
-        $validated['image'] = $imagePath;
-        Student::create($validated);
+        try {
+            $user = User::create([
+                'email' => $email,
+                'password' => $password
+            ]);
 
+            $validated['user_id'] = $user->id;
 
-        Auth::login($user);
+            // Store the image and update the path in $validated
+            $imagePath = $validated['image']->store('students', 'public');
+            $validated['image'] = $imagePath;
 
-        // Send email verification notification
-        $user->sendEmailVerificationNotification();
+            // Create the Student record
+            Student::create($validated);
 
-        event(new Registered($user));
+            // Log in the user
+            Auth::login($user);
 
-        alert('Successfully', 'We send you an email verification!', 'success');
+            // Send email verification notification
+            $user->sendEmailVerificationNotification();
 
-        return redirect()->route('verification.notice');
+            // Dispatch the Registered event
+            event(new Registered($user));
+
+            // Commit the transaction
+            DB::commit();
+
+            // Notify the user
+            alert('Successfully', 'We send you an email verification!', 'success');
+
+            return redirect()->route('verification.notice');
+        } catch (\Exception $e) {
+            // Rollback the transaction if something goes wrong
+            DB::rollBack();
+
+            // Log the error for debugging purposes
+            Log::error('Error in personalInfo method: ' . $e->getMessage());
+
+            // Notify the user of the failure
+            alert('Error', 'Something went wrong. Please try again later.' . $e->getMessage(), 'error');
+
+            return back()->withErrors(['message' => 'An error occurred. Please try again.']);
+        }
     }
+
 
     public function showFamilyBackGround()
     {
