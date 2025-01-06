@@ -34,6 +34,7 @@ class AdminController extends Controller
         $per_page = request('per_page', 10);
         $pending_students = User::with('student')
             ->where('status', 'Pending')
+            ->whereNotNull('email_verified_at')
             ->paginate($per_page);
 
         return view('pages.admin.student-list.pending', [
@@ -82,6 +83,7 @@ class AdminController extends Controller
         $verified_students = User::with('student')
             ->where('status', 'Verified')
             ->where('role', 'Student')
+            ->whereNotNull('email_verified_at')
             ->when($course, function ($q) use ($course) {
                 $q->whereHas('student', function ($s) use ($course) {
                     $s->whereHas('course', function ($c) use ($course) {
