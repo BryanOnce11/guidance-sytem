@@ -62,8 +62,10 @@ class StudentController extends Controller
         $per_page = request('per_page', 10);
 
         $ready_to_pickup_good_morals = GoodMoralRequest::where('student_id', auth()->user()->student->id)
-            ->where('status', 'Ready To Pickup')
-            ->orWhere('status', 'Picked Up')
+            ->where(function ($q) {
+                $q->where('status', 'Ready To Pickup')
+                    ->orWhere('status', 'Picked Up');
+            })
             ->paginate($per_page);
 
         $notifications = Notification::where('student_id', auth()->user()->student->id)
