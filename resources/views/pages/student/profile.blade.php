@@ -339,7 +339,7 @@
                                 First Name
                             </label>
                             <input name="f_fname" id="f_fname" type="text" required
-                                value="{{ old('f_fname', ucwords($user->student->family_back->father->fname) ?? '') }}"
+                                value="{{ old('f_fname', ucwords($user->student->family_back->father->fname ?? '')) }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_fname')
@@ -351,7 +351,7 @@
                                 Last Name
                             </label>
                             <input name="f_lname" id="f_lname" type="text" required
-                                value="{{ old('f_lname', ucwords($user->student->family_back->father->lname) ?? '') }}"
+                                value="{{ old('f_lname', ucwords($user->student->family_back->father->lname ?? '')) }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_lname')
@@ -363,7 +363,7 @@
                                 Middle Name
                             </label>
                             <input name="f_m_i" id="f_m_i" type="text"
-                                value="{{ old('f_m_i', ucwords($user->student->family_back->father->m_i) ?? '') }}"
+                                value="{{ old('f_m_i', ucwords($user->student->family_back->father->m_i ?? '')) }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_m_i')
@@ -389,7 +389,7 @@
                                 Educational Attainment
                             </label>
                             <input name="f_educational_attainment" id="f_educational_attainment" type="text" required
-                                value="{{ old('f_educational_attainment', ucwords($user->student->family_back->father->educational_attainment) ?? '') }}"
+                                value="{{ old('f_educational_attainment', ucwords($user->student->family_back->father->educational_attainment ?? '')) }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_educational_attainment')
@@ -427,7 +427,7 @@
                                 Occupation
                             </label>
                             <input name="f_occupation" id="f_occupation" type="text" required
-                                value="{{ old('f_occupation', ucwords($user->student->family_back->father->occupation) ?? '') }}"
+                                value="{{ old('f_occupation', ucwords($user->student->family_back->father->occupation ?? '')) }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_occupation')
@@ -439,7 +439,7 @@
                                 Name of Company
                             </label>
                             <input name="f_company_name" id="f_company_name" type="text" required
-                                value="{{ old('f_company_name', ucwords($user->student->family_back->father->company_name) ?? '') }}"
+                                value="{{ old('f_company_name', ucwords($user->student->family_back->father->company_name ?? '')) }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_company_name')
@@ -451,7 +451,7 @@
                                 Company Address
                             </label>
                             <input name="f_company_address" id="f_company_address" type="text" required
-                                value="{{ old('f_company_address', ucwords($user->student->family_back->father->company_address) ?? '') }}"
+                                value="{{ old('f_company_address', ucwords($user->student->family_back->father->company_address ?? '')) }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_company_address')
