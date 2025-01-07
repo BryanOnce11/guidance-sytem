@@ -468,7 +468,14 @@ class AdminController extends Controller
             'image' => ['bail', 'required', 'image', 'mimes:jpeg,png,jpg', 'max:20480'],
         ]);
 
-        $user = User::create($validated);
+        // $user = User::create($validated);
+        $user = User::create([
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
+            'role' => 'Admin',
+            'status' => 'Verified',
+            'email_verified_at' => now()
+        ]);
         $validated['user_id'] = $user->id;
 
         $imagePath = $validated['image']->store('admins', 'public');

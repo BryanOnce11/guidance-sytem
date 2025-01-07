@@ -202,8 +202,8 @@
                 <div data-tw-merge="" data-tw-placement="bottom-end" class="relative dropdown"><button
                         data-tw-toggle="dropdown" aria-expanded="false"
                         class="block w-8 h-8 overflow-hidden scale-110 rounded-full shadow-lg cursor-pointer image-fit zoom-in intro-x"><img
-                            src="{{ auth()->user()->role == 'Student' ? asset('storage/' . auth()->user()->student->image) : asset('dist/images/fakers/profile-12.jpg') }}"
-                            alt="Midone Tailwind HTML Admin Template">
+                            src="{{ auth()->user()->role == 'Student' ? asset('storage/' . auth()->user()->student->image) : asset('storage/' . auth()->user()->admin->image) }}"
+                            alt="">
                     </button>
                     <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150"
                         data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
