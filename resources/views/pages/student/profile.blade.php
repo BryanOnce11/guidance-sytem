@@ -61,9 +61,14 @@
                             <label for="status" class="inline-block mb-2">Student Status</label>
                             <select name="status" id="status"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
-                                <option value="Old">Old</option>
-                                <option value="New">New</option>
+                                <option value="Old"
+                                    {{ old('status', $user->student->status) == 'Old' ? 'selected' : '' }}>Old</option>
+                                <option value="New"
+                                    {{ old('status', $user->student->status) == 'New' ? 'selected' : '' }}>New</option>
                             </select>
+                            @error('status')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -71,25 +76,50 @@
                     <div class="flex flex-col w-full gap-3 sm:flex-row">
                         <div class="w-full">
                             <label for="student_id" class="inline-block mb-2">Student ID</label>
-                            <input name="student_id" type="text"
+                            <input value="{{ old('student_id', $user->student->student_id) }}" name="student_id"
+                                type="text"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('student_id')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="w-full">
                             <label for="course" class="inline-block mb-2">Course</label>
                             <select name="course"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
-                                <option value="">Select Course</option>
+                                @foreach ($courses as $course)
+                                    <option value="{{ $course->id }}"
+                                        {{ old('course_id', $user->student->course->id) == $course->id ? 'selected' : '' }}>
+                                        {{ $course->name }}
+                                    </option>
+                                @endforeach
                             </select>
+                            @error('course_id')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="w-full">
                             <label for="year_lvl" class="inline-block mb-2">Year Level</label>
                             <select name="year_lvl"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
-                                <option value="1st Year">1st Year</option>
-                                <option value="2nd Year">2nd Year</option>
-                                <option value="3rd Year">3rd Year</option>
-                                <option value="4th Year">4th Year</option>
+                                <option value="1st Year"
+                                    {{ old('year_lvl', $user->student->year_lvl) == '1st Year' ? 'selected' : '' }}>1st
+                                    Year
+                                </option>
+                                <option value="2nd Year"
+                                    {{ old('year_lvl', $user->student->year_lvl) == '2nd Year' ? 'selected' : '' }}>2nd
+                                    Year
+                                </option>
+                                <option value="3rd Year"
+                                    {{ old('year_lvl', $user->student->year_lvl) == '3rd Year' ? 'selected' : '' }}>3rd
+                                    Year</option>
+                                <option value="4th Year"
+                                    {{ old('year_lvl', $user->student->year_lvl) == '4th Year' ? 'selected' : '' }}>4th
+                                    Year</option>
                             </select>
+                            @error('year_lvl')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -97,18 +127,27 @@
                     <div class="flex flex-col w-full gap-3 sm:flex-row">
                         <div class="w-full">
                             <label for="lname" class="inline-block mb-2">Last Name</label>
-                            <input name="lname" type="text"
+                            <input value="{{ old('lname', ucwords($user->student->lname)) }}" name="lname" type="text"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('lname')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="w-full">
                             <label for="fname" class="inline-block mb-2">First Name</label>
-                            <input name="fname" type="text"
+                            <input value="{{ old('lname', ucwords($user->student->fname)) }}" name="fname" type="text"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('fname')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="w-full">
                             <label for="m_i" class="inline-block mb-2">Middle Name</label>
-                            <input name="m_i" type="text"
+                            <input value="{{ old('lname', ucwords($user->student->m_i)) }}" name="m_i" type="text"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('m_i')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -118,18 +157,30 @@
                             <label for="gender" class="inline-block mb-2">Gender</label>
                             <select name="gender"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                                <option {{ $user->student->gender == 'Male' ? 'selected' : '' }}>Male</option>
+                                <option {{ $user->student->gender == 'Female' ? 'selected' : '' }}>Female</option>
                             </select>
+                            @error('gender')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="w-full">
                             <label for="civil_status" class="inline-block mb-2">Civil Status</label>
                             <select name="civil_status"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
-                                <option value="Single">Single</option>
-                                <option value="Married">Married</option>
-                                <option value="Widowed">Widowed</option>
+                                <option value="Single"
+                                    {{ old('civil_status', $user->student->civil_status) == 'Single' ? 'selected' : '' }}>
+                                    Single</option>
+                                <option value="Married"
+                                    {{ old('civil_status', $user->student->civil_status) == 'Married' ? 'selected' : '' }}>
+                                    Married</option>
+                                <option value="Widowed"
+                                    {{ old('civil_status', $user->student->civil_status) == 'Widowed' ? 'selected' : '' }}>
+                                    Widowed</option>
                             </select>
+                            @error('civil_status')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -137,23 +188,37 @@
                     <div class="flex flex-col w-full gap-3 sm:flex-row">
                         <div class="w-full">
                             <label for="age" class="inline-block mb-2">Age</label>
-                            <input name="age" type="text"
+                            <input value="{{ old('age', $user->student->age) }}" name="age" type="text"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('age')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="w-full">
                             <label for="birth_date" class="inline-block mb-2">Date Of Birth</label>
-                            <input name="birth_date" type="date"
+                            <input value="{{ old('age', $user->student->birth_date) }}" name="birth_date" type="date"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('birth_date')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="w-full">
                             <label for="birth_place" class="inline-block mb-2">Place Of Birth</label>
-                            <input name="birth_place" type="text"
+                            <input value="{{ old('age', ucwords($user->student->birth_place)) }}" name="birth_place"
+                                type="text"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('birth_place')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="w-full">
                             <label for="citizenship" class="inline-block mb-2">Citizenship</label>
-                            <input name="citizenship" type="text"
+                            <input value="{{ old('age', $user->student->citizenship) }}" name="citizenship"
+                                type="text"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('age')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -161,13 +226,21 @@
                     <div class="flex flex-col w-full gap-3 sm:flex-row">
                         <div class="w-full">
                             <label for="email" class="inline-block mb-2">Email</label>
-                            <input name="email" type="email"
+                            <input value="{{ old('age', ucwords($user->student->email)) }}" name="email"
+                                type="email"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('email')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="w-full">
                             <label for="contact_num" class="inline-block mb-2">Contact Number</label>
-                            <input name="contact_num" type="text"
+                            <input value="{{ old('age', $user->student->contact_num) }}" name="contact_num"
+                                type="text"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('contact_num')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -175,18 +248,27 @@
                     <div class="flex flex-col w-full gap-3 sm:flex-row">
                         <div class="w-full">
                             <label for="height" class="inline-block mb-2">Height</label>
-                            <input name="height" type="text"
+                            <input value="{{ old('age', $user->student->height) }}" name="height" type="text"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('height')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="w-full">
                             <label for="weight" class="inline-block mb-2">Weight</label>
-                            <input name="weight" type="text"
+                            <input value="{{ old('age', $user->student->weight) }}" name="weight" type="text"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('weight')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="w-full">
                             <label for="blood_type" class="inline-block mb-2">Blood Type</label>
-                            <input name="blood_type" type="text"
+                            <input value="{{ old('age', $user->student->blood_type) }}" name="blood_type" type="text"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('blood_type')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -197,11 +279,22 @@
                                 Staying?</h2>
                             <select name="where_staying"
                                 class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
-                                <option value="With Parents">With Parents</option>
-                                <option value="With Relatives">With Relatives</option>
-                                <option value="In Boarding House">In Boarding House</option>
-                                <option value="With Employer">With Employer</option>
+                                <option value="With Parents"
+                                    {{ old('where_staying', $user->student->where_staying) == 'With Parents' ? 'selected' : '' }}>
+                                    With Parents</option>
+                                <option value="With Relatives"
+                                    {{ old('where_staying', $user->student->where_staying) == 'With Relatives' ? 'selected' : '' }}>
+                                    With Relatives</option>
+                                <option value="In Boarding House"
+                                    {{ old('where_staying', $user->student->where_staying) == 'In Boarding House' ? 'selected' : '' }}>
+                                    In Boarding House</option>
+                                <option value="With Employer"
+                                    {{ old('where_staying', $user->student->where_staying) == 'With Employer' ? 'selected' : '' }}>
+                                    With Employer</option>
                             </select>
+                            @error('where_staying')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -246,7 +339,7 @@
                                 First Name
                             </label>
                             <input name="f_fname" id="f_fname" type="text" required
-                                value="{{ old('f_fname', $user->student->family_back->father->fname ?? '') }}"
+                                value="{{ old('f_fname', ucwords($user->student->family_back->father->fname) ?? '') }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_fname')
@@ -258,7 +351,7 @@
                                 Last Name
                             </label>
                             <input name="f_lname" id="f_lname" type="text" required
-                                value="{{ old('f_lname', $user->student->family_back->father->lname ?? '') }}"
+                                value="{{ old('f_lname', ucwords($user->student->family_back->father->lname) ?? '') }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_lname')
@@ -270,7 +363,7 @@
                                 Middle Name
                             </label>
                             <input name="f_m_i" id="f_m_i" type="text"
-                                value="{{ old('f_m_i', $user->student->family_back->father->m_i ?? '') }}"
+                                value="{{ old('f_m_i', ucwords($user->student->family_back->father->m_i) ?? '') }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_m_i')
@@ -296,7 +389,7 @@
                                 Educational Attainment
                             </label>
                             <input name="f_educational_attainment" id="f_educational_attainment" type="text" required
-                                value="{{ old('f_educational_attainment', $user->student->family_back->father->educational_attainment ?? '') }}"
+                                value="{{ old('f_educational_attainment', ucwords($user->student->family_back->father->educational_attainment) ?? '') }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_educational_attainment')
@@ -334,7 +427,7 @@
                                 Occupation
                             </label>
                             <input name="f_occupation" id="f_occupation" type="text" required
-                                value="{{ old('f_occupation', $user->student->family_back->father->occupation ?? '') }}"
+                                value="{{ old('f_occupation', ucwords($user->student->family_back->father->occupation) ?? '') }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_occupation')
@@ -346,7 +439,7 @@
                                 Name of Company
                             </label>
                             <input name="f_company_name" id="f_company_name" type="text" required
-                                value="{{ old('f_company_name', $user->student->family_back->father->company_name ?? '') }}"
+                                value="{{ old('f_company_name', ucwords($user->student->family_back->father->company_name) ?? '') }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_company_name')
@@ -358,7 +451,7 @@
                                 Company Address
                             </label>
                             <input name="f_company_address" id="f_company_address" type="text" required
-                                value="{{ old('f_company_address', $user->student->family_back->father->company_address ?? '') }}"
+                                value="{{ old('f_company_address', ucwords($user->student->family_back->father->company_address) ?? '') }}"
                                 placeholder="Input text"
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('f_company_address')
@@ -387,7 +480,7 @@
                                 First Name
                             </label>
                             <input name="m_fname" id="m_fname" type="text"
-                                value="{{ old('m_fname', $user->student->family_back->mother->fname ?? '') }}"
+                                value="{{ old('m_fname', ucwords($user->student->family_back->mother->fname ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('m_fname')
@@ -399,7 +492,7 @@
                                 Last Name
                             </label>
                             <input name="m_lname" id="m_lname" type="text"
-                                value="{{ old('m_lname', $user->student->family_back->mother->lname ?? '') }}"
+                                value="{{ old('m_lname', ucwords($user->student->family_back->mother->lname ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('m_lname')
@@ -411,7 +504,7 @@
                                 Middle Name
                             </label>
                             <input name="m_m_i" id="m_m_i" type="text"
-                                value="{{ old('m_m_i', $user->student->family_back->mother->m_i ?? '') }}"
+                                value="{{ old('m_m_i', ucwords($user->student->family_back->mother->m_i ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('m_m_i')
@@ -419,6 +512,7 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="flex flex-col w-full gap-3 mt-5 sm:flex-row">
                         <div class="w-full sm:flex-1">
                             <label for="m_birth_date" class="inline-block mb-2">
@@ -433,11 +527,11 @@
                             @enderror
                         </div>
                         <div class="w-full sm:flex-1">
-                            <label for="educational_attainment" class="inline-block mb-2">
+                            <label for="m_educational_attainment" class="inline-block mb-2">
                                 Educational Attainment
                             </label>
                             <input name="m_educational_attainment" id="m_educational_attainment" type="text"
-                                value="{{ old('m_educational_attainment', $user->student->family_back->mother->educational_attainment ?? '') }}"
+                                value="{{ old('m_educational_attainment', ucwords($user->student->family_back->mother->educational_attainment ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('m_educational_attainment')
@@ -469,13 +563,14 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="flex flex-col w-full gap-3 mt-5 sm:flex-row">
                         <div class="w-full sm:flex-1">
                             <label for="m_occupation" class="inline-block mb-2">
                                 Occupation
                             </label>
                             <input name="m_occupation" id="m_occupation" type="text"
-                                value="{{ old('m_occupation', $user->student->family_back->mother->occupation ?? '') }}"
+                                value="{{ old('m_occupation', ucwords($user->student->family_back->mother->occupation ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('m_occupation')
@@ -487,7 +582,7 @@
                                 Name of Company
                             </label>
                             <input name="m_company_name" id="m_company_name" type="text"
-                                value="{{ old('m_company_name', $user->student->family_back->mother->company_name ?? '') }}"
+                                value="{{ old('m_company_name', ucwords($user->student->family_back->mother->company_name ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('m_company_name')
@@ -499,7 +594,7 @@
                                 Company Address
                             </label>
                             <input name="m_company_address" id="m_company_address" type="text"
-                                value="{{ old('m_company_address', $user->student->family_back->mother->company_address ?? '') }}"
+                                value="{{ old('m_company_address', ucwords($user->student->family_back->mother->company_address ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('m_company_address')
@@ -511,7 +606,7 @@
                                 Average Monthly Income
                             </label>
                             <input name="m_avg_monthly_income" id="m_avg_monthly_income" type="text"
-                                value="{{ old('m_avg_monthly_income', $user->student->family_back->mother->avg_monthly_income ?? '') }}"
+                                value="{{ old('m_avg_monthly_income', ucwords($user->student->family_back->mother->avg_monthly_income ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('m_avg_monthly_income')
@@ -520,14 +615,13 @@
                         </div>
                     </div>
 
-
                     <div class="flex flex-col w-full gap-3 mt-5 sm:flex-row">
                         <div class="w-full sm:flex-1">
                             <label for="source_of_income" class="inline-block mb-2">
                                 Other Source's Of Income (family/individual)
                             </label>
                             <input name="source_of_income" id="source_of_income" type="text"
-                                value="{{ old('source_of_income', $user->student->family_back->source_of_income ?? '') }}"
+                                value="{{ old('source_of_income', ucwords($user->student->family_back->source_of_income ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('source_of_income')
@@ -555,13 +649,14 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="flex flex-col w-full gap-3 mt-5 sm:flex-row">
                         <div class="w-full sm:flex-1">
                             <label for="birth_rank" class="inline-block mb-2">
                                 Birth Rank In The Family
                             </label>
                             <input name="birth_rank" id="birth_rank" type="text"
-                                value="{{ old('birth_rank', $user->student->family_back->birth_rank ?? '') }}"
+                                value="{{ old('birth_rank', ucwords($user->student->family_back->birth_rank ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('birth_rank')
@@ -573,7 +668,7 @@
                                 Number Of Siblings
                             </label>
                             <input name="number_of_siblings" id="number_of_siblings" type="text"
-                                value="{{ old('number_of_siblings', $user->student->family_back->number_of_siblings ?? '') }}"
+                                value="{{ old('number_of_siblings', ucwords($user->student->family_back->number_of_siblings ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('number_of_siblings')
@@ -585,7 +680,7 @@
                                 Number Of Children
                             </label>
                             <input name="number_of_children" id="number_of_children" type="text"
-                                value="{{ old('number_of_children', $user->student->family_back->number_of_children ?? '') }}"
+                                value="{{ old('number_of_children', ucwords($user->student->family_back->number_of_children ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('number_of_children')
@@ -604,7 +699,7 @@
                                 First Name
                             </label>
                             <input name="s_fname" id="s_fname" type="text"
-                                value="{{ old('s_fname', $user->student->family_back->spouse->fname ?? '') }}"
+                                value="{{ old('s_fname', ucwords($user->student->family_back->spouse->fname ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('s_fname')
@@ -616,7 +711,7 @@
                                 Last Name
                             </label>
                             <input name="s_lname" id="s_lname" type="text"
-                                value="{{ old('s_lname', $user->student->family_back->spouse->lname ?? '') }}"
+                                value="{{ old('s_lname', ucwords($user->student->family_back->spouse->lname ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('s_lname')
@@ -628,7 +723,7 @@
                                 Middle Name
                             </label>
                             <input name="s_m_i" id="s_m_i" type="text"
-                                value="{{ old('s_m_i', $user->student->family_back->spouse->m_i ?? '') }}"
+                                value="{{ old('s_m_i', ucwords($user->student->family_back->spouse->m_i ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('s_m_i')
@@ -636,6 +731,7 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="flex flex-col w-full gap-3 mt-5 sm:flex-row">
                         <div class="w-full sm:flex-1">
                             <label for="s_birth_date" class="inline-block mb-2">
@@ -654,7 +750,7 @@
                                 Educational Attainment
                             </label>
                             <input name="s_educational_attainment" id="s_educational_attainment" type="text"
-                                value="{{ old('s_educational_attainment', $user->student->family_back->spouse->educational_attainment ?? '') }}"
+                                value="{{ old('s_educational_attainment', ucwords($user->student->family_back->spouse->educational_attainment ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('s_educational_attainment')
@@ -686,13 +782,14 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="flex flex-col w-full gap-3 mt-5 sm:flex-row">
                         <div class="w-full sm:flex-1">
                             <label for="s_occupation" class="inline-block mb-2">
                                 Occupation
                             </label>
                             <input name="s_occupation" id="s_occupation" type="text"
-                                value="{{ old('s_occupation', $user->student->family_back->spouse->occupation ?? '') }}"
+                                value="{{ old('s_occupation', ucwords($user->student->family_back->spouse->occupation ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('s_occupation')
@@ -704,7 +801,7 @@
                                 Name of Company
                             </label>
                             <input name="s_company_name" id="s_company_name" type="text"
-                                value="{{ old('s_company_name', $user->student->family_back->spouse->company_name ?? '') }}"
+                                value="{{ old('s_company_name', ucwords($user->student->family_back->spouse->company_name ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('s_company_name')
@@ -716,7 +813,7 @@
                                 Company Address
                             </label>
                             <input name="s_company_address" id="s_company_address" type="text"
-                                value="{{ old('s_company_address', $user->student->family_back->spouse->company_address ?? '') }}"
+                                value="{{ old('s_company_address', ucwords($user->student->family_back->spouse->company_address ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('s_company_address')
@@ -728,7 +825,7 @@
                                 Average Monthly Income
                             </label>
                             <input name="s_avg_monthly_income" id="s_avg_monthly_income" type="text"
-                                value="{{ old('s_avg_monthly_income', $user->student->family_back->spouse->avg_monthly_income ?? '') }}"
+                                value="{{ old('s_avg_monthly_income', ucwords($user->student->family_back->spouse->avg_monthly_income ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('s_avg_monthly_income')
@@ -736,6 +833,7 @@
                             @enderror
                         </div>
                     </div>
+
 
                     <h2 class="mt-5 mr-auto text-base font-medium">
                         Guardian Information
@@ -746,7 +844,7 @@
                                 Name
                             </label>
                             <input name="g_full_name" id="g_full_name" type="text"
-                                value="{{ old('g_full_name', $user->student->family_back->guardian->full_name ?? '') }}"
+                                value="{{ old('g_full_name', ucwords($user->student->family_back->guardian->full_name ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('g_full_name')
@@ -766,13 +864,14 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="flex flex-col w-full gap-3 mt-5 sm:flex-row">
                         <div class="w-full sm:flex-1">
                             <label for="g_occupation" class="inline-block mb-2">
                                 Occupation
                             </label>
                             <input name="g_occupation" id="g_occupation" type="text"
-                                value="{{ old('g_occupation', $user->student->family_back->guardian->occupation ?? '') }}"
+                                value="{{ old('g_occupation', ucwords($user->student->family_back->guardian->occupation ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('g_occupation')
@@ -784,7 +883,7 @@
                                 Company Name
                             </label>
                             <input name="g_company_name" id="g_company_name" type="text"
-                                value="{{ old('g_company_name', $user->student->family_back->guardian->company_name ?? '') }}"
+                                value="{{ old('g_company_name', ucwords($user->student->family_back->guardian->company_name ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('g_company_name')
@@ -792,13 +891,14 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="flex flex-col w-full gap-3 mt-5 sm:flex-row">
                         <div class="w-full sm:flex-1">
                             <label for="g_relationship" class="inline-block mb-2">
                                 Relationship
                             </label>
                             <input name="g_relationship" id="g_relationship" type="text"
-                                value="{{ old('g_relationship', $user->student->family_back->guardian->relationship ?? '') }}"
+                                value="{{ old('g_relationship', ucwords($user->student->family_back->guardian->relationship ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('g_relationship')
@@ -810,7 +910,7 @@
                                 Address
                             </label>
                             <input name="g_address" id="g_address" type="text"
-                                value="{{ old('g_address', $user->student->family_back->guardian->address ?? '') }}"
+                                value="{{ old('g_address', ucwords($user->student->family_back->guardian->address ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('g_address')
@@ -818,6 +918,7 @@
                             @enderror
                         </div>
                     </div>
+
 
                     <h2 class="mt-5 mr-auto text-base font-medium">
                         Person To Notified In Case Of Emergency
@@ -828,7 +929,7 @@
                                 Name
                             </label>
                             <input name="e_full_name" id="e_full_name" type="text"
-                                value="{{ old('e_full_name', $user->student->family_back->emergency_contact->full_name ?? '') }}"
+                                value="{{ old('e_full_name', ucwords($user->student->family_back->emergency_contact->full_name ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('e_full_name')
@@ -848,13 +949,14 @@
                             @enderror
                         </div>
                     </div>
+
                     <div class="flex flex-col w-full gap-3 mt-5 sm:flex-row">
                         <div class="w-full sm:flex-1">
                             <label for="e_relationship" class="inline-block mb-2">
                                 Relationship
                             </label>
                             <input name="e_relationship" id="e_relationship" type="text"
-                                value="{{ old('e_relationship', $user->student->family_back->emergency_contact->relationship ?? '') }}"
+                                value="{{ old('e_relationship', ucwords($user->student->family_back->emergency_contact->relationship ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('e_relationship')
@@ -866,7 +968,7 @@
                                 Address
                             </label>
                             <input name="e_address" id="e_address" type="text"
-                                value="{{ old('e_address', $user->student->family_back->emergency_contact->address ?? '') }}"
+                                value="{{ old('e_address', ucwords($user->student->family_back->emergency_contact->address ?? '')) }}"
                                 placeholder="Input text" required
                                 class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                             @error('e_address')
@@ -874,6 +976,7 @@
                             @enderror
                         </div>
                     </div>
+
 
                 </div>
             </div>
