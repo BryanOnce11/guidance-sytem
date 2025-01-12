@@ -170,13 +170,13 @@
 
         <div class="signature-section">
             <div class="signature">
-                <div class="signatory">BETHANY CLAIRE BERONIO</div>
+                <div class="signatory">Wynchell Dyn M. Ordinario-Mollenido</div>
                 <div class="position">Guidance Counselor</div>
             </div>
 
             <div class="signature">
                 <div>Noted by:</div>
-                <div class="signatory">JERDEN A. MACOLOR</div>
+                <div class="signatory">Mary Grace Villaruz</div>
                 <div class="position">Director</div>
             </div>
         </div>
