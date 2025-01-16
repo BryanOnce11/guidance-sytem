@@ -87,7 +87,8 @@ class StudentController extends Controller
 
         GoodMoralRequest::create([
             'student_id' => auth()->user()->student->id,
-            'reason' => $validated['reason']
+            'reason' => $validated['reason'],
+            'date_requested' => now()->setTimezone('Asia/Manila')
         ]);
 
         alert('Success', 'You have successfully request a good moral', 'success');
@@ -141,7 +142,8 @@ class StudentController extends Controller
 
         VirtualCounseling::create([
             'student_id' => auth()->user()->student->id,
-            'reason' => $validated['reason']
+            'reason' => $validated['reason'],
+            'date_requested' => now()->setTimezone('Asia/Manila')
         ]);
 
         alert('Success', 'You have successfully request a virtual conseling', 'success');
