@@ -92,6 +92,7 @@
     <script src="{{ asset('dist/js/components/base/leaflet-map-loader.js') }}"></script>
     <script src="{{ asset('dist/js/components/mobile-menu.js') }}"></script>
     <script src="{{ asset('dist/js/components/themes/enigma/top-bar.js') }}"></script>
+    <script src="{{ asset('dist/js/components/horizontal-bar-chart.js') }}"></script>
     <!-- END: Vendor JS Assets-->
 </body>
 

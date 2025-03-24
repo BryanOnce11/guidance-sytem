@@ -82,12 +82,13 @@ class StudentController extends Controller
     public function storeGoodMoral(Request $request)
     {
         $validated = $request->validate([
-            'reason' => 'required'
+            'reason' => 'sometimes',
+            'other_reason' => 'sometimes'
         ]);
 
         GoodMoralRequest::create([
             'student_id' => auth()->user()->student->id,
-            'reason' => $validated['reason'],
+            'reason' => $validated['reason'] == 'others' ? $validated['other_reason'] : $validated['reason'],
             'date_requested' => now()->setTimezone('Asia/Manila')
         ]);
 

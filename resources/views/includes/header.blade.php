@@ -197,6 +197,86 @@
                         </div>
                     </div>
                 @endif
+                @if (auth()->user()->role == 'Admin')
+                    {{-- <div data-tw-merge="" data-tw-placement="bottom-end" class="relative mr-4 dropdown intro-x sm:mr-6">
+                        <div data-tw-toggle="dropdown" aria-expanded="false"
+                            class="cursor-pointer relative block text-white/70 outline-none before:absolute before:right-0 before:top-[-2px] before:h-[8px] before:w-[8px] before:rounded-full before:bg-danger before:content-['']">
+                            <i data-tw-merge="" data-lucide="bell" class="stroke-1.5 w-5 h-5 dark:text-slate-500"></i>
+                        </div>
+                        <div data-transition="" data-selector=".show"
+                            data-enter="transition-all ease-linear duration-150"
+                            data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1"
+                            data-enter-to="!mt-1 visible opacity-100 translate-y-0"
+                            data-leave="transition-all ease-linear duration-150"
+                            data-leave-from="!mt-1 visible opacity-100 translate-y-0"
+                            data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1"
+                            class="dropdown-menu absolute z-[9999] hidden">
+                            <div data-tw-merge=""
+                                class="dropdown-content rounded-md border-transparent bg-white shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 mt-2 w-[280px] p-5 sm:w-[350px]">
+                                <div class="mb-5 font-medium">Virtual Counseling Notifications</div>
+
+                                <!-- Today's Schedule Notification -->
+                                <div class="relative flex items-center cursor-pointer">
+
+                                    <div class="ml-2 overflow-hidden">
+                                        <div class="flex items-center">
+                                            <a class="mr-5 font-medium truncate" href="">
+                                                John Duyan (Counseling Request)
+                                            </a>
+                                            <div class="ml-auto text-xs whitespace-nowrap text-slate-400">
+                                                02:00 PM
+                                            </div>
+                                        </div>
+                                        <div class="mt-0.5 w-full text-slate-500">
+                                            Your virtual counseling session is scheduled for today at 02:00 PM. Please
+                                            be ready for the meeting.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tomorrow's Schedule Notification -->
+                                <div class="relative flex items-center mt-5 cursor-pointer">
+
+                                    <div class="ml-2 overflow-hidden">
+                                        <div class="flex items-center">
+                                            <a class="mr-5 font-medium truncate" href="">
+                                                Julie Sandoval (Counseling Request)
+                                            </a>
+                                            <div class="ml-auto text-xs whitespace-nowrap text-slate-400">
+                                                10:30 AM
+                                            </div>
+                                        </div>
+                                        <div class="mt-0.5 w-full text-slate-500">
+                                            Your virtual counseling session is scheduled for tomorrow at 10:30 AM.
+                                            Please prepare any questions or concerns.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Day After Tomorrow's Schedule Notification -->
+                                <div class="relative flex items-center mt-5 cursor-pointer">
+
+                                    <div class="ml-2 overflow-hidden">
+                                        <div class="flex items-center">
+                                            <a class="mr-5 font-medium truncate" data-tw-merge="" data-tw-toggle="modal"
+                                                data-tw-target="#new-order-modal">
+                                                Mark Alcasid (Counseling Request)
+                                            </a>
+                                            <div class="ml-auto text-xs whitespace-nowrap text-slate-400">
+                                                01:00 PM
+                                            </div>
+                                        </div>
+                                        <div class="mt-0.5 w-full text-slate-500">
+                                            Your virtual counseling session is scheduled for the day after tomorrow at
+                                            01:00 PM. Please make sure to be prepared.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div> --}}
+                @endif
                 <!-- END: Notifications -->
                 <!-- BEGIN: Account Menu -->
                 <div data-tw-merge="" data-tw-placement="bottom-end" class="relative dropdown"><button
@@ -257,3 +337,58 @@
             </div>
         </div>
         <!-- END: Top Bar -->
+        {{--
+        <div data-tw-backdrop="" aria-hidden="true" tabindex="-1" id="new-order-modal"
+            class="modal group bg-black/60 transition-[visibility,opacity] w-screen h-screen fixed left-0 top-0 [&:not(.show)]:duration-[0s,0.2s] [&:not(.show)]:delay-[0.2s,0s] [&:not(.show)]:invisible [&:not(.show)]:opacity-0 [&.show]:visible [&.show]:opacity-100 [&.show]:duration-[0s,0.4s]">
+            <div data-tw-merge=""
+                class="w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-[margin-top,transform] duration-[0.4s,0.3s] -mt-16 group-[.show]:mt-16 group-[.modal-static]:scale-[1.05] dark:bg-darkmode-600 sm:w-[460px]">
+                <div class="flex items-center px-5 py-3 border-b border-slate-200/60 dark:border-darkmode-400">
+                    <h2 class="mr-auto text-base font-medium">Request Virtual Counseling</h2>
+                </div>
+                <form action="{{ route('student.good-moral.store') }}" method="POST">
+                    @csrf
+                    <div data-tw-merge="" class="grid grid-cols-12 gap-4 p-5 gap-y-3">
+                        <div class="col-span-12">
+                            <div class="form-group">
+                                <label for="status">Request Status</label>
+                                <div class="flex items-center gap-4">
+                                    <label for="accept" class="inline-flex items-center">
+                                        <input type="radio" id="accept" name="status" value="accept"
+                                            class="form-radio text-primary focus:ring-primary" required>
+                                        <span class="ml-2">Accept</span>
+                                    </label>
+                                    <label for="reject" class="inline-flex items-center">
+                                        <input type="radio" id="reject" name="status" value="reject"
+                                            class="form-radio text-danger focus:ring-danger" required>
+                                        <span class="ml-2">Reject</span>
+                                    </label>
+                                </div>
+
+                                @error('status')
+                                    <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Date Picker for Reschedule -->
+                        <div class="col-span-12" id="reschedule-date">
+                            <div class="form-group">
+                                <label for="reschedule_date">New Date for Request</label>
+                                <input type="date" name="reschedule_date" id="reschedule_date"
+                                    class="w-full text-sm rounded-md shadow-sm border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80">
+                                @error('reschedule_date')
+                                    <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-5 py-3 text-right border-t border-slate-200/60 dark:border-darkmode-400"><button
+                            data-tw-merge="" data-tw-dismiss="modal" type="button"
+                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 mr-1 w-32">Cancel</button>
+                        <button data-tw-merge="" type="submit"
+                            class="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary w-32">
+                            Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div> --}}

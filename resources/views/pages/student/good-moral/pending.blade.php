@@ -215,16 +215,41 @@
                 @csrf
                 <div data-tw-merge="" class="grid grid-cols-12 gap-4 p-5 gap-y-3">
                     <div class="col-span-12">
-                        <label data-tw-merge="" for="pos-form-1"
-                            class="inline-block mb-2 group-[.form-inline]:mb-2 group-[.form-inline]:sm:mb-0 group-[.form-inline]:sm:mr-5 group-[.form-inline]:sm:text-right">
-                            Reason
-                        </label>
-                        <input data-tw-merge="" name="reason" id="pos-form-1" type="text"
-                            value="{{ old('reason') }}" placeholder="Input your reason"
-                            class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 flex-1">
-                        @error('reason')
-                            <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
-                        @enderror
+                        <div class="form-group">
+                            <label for="reason">Reason</label>
+                            <select name="reason" id="pos-form-1"
+                                class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80">
+                                <option value="For transfer">For transfer</option>
+                                <option value="For Employment">For Employment </option>
+                                <option value="For Scholarship">For Scholarship</option>
+                                <option value="For Board Exam">For Board Exam</option>
+                                <option value="others">Others</option>
+                                <!-- Add other options here as needed -->
+                            </select>
+
+                            <!-- Input for 'others' reason -->
+                            <div id="others-input" class="hidden mt-2">
+                                <input name="other_reason" type="text" placeholder="Please specify your reason"
+                                    class="w-full text-sm rounded-md shadow-sm border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80">
+                            </div>
+
+                            @error('reason')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <script>
+                            // JavaScript to toggle visibility of input field based on 'others' selection
+                            document.getElementById('pos-form-1').addEventListener('change', function() {
+                                var othersInput = document.getElementById('others-input');
+                                if (this.value === 'others') {
+                                    othersInput.classList.remove('hidden');
+                                } else {
+                                    othersInput.classList.add('hidden');
+                                }
+                            });
+                        </script>
+
                     </div>
                 </div>
                 <div class="px-5 py-3 text-right border-t border-slate-200/60 dark:border-darkmode-400"><button

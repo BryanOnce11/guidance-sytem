@@ -26,7 +26,22 @@ class AdminController extends Controller
 
     public function homePage()
     {
-        return view('pages.admin.home-page');
+        $per_page = request('per_page', 10);
+        $virtual_counselings_pending = VirtualCounseling::with('student')
+            ->where('status', operator: 'Approved')
+            ->where(function ($query) {
+                $today = Carbon::today();
+                $tomorrow = Carbon::tomorrow();
+
+                // Check if date_scheduled is either today or tomorrow
+                $query->whereDate('date_scheduled', $today)
+                    ->orWhereDate('date_scheduled', $tomorrow);
+            })
+            ->orderBy('date_scheduled', 'asc')
+            ->paginate($per_page);
+        return view('pages.admin.home-page', [
+            'virtual_counselings_pending' => $virtual_counselings_pending
+        ]);
     }
 
     public function pendingStudents()
