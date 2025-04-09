@@ -166,7 +166,7 @@
         <!-- END: Pagination -->
     </div>
 
-    <div class="mt-10 overflow-x-auto">
+    {{-- <div class="mt-10 overflow-x-auto">
         <table data-tw-merge class="w-full text-left">
             <thead data-tw-merge class="">
                 <tr data-tw-merge
@@ -254,7 +254,7 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> --}}
 
     <div class="w-auto h-[400px] mt-10">
         <canvas class="chart horizontal-bar-chart"></canvas>
