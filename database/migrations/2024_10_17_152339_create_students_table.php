@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->string('fname');
             $table->string('lname');
             $table->string('m_i');
+            $table->string('suffix')->nullable();
             $table->string('age');
             $table->date('birth_date');
             $table->string('birth_place');

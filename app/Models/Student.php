@@ -18,6 +18,7 @@ class Student extends Model
         'fname',
         'lname',
         'm_i',
+        'suffix',
         'course_id',
         'year_lvl',
         'age',

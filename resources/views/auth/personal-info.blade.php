@@ -156,7 +156,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-3">
+                                <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-4">
                                     <div>
                                         <label class="block text-black">First Name</label>
                                         <input type="text" name="fname" value="{{ old('fname') }}"
@@ -178,6 +178,14 @@
                                         <input type="text" name="m_i" value="{{ old('m_i') }}"
                                             class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
                                         @error('m_i')
+                                            <span class="text-sm text-red-500">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div>
+                                        <label class="block text-black">Suffix</label>
+                                        <input type="text" name="suffix" value="{{ old('suffix') }}"
+                                            class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" />
+                                        @error('suffix')
                                             <span class="text-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>

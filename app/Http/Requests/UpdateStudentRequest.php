@@ -27,6 +27,7 @@ class UpdateStudentRequest extends FormRequest
             'fname' => 'required|string|max:50',
             'lname' => 'required|string|max:50',
             'm_i' => 'nullable',
+            'suffix' => 'nullable|string',
             'course_id' => 'required',
             'year_lvl' => 'required|string|max:10',
             'birth_date' => 'required|date',

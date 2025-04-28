@@ -159,6 +159,15 @@
                             <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="flex-1">
+                        <label for="update-profile-form-6" class="inline-block mb-2">Suffix</label>
+                        <input name="suffix" id="update-profile-form-6" type="text"
+                            value="{{ old('suffix', ucwords($user->student->suffix)) }}" placeholder="Input text"
+                            class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
+                        @error('suffix')
+                            <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
                 <div class="flex flex-row w-full gap-3 mt-5">
                     <div class="flex-1">
@@ -213,7 +222,8 @@
                     <div class="flex-1">
                         <label for="update-profile-form-6" class="inline-block mb-2">Place Of Birth</label>
                         <input name="birth_place" id="update-profile-form-6" type="text"
-                            value="{{ old('birth_place', ucwords($user->student->birth_place)) }}" placeholder="Input text"
+                            value="{{ old('birth_place', ucwords($user->student->birth_place)) }}"
+                            placeholder="Input text"
                             class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                         @error('birth_place')
                             <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
@@ -222,7 +232,8 @@
                     <div class="flex-1">
                         <label for="update-profile-form-6" class="inline-block mb-2">Citizenship</label>
                         <input name="citizenship" id="update-profile-form-6" type="text"
-                            value="{{ old('citizenship', ucwords($user->student->citizenship)) }}" placeholder="Input text"
+                            value="{{ old('citizenship', ucwords($user->student->citizenship)) }}"
+                            placeholder="Input text"
                             class="w-full text-sm transition duration-200 ease-in-out rounded-md shadow-sm disabled:bg-slate-100 disabled:cursor-not-allowed border-slate-200 placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50">
                         @error('citizenship')
                             <div class="mt-1 text-sm text-red-600">{{ $message }}</div>

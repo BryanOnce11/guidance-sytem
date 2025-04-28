@@ -152,6 +152,7 @@ class AuthController extends Controller
         $fname = $request->session()->get('fname');
         $lname = $request->session()->get('lname');
         $mI = $request->session()->get('m_i');
+        $suffix = $request->session()->get('suffix');
         $course_id = $request->session()->get('course_id');
         $year_lvl = $request->session()->get('year_lvl');
         $birth_date = $request->session()->get('birth_date');
@@ -206,6 +207,7 @@ class AuthController extends Controller
             'fname' => $fname,
             'lname' => $lname,
             'm_i' => $mI,
+            'suffix' => $suffix,
             'student_id' => $student_id,
             'course_id' => $course_id,
             'year_lvl' => $year_lvl,

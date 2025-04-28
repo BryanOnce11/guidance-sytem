@@ -149,6 +149,14 @@
                                 <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="w-full">
+                            <label for="suffix" class="inline-block mb-2">Suffix</label>
+                            <input value="{{ old('suffix', ucwords($user->student->suffix)) }}" name="suffix" type="text"
+                                class="w-full px-3 py-2 text-sm transition duration-200 ease-in-out rounded-md shadow-sm border-slate-200">
+                            @error('suffix')
+                                <div class="mt-1 text-sm text-red-600">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
 
                     <!-- Personal Details -->
